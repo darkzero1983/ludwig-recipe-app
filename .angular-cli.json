@@ -11,8 +11,7 @@
         "assets",
         "favicon.ico",
         "manifest.json",
-        "pwabuilder-sw.js",
-        "offline.html"
+        "pwabuilder-sw.js"
       ],
       "index": "index.html",
       "main": "main.ts",
@@ -23,9 +22,12 @@
       "prefix": "app",
       "serviceWorker": true,
       "styles": [
+        "css/bootstrap.min.css",
         "styles.css"
       ],
-      "scripts": [],
+      "scripts": [
+        "js/bootstrap.bundle.min.js"
+      ],
       "environmentSource": "environments/environment.ts",
       "environments": {
         "dev": "environments/environment.ts",
