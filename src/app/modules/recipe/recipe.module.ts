@@ -2,8 +2,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 
-import { RecipeOverviewComponent } from './components/overview/recipe.overview.component';
-
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { ModalModule } from 'ngx-bootstrap/modal';
@@ -20,6 +18,6 @@ import { ModalModule } from 'ngx-bootstrap/modal';
   ],
   exports: [BsDropdownModule, TooltipModule, ModalModule],
   providers: [],
-  bootstrap: [RecipeOverviewComponent]
+  bootstrap: []
 })
 export class RecipeModule { }
