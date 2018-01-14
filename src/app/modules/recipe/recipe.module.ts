@@ -1,23 +1,24 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { RecipeDetailComponent } from './components/detail/recipe.detail.component';
 
-
-import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
-import { TooltipModule } from 'ngx-bootstrap/tooltip';
-import { ModalModule } from 'ngx-bootstrap/modal';
+const routes: Routes = [
+  {
+    path: '',
+    component: RecipeDetailComponent
+  } 
+ ];
 
 @NgModule({
   declarations: [
-    
+    RecipeDetailComponent
   ],
   imports: [
-    BrowserModule,
-    BsDropdownModule.forRoot(),
-    TooltipModule.forRoot(),
-    ModalModule.forRoot()
+    RouterModule.forChild(routes)
   ],
-  exports: [BsDropdownModule, TooltipModule, ModalModule],
+  exports: [RouterModule],
   providers: [],
-  bootstrap: []
+  bootstrap: [RecipeDetailComponent]
 })
 export class RecipeModule { }
