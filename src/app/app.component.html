@@ -1,3 +1,11 @@
-App Component
 
-<router-outlet></router-outlet>
+
+<div class="container body-content" (click)="deactivateMobileSearch()">
+    <navigation-component></navigation-component>
+    <div class="content-body">
+        <router-outlet></router-outlet>
+    </div>
+    <footer>
+        <a [routerLink]="['Contact']">Kontakt</a> / <a [routerLink]="['About']">Impressum</a>
+    </footer>
+</div>

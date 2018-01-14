@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
+import { NavigationComponent } from './shared_component';
 
 import { RecipeModule } from './modules/recipe/recipe.module';
 
@@ -17,14 +18,14 @@ export function loadRecipeModule() {
 
 const routes: Routes = [
   {
-    path: '',
-    loadChildren: loadRecipeModule
+    path: '', loadChildren: loadRecipeModule
   }
 ];
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    NavigationComponent
   ],
   imports: [
     BrowserModule,

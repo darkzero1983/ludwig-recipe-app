@@ -12,7 +12,8 @@
         "favicon.ico",
         "manifest.json",
         "pwabuilder-sw.js",
-        "img/icons/*.*"
+        "img/icons/*.*",
+        "img/*.*"
       ],
       "index": "index.html",
       "main": "main.ts",
