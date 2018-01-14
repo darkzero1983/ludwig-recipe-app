@@ -6,6 +6,10 @@ var precacheFiles = [
   "/pwabuilder-sw.js"
 ];
 
+var ignoreRequests = [
+  "/sockjs-node"
+];
+
 //Install stage sets up the cache-array to configure pre-cache content
 self.addEventListener('install', function(evt) {
   console.log('The service worker is being installed.');
@@ -26,9 +30,25 @@ console.log('[ServiceWorker] Claiming clients for current page');
 });
 
 self.addEventListener('fetch', function(evt) {
-  console.log('The service worker is serving the asset.'+ evt.request.url);
-  evt.respondWith(fromCache(evt.request).catch(fromServer(evt.request)));
-  evt.waitUntil(update(evt.request));
+  let ignoreRequest = false;
+  ignoreRequests.forEach(function(element) {
+    if(evt.request.url.startsWith("http://localhost:4200" + element))
+    {
+      ignoreRequest = true;
+    }
+  });
+
+  if(ignoreRequest)
+  {
+    console.log('The service worker ignored asset: '+ evt.request.url);
+  }
+  else
+  {
+    console.log('The service worker is serving the asset: '+ evt.request.url);
+    evt.respondWith(fromCache(evt.request).catch(fromServer(evt.request)));
+    evt.waitUntil(update(evt.request));
+  }
+  
 });
 
 
