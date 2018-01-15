@@ -13,6 +13,6 @@ export class NavigationComponent {
   constructor(
     private accountService: AccountService
   ) {
-    
+    console.info(accountService.isUserLoggedIn)
    }
 }
