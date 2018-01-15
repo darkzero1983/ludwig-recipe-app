@@ -11,8 +11,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { ModalModule } from 'ngx-bootstrap/modal';
-import { AccountService } from './shared_services/account.service';
+import { AccountService, NavigationService } from './shared_services';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 export function loadRecipeModule() {
   return RecipeModule;
@@ -37,10 +38,11 @@ const routes: Routes = [
     TooltipModule.forRoot(),
     ModalModule.forRoot(),
     RouterModule.forRoot(routes),
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   exports: [BsDropdownModule, TooltipModule, ModalModule,RouterModule],
-  providers: [AccountService],
+  providers: [AccountService, NavigationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,6 +1,7 @@
 //This is the service worker with the Cache-first network
 
 var CACHE = 'pwabuilder-precache';
+var CACHE_ENABLED = false;
 var precacheFiles = [
   "/index.html",
   "/pwabuilder-sw.js"
@@ -39,7 +40,7 @@ self.addEventListener('fetch', function(evt) {
     }
   });
 
-  if(ignoreRequest)
+  if(ignoreRequest && !CACHE_ENABLED)
   {
     //console.log('The service worker ignored asset: '+ evt.request.url);
   }

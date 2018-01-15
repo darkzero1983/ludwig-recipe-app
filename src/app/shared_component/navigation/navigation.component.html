@@ -1,3 +1,44 @@
+<div class="collapse bg-faded hidden-md-up mobile-menu" id="bird">
+	<div class="p-a mobile-menu-height" (click)="openMobileMenu();" data-toggle="collapse" data-target="#bird">
+		<div *ngFor="let navItem of navigation.mainNavigation">
+			<a *ngIf="navItem.items.length <= 1 && navItem.href != null" class="nav-link" [ngClass]="{active: navItem.active}" href="{{navItem.href}}">{{navItem.name}}</a>
+			<a class="nav-link" *ngIf="navItem.categoryUrl == null && navItem.href == null" [ngClass]="{active: navItem.active}" [routerLink]="[navItem.routeName]">{{navItem.name}}</a>
+			<a class="nav-link" *ngIf="navItem.categoryUrl != null && navItem.href == null" [ngClass]="{active: navItem.active}" [routerLink]="[navItem.routeName, {categoryUrl: navItem.categoryUrl}]">{{navItem.name}}</a>
+			<a *ngFor="let navSubItem of navItem.items" class="nav-link" [ngClass]="{active: navSubItem.active}" [routerLink]="[navSubItem.routeName, {categoryUrl: navItem.categoryUrl, subCategoryUrl: navSubItem.subCategoryUrl}]">&nbsp;&nbsp;&nbsp;{{navSubItem.name}}</a>
+		</div>
+		<div *ngFor="let navItem of navigation.subNavigation">
+			<a class="nav-link" *ngIf="navItem.categoryUrl == null" [ngClass]="{active: navItem.active}" [routerLink]="[navItem.routeName]">{{navItem.name}}</a>
+			<a class="nav-link" *ngIf="navItem.categoryUrl != null" [ngClass]="{active: navItem.active}" [routerLink]="[navItem.routeName, {categoryUrl: navItem.categoryUrl}]">{{navItem.name}}</a>
+			<a *ngFor="let navSubItem of navItem.items" class="nav-link" [ngClass]="{active: navSubItem.active}" [routerLink]="[navSubItem.routeName, {categoryUrl: navItem.categoryUrl, subCategoryUrl: navSubItem.subCategoryUrl}]">&nbsp;&nbsp;&nbsp;{{navSubItem.name}}</a>
+		</div>
+
+		<a [routerLink]="['Login']" class="nav-link nav-login-link" [hidden]="accountService.isUserLoggedIn">Anmelden</a>
+		<a [routerLink]="['Logout']" class="nav-link nav-login-link" [hidden]="!accountService.isUserLoggedIn">Abmelden</a>
+	</div>
+</div>
+<nav class="navbar navbar-light bg-faded hidden-md-up navbar-fixed-top">
+	<a class="navbar-brand" [routerLink]="['/']"><img src="/img/Logo.png" class="header-logo"></a>
+	<button id="mobileMenuButton" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#bird" (click)="openMobileMenu();">☰</button>
+</nav>
+
+
+<div class="hidden-md-up bg-faded nav-delimiter"></div>
+<div class="hidden-md-up bg-faded navbar-search">
+	<form class="">
+		<div class="input-group">
+			<input class="form-control" type="text" placeholder="Rezepte suchen" [(ngModel)]="searchTerm" name="searchTerm" (keyup)="changeSearchTerm()" (focus)="activeMobileSearch()">
+			<span class="input-group-btn">
+				<button class="btn btn-success-outline" type="submit"><i class="fa fa-search"></i></button>
+			</span>
+		</div>
+		
+	</form>
+	<div style="clear:both;"></div>
+</div>
+<div class="search-result mobile-search-result" *ngIf="searchResult.Recipes.length > 0">
+	<div class="result-item" *ngFor="let recipe of searchResult.Recipes" (click)="selectSearchResult(recipe)"><img src="{{recipe.TeaserImageUrl}}?w=40&h=30&mode=crop">{{recipe.Name}}</div>
+</div>
+
 <div class="container body-content" (click)="deactivateMobileSearch()">
     <nav class="navbar navbar-light bg-faded hidden-sm-down">
         <a class="navbar-brand" [routerLink]="['/']"><img src="/img/Logo.png" class="header-logo"></a>
@@ -5,5 +46,39 @@
             <a [routerLink]="['Login']" [hidden]="accountService.isUserLoggedIn">Anmelden</a>
             <a [routerLink]="['Logout']" [hidden]="!accountService.isUserLoggedIn">Abmelden</a>
         </div>
+
+        <form class="form-inline pull-xs-right navbar-search">
+			<div class="input-group">
+				<input [(ngModel)]="searchTerm" name="searchTerm" class="form-control" type="text" placeholder="Rezepte suchen"  (keyup)="changeSearchTerm()">
+				<span class="input-group-btn">
+					<button class="btn btn-success-outline" type="submit"><i class="fa fa-search"></i></button>
+				</span>
+			</div>
+			<div class="search-result" *ngIf="searchResult.Recipes.length > 0">
+				<div class="result-item" *ngFor="let recipe of searchResult.Recipes" (click)="selectSearchResult(recipe)"><img src="{{recipe.TeaserImageUrl}}?w=40&h=30&mode=crop">{{recipe.Name}}</div>
+			</div>
+		</form>
+        <div style="clear:both" class="hidden-xs"></div>
+        <ul class="nav nav-tabs navbar-nav">
+			<li class="nav-item" [ngClass]="{dropdown: navItem.items.length > 1}" *ngFor="let navItem of navigation.mainNavigation">
+				<a *ngIf="navItem.items.length <= 1 && navItem.Href != null" class="nav-link" [ngClass]="{active: navItem.active}" href="{{navItem.href}}">{{navItem.Name}}</a>
+				<a *ngIf="navItem.items.length <= 1 && navItem.categoryUrl != null && navItem.routeName != null" class="nav-link" [ngClass]="{active: navItem.active}" [routerLink]="[navItem.routeName, {categoryUrl: navItem.categoryUrl}]">{{navItem.name}}</a>
+				<a *ngIf="navItem.items.length <= 1 && navItem.categoryUrl == null && navItem.routeName != null" class="nav-link" [ngClass]="{active: navItem.active}" [routerLink]="[navItem.routeName]">{{navItem.name}}</a>
+				<a *ngIf="navItem.items.length > 1" class="nav-link dropdown-toggle" [ngClass]="{active: navItem.active}" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">{{navItem.Name}}</a>
+				<div class="dropdown-menu">
+					<a class="dropdown-item" [ngClass]="{active: navItem.active}" [routerLink]="[navItem.routeName, {categoryUrl: navItem.categoryUrl}]">Alle</a>
+					<a *ngFor="let navSubItem of navItem.items" class="dropdown-item" [routerLink]="[navSubItem.RouteName, {categoryUrl: navItem.categoryUrl, subCategoryUrl: navSubItem.subCategoryUrl}]">{{navSubItem.name}}</a>
+				</div>
+			</li>
+
+			<li class="nav-item" [ngClass]="{dropdown: navItem.items.length > 1}" *ngFor="let navItem of navigation.subNavigation">
+				<a *ngIf="navItem.items.length <= 1" class="nav-link" [ngClass]="{active: navItem.active}" [routerLink]="[navItem.routeName, {categoryUrl: navItem.categoryUrl}]">{{navItem.name}}</a>
+				<a *ngIf="navItem.items.length > 1" class="nav-link dropdown-toggle" [ngClass]="{active: navItem.Active}" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">{{navItem.name}}</a>
+				<div class="dropdown-menu">
+					<a class="dropdown-item" [ngClass]="{active: navItem.active}" [routerLink]="[navItem.routeName, {categoryUrl: navItem.categoryUrl}]">Alle</a>
+					<a *ngFor="let navSubItem of navItem.items" class="dropdown-item" [routerLink]="[navSubItem.routeName, {categoryUrl: navItem.categoryUrl, subCategoryUrl: navSubItem.subCategoryUrl}]">{{navSubItem.name}}</a>
+				</div>
+			</li>
+		</ul>
     </nav>
 </div>
