@@ -11,6 +11,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { AccountService } from './shared_services/account.service';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 
 export function loadRecipeModule() {
   return RecipeModule;
@@ -18,7 +20,7 @@ export function loadRecipeModule() {
 
 const routes: Routes = [
   {
-    path: '', loadChildren: loadRecipeModule
+    path: '', loadChildren: loadRecipeModule, canActivate: [AccountService]
   }
 ];
 
@@ -32,10 +34,11 @@ const routes: Routes = [
     BsDropdownModule.forRoot(),
     TooltipModule.forRoot(),
     ModalModule.forRoot(),
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    HttpClientModule
   ],
   exports: [BsDropdownModule, TooltipModule, ModalModule,RouterModule],
-  providers: [],
+  providers: [AccountService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
