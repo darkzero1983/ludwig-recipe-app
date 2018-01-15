@@ -7,14 +7,15 @@ var precacheFiles = [
 ];
 
 var ignoreRequests = [
-  "/sockjs-node"
+  "/sockjs-node",
+  "/test_data"
 ];
 
 //Install stage sets up the cache-array to configure pre-cache content
 self.addEventListener('install', function(evt) {
-  console.log('The service worker is being installed.');
+  //console.log('The service worker is being installed.');
   evt.waitUntil(precache().then(function() {
-    console.log('[ServiceWorker] Skip waiting on install');
+    //console.log('[ServiceWorker] Skip waiting on install');
       return self.skipWaiting();
 
   })
@@ -24,8 +25,8 @@ self.addEventListener('install', function(evt) {
 
 //allow sw to control of current page
 self.addEventListener('activate', function(event) {
-console.log('[ServiceWorker] Claiming clients for current page');
-      return self.clients.claim();
+  //console.log('[ServiceWorker] Claiming clients for current page');
+  return self.clients.claim();
 
 });
 
@@ -40,11 +41,11 @@ self.addEventListener('fetch', function(evt) {
 
   if(ignoreRequest)
   {
-    console.log('The service worker ignored asset: '+ evt.request.url);
+    //console.log('The service worker ignored asset: '+ evt.request.url);
   }
   else
   {
-    console.log('The service worker is serving the asset: '+ evt.request.url);
+    //console.log('The service worker is serving the asset: '+ evt.request.url);
     evt.respondWith(fromCache(evt.request).catch(fromServer(evt.request)));
     evt.waitUntil(update(evt.request));
   }

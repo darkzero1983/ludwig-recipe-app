@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {  } from '../../shared_models';
+import { AccountService } from '../../shared_services/account.service';
 
 @Component({
   selector: 'navigation-component',
@@ -8,4 +9,10 @@ import {  } from '../../shared_models';
 })
 export class NavigationComponent {
   private isUserLoggedIn : boolean = false;
+
+  constructor(
+    private accountService: AccountService
+  ) {
+    
+   }
 }
