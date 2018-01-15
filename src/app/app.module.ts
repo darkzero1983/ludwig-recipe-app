@@ -20,7 +20,9 @@ export function loadRecipeModule() {
 
 const routes: Routes = [
   {
-    path: '', loadChildren: loadRecipeModule, canActivate: [AccountService]
+    path: '', loadChildren: loadRecipeModule, canActivate: [AccountService],
+    //path: 'CMS'
+    //path: 'Benutzerverwaltung'
   }
 ];
 

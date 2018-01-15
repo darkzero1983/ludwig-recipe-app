@@ -8,11 +8,7 @@ import { AccountService } from '../../shared_services/account.service';
   styleUrls: ['./navigation.component.css']
 })
 export class NavigationComponent {
-  private isUserLoggedIn : boolean = false;
-
   constructor(
     private accountService: AccountService
-  ) {
-    console.info(accountService.isUserLoggedIn)
-   }
+  ) { }
 }
