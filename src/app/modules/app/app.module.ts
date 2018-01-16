@@ -12,6 +12,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { AccountService, NavigationService } from '../../shared/services';
+import { RecipeService } from '../../modules/recipe/services/recipe.service';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 
@@ -53,7 +54,7 @@ const routes: Routes = [
     FormsModule
   ],
   exports: [BsDropdownModule, TooltipModule, ModalModule,RouterModule],
-  providers: [AccountService, NavigationService],
+  providers: [AccountService, NavigationService, RecipeService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

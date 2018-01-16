@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { RecipeOverview } from '../../models';
+import { RecipeService } from '../../services';
 
 @Component({
   selector: 'recipe-overview-component',
@@ -6,5 +8,14 @@ import { Component } from '@angular/core';
   styleUrls: ['./recipe.overview.component.css']
 })
 export class RecipeOverviewComponent {
-  title = 'Ludwigs Rezepte - Übersicht';
+  paging: number[] = new Array<number>();
+  categoryUrl: string;
+  subCategoryUrl: string;
+  recipeOverview: RecipeOverview = new RecipeOverview();
+
+  constructor(
+    private recipeService: RecipeService
+	) {
+    recipeService.LoadOverview().subscribe(x => this.recipeOverview = x);
+	}
 }

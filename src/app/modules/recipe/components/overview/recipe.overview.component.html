@@ -1,2 +1,36 @@
-Übersicht
-<a routerLink="/Detail">Detail</a>
+<h1 class="headline">{{recipeOverview.title}}</h1>
+<form id="my-form" class="form-inline">
+    <div class="recipe-overview-item" *ngFor="let recipe of recipeOverview.recipes">
+        <a routerLink="/Rezept/{{recipe.url}}/{{recipe.Id}}">
+            <div class="teaser-image">
+                <img src="{{recipe.teaserImageUrl}}?w=640&h=480&mode=crop">
+            </div>
+            <div class="teaser-text">
+                <div class="recipe-name">{{recipe.name}}</div>
+                
+                <div class="recipe-info">
+                    <div class="hidden-sm-down">{{recipe.description}}<br></div>
+                    Erstellt: {{recipe.publishDate}}
+                </div>
+            </div>
+            <div style="clear:both"></div>
+        </a>
+    </div>
+</form>
+<nav class="text-center" *ngIf="recipeOverview && recipeOverview.paging && recipeOverview.paging.showPaging">
+    <ul class="pagination">
+        <li class="page-item" [ngClass]="{disabled: !recipeOverview.paging.showPreview}" (click)="loadRecipes(recipeOverview.paging.currentPage - 1)">
+            <span class="page-link" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+                <span class="sr-only">Previous</span>
+            </span>
+        </li>
+        <li *ngFor="let page of paging" (click)="loadRecipes(page)" class="page-item active" [ngClass]="{active: page == recipeOverview.paging.currentPage}"><span class="page-link">{{page}}</span></li>
+        <li class="page-item"  [ngClass]="{disabled: !recipeOverview.paging.showNext}" (click)="loadRecipes(recipeOverview.paging.currentPage + 1)">
+            <span class="page-link" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+                <span class="sr-only">Next</span>
+            </span>
+        </li>
+    </ul>
+</nav>
