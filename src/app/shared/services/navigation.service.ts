@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { Observable } from 'rxjs/Observable';
-import { Navigation, SearchResult } from '../shared_models';
+import { Navigation, SearchResult } from '../models';
 
 @Injectable()
 export class NavigationService  {

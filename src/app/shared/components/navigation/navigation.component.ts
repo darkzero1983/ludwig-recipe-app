@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { Navigation, SearchResult, SearchResultRecipe } from '../../shared_models';
-import { AccountService, NavigationService } from '../../shared_services';
+import { Navigation, SearchResult, SearchResultRecipe } from '../../models';
+import { AccountService, NavigationService } from '../../services';
 
 @Component({
   selector: 'navigation-component',

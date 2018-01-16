@@ -4,14 +4,10 @@ import { RouterModule, Routes } from '@angular/router';
 import { RecipeDetailComponent, RecipeOverviewComponent } from './components/';
 
 const routes: Routes = [
-  {
-    path: '',
-    component: RecipeOverviewComponent
-  },
-  {
-    path: 'Detail',
-    component: RecipeDetailComponent
-  } 
+  { path: '', component: RecipeOverviewComponent },
+  { path: 'Rezepte/:categoryUrl', component: RecipeOverviewComponent },
+  { path: 'Rezepte/:categoryUrl/:subCategoryUrl', component: RecipeOverviewComponent },
+  { path: 'Detail', component: RecipeDetailComponent } 
  ];
 
 @NgModule({
