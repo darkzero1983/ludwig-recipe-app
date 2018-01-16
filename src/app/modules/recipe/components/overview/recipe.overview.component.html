@@ -1,7 +1,7 @@
 <h1 class="headline">{{recipeOverview.title}}</h1>
 <form id="my-form" class="form-inline">
     <div class="recipe-overview-item" *ngFor="let recipe of recipeOverview.recipes">
-        <a routerLink="/Rezept/{{recipe.url}}/{{recipe.Id}}">
+        <a routerLink="/Rezept/{{recipe.url}}/{{recipe.id}}">
             <div class="teaser-image">
                 <img src="{{recipe.teaserImageUrl}}?w=640&h=480&mode=crop">
             </div>
