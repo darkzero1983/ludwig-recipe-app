@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+
 import { Navigation, SearchResult, SearchResultRecipe } from '../../models';
 import { AccountService, NavigationService } from '../../services';
 
@@ -13,16 +15,19 @@ export class NavigationComponent {
   navigation: Navigation = new Navigation();
   constructor(
     private accountService: AccountService,
-    private navigationService: NavigationService
+    private navigationService: NavigationService,
+    private router: Router
   ) { 
     this.navigationService.Load(false).subscribe(result => {this.navigation = result;});
   }
 
   activeMobileSearch() {
+    this.navigationService.isMobileSearchActive = true;
     //ToDo: Fill Function
   }
   deactivateMobileSearch()
   {
+    this.navigationService.isMobileSearchActive = false;
     //ToDo: Fill Function
   }
 
@@ -44,9 +49,9 @@ export class NavigationComponent {
   
   selectSearchResult(recipe: SearchResultRecipe)
 	{
-		//this.router.navigate(['RecipeDetail', { url: recipe.Url, id: recipe.Id }]);
+		this.router.navigate(['/Rezepte', { url: recipe.Url, id: recipe.Id }]);
 		this.searchResult = new SearchResult();
-		this.searchTerm = "";
-		//$('body').removeClass('active-mobile-search');
+    this.searchTerm = "";
+    this.navigationService.isMobileSearchActive = false;
 	}
 }

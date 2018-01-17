@@ -6,6 +6,7 @@ import { Navigation, SearchResult } from '../models';
 
 @Injectable()
 export class NavigationService  {
+    public isMobileSearchActive: boolean = false;
 
     constructor(
         private http: HttpClient
