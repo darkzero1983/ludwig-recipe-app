@@ -12,6 +12,6 @@ export class AppComponent {
     public navigationService: NavigationService,
     private titleService: Title 
   ) { 
-    titleService.setTitle("Ludwigs Rezepte")
+    titleService.setTitle("Ludwigs Rezepte");
   }
 }

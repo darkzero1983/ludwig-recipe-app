@@ -21,12 +21,12 @@ export class AccountService implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ) : Observable<boolean> {
-    return this.http.get<boolean>(environment.apiAccountCanActive);
+    return this.http.get<boolean>(environment.useTestData ? environment.apiAccountCanActiveTest : environment.apiAccountCanActive);
   }
 
   private getAccountDataObservable(): Observable<UserData>
   {
-    return this.http.get<UserData>(environment.apiAccountData);
+    return this.http.get<UserData>(environment.useTestData ? environment.apiAccountDataTest : environment.apiAccountData);
   }
 
 }

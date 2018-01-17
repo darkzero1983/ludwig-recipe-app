@@ -18,7 +18,7 @@ export class RecipeOverviewComponent {
     private recipeService: RecipeService,
     private titleService: Title 
 	) {
-    titleService.setTitle("Rezept Übersicht - Ludwigs Rezepte")
+    titleService.setTitle("Rezept Übersicht - Ludwigs Rezepte");
     recipeService.LoadOverview().subscribe(x => this.recipeOverview = x);
 	}
 }

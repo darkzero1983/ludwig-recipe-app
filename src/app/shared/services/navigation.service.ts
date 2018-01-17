@@ -16,7 +16,7 @@ export class NavigationService  {
     }
 
     public Load(cmsVersion: boolean): Observable<Navigation> {
-        var url: string = environment.apiNavigation;
+        var url: string = environment.useTestData ? environment.apiNavigationTest : environment.apiNavigation;
         if (cmsVersion) {
             url = url + '?cmsVersion=true';
         }
@@ -25,13 +25,13 @@ export class NavigationService  {
 
     public Search(term: string): Observable<SearchResult> {
         let myData = JSON.stringify(term);
-        if(environment.production)
+        if(environment.useTestData)
         {
-            return this.http.post<SearchResult>(environment.apiRecipeSearch, myData);
+            return this.http.get<SearchResult>(environment.apiRecipeSearchTest);
         }
         else
         {
-            return this.http.get<SearchResult>(environment.apiRecipeSearch);
+            return this.http.post<SearchResult>(environment.apiRecipeSearch, myData);
         }
         
     }

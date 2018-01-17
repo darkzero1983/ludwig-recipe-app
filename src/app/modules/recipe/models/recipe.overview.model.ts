@@ -1,5 +1,5 @@
-import { Paging } from "../../../shared/models"
-import { RecipeOverviewRecipe } from "./"
+import { Paging } from "../../../shared/models";
+import { RecipeOverviewRecipe } from "./";
 
 export class RecipeOverview {
 	title: string;

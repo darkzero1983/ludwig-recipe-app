@@ -10,6 +10,6 @@ export class RecipeDetailComponent {
   public constructor(
     private titleService: Title 
   ) {
-    titleService.setTitle("Rezept Detail - Ludwigs Rezepte")
+    titleService.setTitle("Rezept Detail - Ludwigs Rezepte");
    }
 }
