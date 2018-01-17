@@ -21,30 +21,20 @@ export class NavigationComponent {
     this.navigationService.Load(false).subscribe(result => {this.navigation = result;});
   }
 
-  activeMobileSearch() {
-    this.navigationService.isMobileSearchActive = true;
-    //ToDo: Fill Function
-  }
-  deactivateMobileSearch()
-  {
-    this.navigationService.isMobileSearchActive = false;
-    //ToDo: Fill Function
-  }
-
   changeSearchTerm() {
 		if (this.searchTerm.length < 1)
 		{
 			this.searchResult = new SearchResult();
 			return;
     }
-    /*
-		this.navigationService.Search(this.searchTerm).subscribe((result: SearchResultViewModel) => {
+    
+		this.navigationService.Search(this.searchTerm).subscribe((result: SearchResult) => {
 			if (result.SearchTerm == this.searchTerm) {
-				this.globalVariables.SearchResult = result;
+				this.searchResult = result;
 			}
     });
-    */
-		return true;
+    
+    return true;
   }
   
   selectSearchResult(recipe: SearchResultRecipe)

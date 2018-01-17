@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
+import { environment } from '../../../environments/environment';
+
 import { Observable } from 'rxjs/Observable';
 import { Navigation, SearchResult } from '../models';
 
@@ -14,18 +16,35 @@ export class NavigationService  {
     }
 
     Load(cmsVersion: boolean): Observable<Navigation> {
-        var url: string = '/api/Navigation/Load';
+        var url: string = environment.apiNavigation;
         if (cmsVersion) {
             url = url + '?cmsVersion=true';
         }
-        url = "/test_data/navigation.json"
         return this.http.get<Navigation>(url);
     }
 
     Search(term: string): Observable<SearchResult> {
         let myData = JSON.stringify(term);
+        if(environment.production)
+        {
+            return this.http.post<SearchResult>(environment.apiRecipeSearch, myData);
+        }
+        else
+        {
+            return this.http.get<SearchResult>(environment.apiRecipeSearch);
+        }
+        
+    }
 
-        return this.http.post<SearchResult>('https://www.ludwigs-rezepte.de/api/Recipe/Search', myData);
+    activeMobileSearch() {
+        this.isMobileSearchActive = true;
+        //ToDo: Fill Function
+    }
+
+    deactivateMobileSearch()
+    {
+        this.isMobileSearchActive = false;
+        //ToDo: Fill Function
     }
 
 }

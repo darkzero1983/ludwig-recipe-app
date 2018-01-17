@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { UserData } from '../models';
 import { Observable } from 'rxjs/Observable';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import { environment } from '../../../environments/environment';
 
 @Injectable()
 export class AccountService implements CanActivate {
@@ -20,12 +21,12 @@ export class AccountService implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ) : Observable<boolean> {
-    return this.http.get<boolean>('/test_data/canActivate.json');
+    return this.http.get<boolean>(environment.apiAccountCanActive);
   }
 
   private getAccountDataObservable(): Observable<UserData>
   {
-    return this.http.get<UserData>('/test_data/account-data.json');
+    return this.http.get<UserData>(environment.apiAccountData);
   }
 
 }

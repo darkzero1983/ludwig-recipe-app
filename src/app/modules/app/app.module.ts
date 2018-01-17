@@ -29,13 +29,13 @@ export function loadRecipeModule() {
 
 const routes: Routes = [
   {
-    path: '', loadChildren: loadRecipeModule, canActivate: [AccountService],
-  },
-  {
-    path: 'CMS', loadChildren: loadCMSModule
+    path: 'CMS', loadChildren: loadCMSModule, canActivate: [AccountService]
   },
   {
     path: 'Benutzerverwaltung', loadChildren: loadAccountModule
+  },
+  {
+    path: '', loadChildren: loadRecipeModule
   }
 ];
 
