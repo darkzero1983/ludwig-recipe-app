@@ -1,7 +1,7 @@
 export class Paging {
-	CurrentPage: number;
-	MaxPage: number;
-	ShowPaging: boolean;
-	ShowPreview: boolean;
-	ShowNext: boolean;
+	currentPage: number;
+	maxPage: number;
+	showPaging: boolean;
+	showPreview: boolean;
+	showNext: boolean;
 }

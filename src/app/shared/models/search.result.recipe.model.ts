@@ -1,6 +1,6 @@
 export class SearchResultRecipe {
-	Id: number;
-	Name: string;
-	Url: string;
-	TeaserImageUrl: string;
+	id: number;
+	name: string;
+	url: string;
+	teaserImageUrl: string;
 }

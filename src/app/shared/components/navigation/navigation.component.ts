@@ -14,8 +14,8 @@ export class NavigationComponent {
   searchResult: SearchResult = new SearchResult();
   navigation: Navigation = new Navigation();
   constructor(
-    private accountService: AccountService,
-    private navigationService: NavigationService,
+    public accountService: AccountService,
+    public navigationService: NavigationService,
     private router: Router
   ) { 
     this.navigationService.Load(false).subscribe(result => {this.navigation = result;});
@@ -29,7 +29,7 @@ export class NavigationComponent {
     }
     
 		this.navigationService.Search(this.searchTerm).subscribe((result: SearchResult) => {
-			if (result.SearchTerm == this.searchTerm) {
+			if (result.searchTerm == this.searchTerm) {
 				this.searchResult = result;
 			}
     });
@@ -37,9 +37,13 @@ export class NavigationComponent {
     return true;
   }
   
+  openMobileMenu(){
+
+  }
+  
   selectSearchResult(recipe: SearchResultRecipe)
 	{
-		this.router.navigate(['/Rezepte', { url: recipe.Url, id: recipe.Id }]);
+		this.router.navigate(['/Rezepte', { url: recipe.url, id: recipe.id }]);
 		this.searchResult = new SearchResult();
     this.searchTerm = "";
     this.navigationService.isMobileSearchActive = false;

@@ -1,7 +1,7 @@
 export class NavigationItem {
-	Active: boolean;
-	Name: string;
-	Href: string;
-	RouteName: string;
-	SubCategoryUrl: string;
+	active: boolean;
+	name: string;
+	href: string;
+	routeName: string;
+	subCategoryUrl: string;
 }

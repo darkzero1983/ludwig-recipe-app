@@ -1,10 +1,10 @@
 import { SearchResultRecipe } from './';
 
 export class SearchResult {
-	SearchTerm: string;
-	Recipes: SearchResultRecipe[];
+	searchTerm: string;
+	recipes: SearchResultRecipe[];
 	constructor()
 	{
-		this.Recipes = new Array<SearchResultRecipe>();
+		this.recipes = new Array<SearchResultRecipe>();
 	}
 }

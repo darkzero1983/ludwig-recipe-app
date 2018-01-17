@@ -26,7 +26,7 @@
 <div class="hidden-md-up bg-faded navbar-search">
 	<form class="">
 		<div class="input-group">
-			<input class="form-control" type="text" placeholder="Rezepte suchen" [(ngModel)]="searchTerm" name="searchTerm" (keyup)="changeSearchTerm()" (focus)="activeMobileSearch()">
+			<input class="form-control" type="text" placeholder="Rezepte suchen" [(ngModel)]="searchTerm" name="searchTerm" (keyup)="changeSearchTerm()" (focus)="navigationService.activeMobileSearch()">
 			<span class="input-group-btn">
 				<button class="btn btn-success-outline" type="submit"><i class="fa fa-search"></i></button>
 			</span>
@@ -35,8 +35,8 @@
 	</form>
 	<div style="clear:both;"></div>
 </div>
-<div class="search-result mobile-search-result" *ngIf="searchResult.Recipes.length > 0">
-	<div class="result-item" *ngFor="let recipe of searchResult.Recipes" (click)="selectSearchResult(recipe)"><img src="{{recipe.TeaserImageUrl}}?w=40&h=30&mode=crop">{{recipe.Name}}</div>
+<div class="search-result mobile-search-result" *ngIf="searchResult.recipes.length > 0">
+	<div class="result-item" *ngFor="let recipe of searchResult.recipes" (click)="selectSearchResult(recipe)"><img src="{{recipe.TeaserImageUrl}}?w=40&h=30&mode=crop">{{recipe.Name}}</div>
 </div>
 
 <div class="container body-content" (click)="navigationService.deactivateMobileSearch()">
@@ -54,8 +54,8 @@
 					<button class="btn btn-success-outline" type="submit"><i class="fa fa-search"></i></button>
 				</span>
 			</div>
-			<div class="search-result" *ngIf="searchResult.Recipes.length > 0">
-				<div class="result-item" *ngFor="let recipe of searchResult.Recipes" (click)="selectSearchResult(recipe)"><img src="{{recipe.TeaserImageUrl}}?w=40&h=30&mode=crop">{{recipe.Name}}</div>
+			<div class="search-result" *ngIf="searchResult.recipes.length > 0">
+				<div class="result-item" *ngFor="let recipe of searchResult.recipes" (click)="selectSearchResult(recipe)"><img src="{{recipe.TeaserImageUrl}}?w=40&h=30&mode=crop">{{recipe.Name}}</div>
 			</div>
 		</form>
         <div style="clear:both" class="hidden-xs"></div>

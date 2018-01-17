@@ -15,7 +15,7 @@ export class NavigationService  {
     ) {
     }
 
-    Load(cmsVersion: boolean): Observable<Navigation> {
+    public Load(cmsVersion: boolean): Observable<Navigation> {
         var url: string = environment.apiNavigation;
         if (cmsVersion) {
             url = url + '?cmsVersion=true';
@@ -23,7 +23,7 @@ export class NavigationService  {
         return this.http.get<Navigation>(url);
     }
 
-    Search(term: string): Observable<SearchResult> {
+    public Search(term: string): Observable<SearchResult> {
         let myData = JSON.stringify(term);
         if(environment.production)
         {
@@ -36,12 +36,12 @@ export class NavigationService  {
         
     }
 
-    activeMobileSearch() {
+    public activeMobileSearch() {
         this.isMobileSearchActive = true;
         //ToDo: Fill Function
     }
 
-    deactivateMobileSearch()
+    public deactivateMobileSearch()
     {
         this.isMobileSearchActive = false;
         //ToDo: Fill Function

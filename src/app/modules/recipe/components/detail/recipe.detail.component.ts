@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Title }     from '@angular/platform-browser';
 
 @Component({
   selector: 'recipe-detail-component',
@@ -6,5 +7,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./recipe.detail.component.css']
 })
 export class RecipeDetailComponent {
-  title = 'Ludwigs Rezepte - Detail';
+  public constructor(
+    private titleService: Title 
+  ) {
+    titleService.setTitle("Rezept Detail - Ludwigs Rezepte")
+   }
 }

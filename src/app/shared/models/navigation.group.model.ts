@@ -1,14 +1,14 @@
 import { NavigationItem } from './';
 
 export class NavigationGroup {
-	Active: boolean;
-	Name: string;
-	Href: string;
-	RouteName: string;
-	CategoryUrl: string;
-	Items: NavigationItem[];
+	active: boolean;
+	name: string;
+	href: string;
+	routeName: string;
+	categoryUrl: string;
+	items: NavigationItem[];
 
 	constructor() {
-		this.Items = new Array<NavigationItem>();
+		this.items = new Array<NavigationItem>();
 	}
 }

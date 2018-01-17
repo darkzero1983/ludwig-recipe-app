@@ -2,11 +2,11 @@ import { Paging } from "../../../shared/models"
 import { RecipeOverviewRecipe } from "./"
 
 export class RecipeOverview {
-	Title: string;
-	Paging: Paging;
-	Recipes: RecipeOverviewRecipe[];
+	title: string;
+	paging: Paging;
+	recipes: RecipeOverviewRecipe[];
 
 	constructor() {
-		this.Paging = new Paging();
+		this.paging = new Paging();
 	}
 }

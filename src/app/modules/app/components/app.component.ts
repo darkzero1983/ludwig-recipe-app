@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavigationService } from '../../../shared/services/navigation.service';
+import { Title }     from '@angular/platform-browser';
 
 @Component({
   selector: 'app-root',
@@ -8,7 +9,9 @@ import { NavigationService } from '../../../shared/services/navigation.service';
 })
 export class AppComponent {
   constructor(
-    private navigationService: NavigationService
+    public navigationService: NavigationService,
+    private titleService: Title 
   ) { 
+    titleService.setTitle("Ludwigs Rezepte")
   }
 }

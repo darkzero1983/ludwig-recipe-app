@@ -1,11 +1,11 @@
 import { NavigationGroup } from './';
 
 export class Navigation {
-	MainNavigation: NavigationGroup[];
-	SubNavigation: NavigationGroup[];
+	mainNavigation: NavigationGroup[];
+	subNavigation: NavigationGroup[];
 
 	constructor() {
-		this.MainNavigation = new Array<NavigationGroup>();
-		this.SubNavigation = new Array<NavigationGroup>();
+		this.mainNavigation = new Array<NavigationGroup>();
+		this.subNavigation = new Array<NavigationGroup>();
 	}
 }

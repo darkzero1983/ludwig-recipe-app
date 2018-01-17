@@ -1,4 +1,4 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, Title } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './components/app.component';
@@ -15,6 +15,8 @@ import { AccountService, NavigationService } from '../../shared/services';
 import { RecipeService } from '../../modules/recipe/services/recipe.service';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../../../environments/environment';
 
 export function loadAccountModule() {
   return AccountModule;
@@ -46,6 +48,7 @@ const routes: Routes = [
   ],
   imports: [
     BrowserModule,
+    ServiceWorkerModule.register('/ngsw-worker.js', {enabled: environment.production}),
     BsDropdownModule.forRoot(),
     TooltipModule.forRoot(),
     ModalModule.forRoot(),
@@ -54,7 +57,7 @@ const routes: Routes = [
     FormsModule
   ],
   exports: [BsDropdownModule, TooltipModule, ModalModule,RouterModule],
-  providers: [AccountService, NavigationService, RecipeService],
+  providers: [AccountService, NavigationService, RecipeService, Title],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
