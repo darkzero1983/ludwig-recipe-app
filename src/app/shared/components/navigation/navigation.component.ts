@@ -15,7 +15,7 @@ export class NavigationComponent {
     private accountService: AccountService,
     private navigationService: NavigationService
   ) { 
-    this.navigationService.Load(false).subscribe(result => {this.navigation = result; console.info(result)});
+    this.navigationService.Load(false).subscribe(result => {this.navigation = result;});
   }
 
   activeMobileSearch() {
