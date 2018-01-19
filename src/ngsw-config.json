@@ -3,6 +3,7 @@
     "assetGroups": [{
       "name": "ludwig-recipe-app",
       "installMode": "prefetch",
+      "updateMode": "prefetch",
       "resources": {
         "files": [
           "/favicon.ico",
@@ -23,7 +24,7 @@
       "updateMode": "prefetch",
       "resources": {
         "files": [
-          "/assets/**"
+          "/api/**"
         ]
       }
     }]
