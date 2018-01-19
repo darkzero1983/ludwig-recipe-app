@@ -1,4 +1,4 @@
-import { BrowserModule, Title } from '@angular/platform-browser';
+import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './components/app.component';
@@ -54,10 +54,13 @@ const routes: Routes = [
     ModalModule.forRoot(),
     RouterModule.forRoot(routes),
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    AccountModule,
+    CMSModule,
+    RecipeModule
   ],
   exports: [BsDropdownModule, TooltipModule, ModalModule,RouterModule],
-  providers: [AccountService, NavigationService, RecipeService, Title],
+  providers: [AccountService, NavigationService, RecipeService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

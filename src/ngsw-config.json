@@ -7,12 +7,14 @@
         "files": [
           "/favicon.ico",
           "/index.html",
-          "/img/Logo.png"
+          "/img/Logo.png",
+          "/test_data/*.*"
         ],
         "versionedFiles": [
           "/*.bundle.css",
           "/*.bundle.js",
           "/*.chunk.js"
+
         ]
       }
     }, {

@@ -13,7 +13,7 @@ export class AccountService implements CanActivate {
     private http: HttpClient
   ) {
     this.getAccountDataObservable().subscribe(data => {
-      this.isUserLoggedIn = data.isUserLoggedIn;
+      //this.isUserLoggedIn = data.isUserLoggedIn;
     }); 
   }
 
