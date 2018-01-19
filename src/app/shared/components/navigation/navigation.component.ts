@@ -43,7 +43,6 @@ export class NavigationComponent {
   
   selectSearchResult(recipe: SearchResultRecipe)
 	{
-		this.router.navigate(['/Rezepte', { url: recipe.url, id: recipe.id }]);
 		this.searchResult = new SearchResult();
     this.searchTerm = "";
     this.navigationService.isMobileSearchActive = false;
