@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './components/app.component';
 import { NavigationComponent } from '../../shared/components';
 
-import { AccountModule, CMSModule, RecipeModule } from '../';
+import { CMSModule } from '../';
 
 import { RouterModule, Routes } from '@angular/router';
 
@@ -18,14 +18,8 @@ import { FormsModule } from '@angular/forms';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../../../environments/environment';
 
-export function loadAccountModule() {
-  return AccountModule;
-}
 export function loadCMSModule() {
   return CMSModule;
-}
-export function loadRecipeModule() {
-  return RecipeModule;
 }
 
 
@@ -34,10 +28,10 @@ const routes: Routes = [
     path: 'CMS', loadChildren: loadCMSModule, canActivate: [AccountService]
   },
   {
-    path: 'Benutzerverwaltung', loadChildren: loadAccountModule
+    path: 'Benutzerverwaltung', loadChildren: '../account/account.module#AccountModule'
   },
   {
-    path: '', loadChildren: loadRecipeModule
+    path: '', loadChildren: '../recipe/recipe.module#RecipeModule'
   }
 ];
 
@@ -55,9 +49,7 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     HttpClientModule,
     FormsModule,
-    AccountModule,
     CMSModule,
-    RecipeModule
   ],
   exports: [BsDropdownModule, TooltipModule, ModalModule,RouterModule],
   providers: [AccountService, NavigationService, RecipeService],

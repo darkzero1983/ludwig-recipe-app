@@ -1,14 +1,20 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AccountLoginComponent} from './components/login/account.login.component'
 
-const routes: Routes = [];
+const routes: Routes = [
+  { path: 'Einloggen', component: AccountLoginComponent },
+  { path: '', component: AccountLoginComponent }
+ ];
 
 @NgModule({
   declarations: [
+    AccountLoginComponent
   ],
   imports: [
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    CommonModule
   ],
   exports: [RouterModule],
   providers: []
