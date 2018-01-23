@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { RecipeDetailComponent, RecipeOverviewComponent } from './components/';
-
+import { RecipeService } from './services';
 const routes: Routes = [
   { path: '', component: RecipeOverviewComponent },
   { path: 'Rezepte/:categoryUrl', component: RecipeOverviewComponent },
@@ -20,6 +20,6 @@ const routes: Routes = [
     CommonModule 
   ],
   exports: [RouterModule],
-  providers: []
+  providers: [RecipeService]
 })
 export class RecipeModule { }
