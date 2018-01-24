@@ -15,23 +15,17 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { AppComponent } from './components/app.component';
 import { NavigationComponent } from '../../shared/components';
 
-//Module
-import { CMSModule } from '../cms/cms.module';
-
 //Services
 import { AccountService, NavigationService } from '../../shared/services';
 
 //Environment
 import { environment } from '../../../environments/environment';
 
-export function loadCMSModule() {
-  return CMSModule;
-}
 
 
 const routes: Routes = [
   {
-    path: 'CMS', loadChildren: loadCMSModule, canActivate: [AccountService]
+    path: 'CMS', loadChildren: '../cms/cms.module#CmsModule', canActivate: [AccountService]
   },
   {
     path: 'Benutzerverwaltung', loadChildren: '../account/account.module#AccountModule'
@@ -55,7 +49,6 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     HttpClientModule,
     FormsModule,
-    CMSModule,
   ],
   exports: [BsDropdownModule, TooltipModule, ModalModule,RouterModule],
   providers: [AccountService, NavigationService],

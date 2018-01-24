@@ -2,12 +2,15 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-const routes: Routes = [
+import { CmsOverviewComponent } from './components';
 
+const routes: Routes = [
+  { path: '', component: CmsOverviewComponent }
  ];
 
 @NgModule({
   declarations: [
+    CmsOverviewComponent
   ],
   imports: [
     RouterModule.forChild(routes)
@@ -15,4 +18,4 @@ const routes: Routes = [
   exports: [RouterModule],
   providers: []
 })
-export class CMSModule { }
+export class CmsModule { }
