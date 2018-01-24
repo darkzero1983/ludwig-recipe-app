@@ -4,8 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AccountLoginComponent} from './components/login/account.login.component'
 
 const routes: Routes = [
-  { path: 'Einloggen', component: AccountLoginComponent },
-  { path: '', component: AccountLoginComponent }
+  { path: 'Einloggen', component: AccountLoginComponent }
  ];
 
 @NgModule({
