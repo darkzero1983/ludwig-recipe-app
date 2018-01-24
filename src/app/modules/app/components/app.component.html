@@ -1,29 +1,12 @@
 <body [ngClass]="{'active-mobile-search': navigationService.isMobileSearchActive}">
-<navigation-component></navigation-component>
+  <navigation-component></navigation-component>
 
-
-<div class="container body-content" (click)="navigationService.deactivateMobileSearch()">
-    <div class="content-body">
-        <router-outlet></router-outlet>
-    </div>
-    <footer>
-        <a [routerLink]="['Contact']">Kontakt</a> / <a [routerLink]="['About']">Impressum</a>
-    </footer>
-</div>
-
-<!--
-<script type="text/javascript">
-  if (navigator.serviceWorker.controller) {
-    //console.log('[PWA Builder] active service worker found, no need to register')
-  } else {
-    //Register the ServiceWorker
-    navigator.serviceWorker.register('pwabuilder-sw.js', {
-      scope: './'
-    }).then(function(reg) {
-      //console.log('Service worker has been registered for scope:'+ reg.scope);
-    });
-  }
-</script>
--->
-
+  <div class="container body-content" (click)="navigationService.deactivateMobileSearch()">
+      <div class="content-body">
+          <router-outlet></router-outlet>
+      </div>
+      <footer>
+          <a [routerLink]="['Contact']">Kontakt</a> / <a [routerLink]="['About']">Impressum</a>
+      </footer>
+  </div>
 </body>

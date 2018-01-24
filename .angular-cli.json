@@ -26,11 +26,11 @@
       "serviceWorker": true,
       "styles": [
         "css/bootstrap.min.css",
-        "styles.css"
+        "css/styles.less"
       ],
       "scripts": [
         "../node_modules/jquery/dist/jquery.min.js",
-        "js/bootstrap.js"
+        "js/bootstrap.min.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {

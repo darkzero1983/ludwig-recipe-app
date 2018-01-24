@@ -7,7 +7,7 @@ import { AccountService, NavigationService } from '../../services';
 @Component({
   selector: 'navigation-component',
   templateUrl: './navigation.component.html',
-  styleUrls: ['./navigation.component.css']
+  styleUrls: ['./navigation.component.less']
 })
 export class NavigationComponent {
   searchTerm: string = "";
