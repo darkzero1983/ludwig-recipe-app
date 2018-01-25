@@ -26,6 +26,7 @@
       "serviceWorker": true,
       "styles": [
         "../node_modules/bootstrap/dist/css/bootstrap.css",
+        "../node_modules/font-awesome/less/font-awesome.less",
         "css/styles.less"
       ],
       "scripts": [
