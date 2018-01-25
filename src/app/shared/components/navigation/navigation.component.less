@@ -1,3 +1,5 @@
+@import "../../../../css/variables.less";
+
 .navbar {
 	padding: 0;
 	margin-bottom: 20px;
@@ -27,9 +29,9 @@
 }
 
 .navbar-fixed-bottom {
-	border-top: 1px solid #999;
+	border-top: 1px solid @color-grey-dark;
 	margin-bottom: 0 !important;
-	background-color: #FFFFFF;
+	background-color: @color-white;
 
 	
 }
@@ -41,10 +43,10 @@
 
 
 .search-result {
-	border-bottom: 2px solid #ddd;
-	border-left: 2px solid #ddd;
-	border-right: 2px solid #ddd;
-	background-color: #FFF;
+	border-bottom: 2px solid @color-grey-light;
+	border-left: 2px solid @color-grey-light;
+	border-right: 2px solid @color-grey-light;
+	background-color: @color-white;
 	border-radius: 0 0 4px 4px;
 	overflow-x:hidden;
 	width:268px;
@@ -54,12 +56,12 @@
 .search-result .result-item {
 	cursor:pointer;
 	padding: 3px;
-	border-bottom: 1px solid #ddd;
+	border-bottom: 1px solid @color-grey-light;
 	white-space:nowrap;
 }
 .search-result .result-item:hover
 {
-	color: #C1282D;
+	color: @color-red;
 }
 .search-result div:last-of-type
 {
@@ -72,7 +74,7 @@
 	padding-right:5px;
 }
 
-@media (min-width:768px) {
+@media (min-width:@breakpoint-desktop-min) {
 	.header-logo {
 		height: 100px;
 	}
@@ -85,12 +87,12 @@
 	.navbar .navbar-login a, .navbar .navbar-login a:hover, .navbar .navbar-login a:focus, .navbar .navbar-login a:visited {
 		text-decoration:none;
 		display:inline-block;
-		background-color: #FFF;
+		background-color: @color-white;
 		padding: 3px 10px;
-		border: 1px solid #ddd;
+		border: 1px solid @color-grey-light;
 		border-top: none;
 		border-radius: 0 0 .25rem .25rem;
-		color:#C1282D;
+		color:@color-red;
 	}
 
 	.navbar .navbar-login a:hover{
@@ -119,11 +121,11 @@
 		margin-right: 30px !important;
 		padding-right: 0 !important;
 		padding-left: 0 !important;
-		border-top: 1px dotted #e7e7e7;
+		border-top: 1px dotted @color-grey;
 	}
 
 	.navbar-right {
-		border-left: 1px dotted #e7e7e7;
+		border-left: 1px dotted @color-grey;
 	}
 
 
@@ -145,7 +147,7 @@
 	}
 }
 
-@media (max-width: 767px) {
+@media (max-width: @breakpoint-mobile-max) {
 	.header-logo {
 		height: 40px;
 		margin-top: 5px;
@@ -182,7 +184,7 @@
 
 
 	.nav-login-link {
-		color: #C1282D !important;
+		color: @color-red !important;
 		text-align: center;
 		font-weight: bold;
 	}
@@ -192,20 +194,20 @@
 		padding: 10px;
 		margin-top: 50px;
 		z-index: 900;
-		border-bottom: 1px solid #999;
+		border-bottom: 1px solid @color-grey-dark;
 		display: inline-block;
 		position: relative;
 	}
 
 	.navbar-toggler {
 		margin-top: 11px;
-		border: 1px solid #D6D6D6;
+		border: 1px solid @color-grey;
 		float: right;
 	}
 
 
 	.nav-delimiter {
-		background-color: #999;
+		background-color: @color-grey-dark;
 		top: 58px;
 		width: 100%;
 		height: 1px;
@@ -216,12 +218,12 @@
 	}
 
 	.mobile-menu {
-		box-shadow: 0 4px 2px -2px gray;
+		box-shadow: 0 4px 2px -2px @color-grey-dark;
 		position: fixed;
 		top: 59px;
 		z-index: 999;
 		width: 100%;
-		border-top: 1px solid #999;
+		border-top: 1px solid @color-grey-dark;
 		overflow-y: scroll;
 		-webkit-overflow-scrolling: touch;
 
@@ -231,7 +233,7 @@
 		display: block;
 		width: 100%;
 		padding: 10px;
-		border-bottom: 1px solid #D6D6D6;
+		border-bottom: 1px solid @color-grey;
 		color: rgba(0, 0, 0, .6);
 	}
 
@@ -239,7 +241,7 @@
 		display: block;
 		width: 100%;
 		padding: 10px 10px 10px 40px;
-		border-bottom: 1px solid #D6D6D6;
+		border-bottom: 1px solid @color-grey;
 		color: rgba(0, 0, 0, .6);
 	}
 	.search-result {

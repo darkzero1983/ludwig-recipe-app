@@ -1,0 +1,79 @@
+@import "../../../../../css/variables.less";
+
+.headline {
+    color: @color-red;
+    font-size: 34px;
+    margin-bottom: 15px;
+    font-weight: bold;
+    text-shadow: 1px 1px #D6D6D6;
+}
+
+.recipe-overview-item {
+    cursor: pointer;
+    border-bottom: 1px solid #BBB;
+    
+    a,
+    a:hover,
+    a:focus {
+        color: #373a3c;
+        text-decoration: none;
+    }
+    .teaser-image,
+    .teaser-text {
+        float: left;
+    }
+
+
+    @media (min-width: @breakpoint-desktop-min) {
+        padding-bottom: 10px;
+        margin-bottom: 10px;
+
+        .teaser-image {
+            width: 250px;
+
+            
+        }
+        .teaser-image img {
+            width: 240px;
+            height: 180px;
+        }
+
+        .teaser-text  .recipe-name {
+            font-size: 26px;
+            font-weight: bold;
+        }
+
+        .teaser-text {
+            width: ~"calc(100% - 250px)";
+        }
+
+        
+    }
+
+    @media (max-width: @breakpoint-mobile-max) {
+        padding-bottom: 5px;
+        margin-bottom: 5px;
+        
+        .headline {
+            font-size: 24px;
+        }
+
+        .teaser-image {
+            width: 117px;
+        }
+
+        .teaser-image img {
+            height: 80px;
+            width: 107px;
+        }
+
+        .teaser-text {
+            width: ~"calc(100% - 147px)";
+        }
+
+        .teaser-text .recipe-info {
+            margin-top: 10px;
+            font-size: 10px;
+        }
+    }
+}

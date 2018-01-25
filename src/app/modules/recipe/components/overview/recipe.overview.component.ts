@@ -6,7 +6,7 @@ import { Title }     from '@angular/platform-browser';
 @Component({
   selector: 'recipe-overview-component',
   templateUrl: './recipe.overview.component.html',
-  styleUrls: ['./recipe.overview.component.css']
+  styleUrls: ['./recipe.overview.component.less']
 })
 export class RecipeOverviewComponent {
   paging: number[] = new Array<number>();
