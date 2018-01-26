@@ -13,10 +13,10 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 
 //Components
 import { AppComponent } from './components/app.component';
-import { NavigationComponent } from '../../shared/components';
+import { NavigationComponent } from '@shared/components';
 
 //Services
-import { AccountService, NavigationService } from '../../shared/services';
+import { AccountService, NavigationService } from '@shared/services';
 
 //Environment
 import { environment } from '../../../environments/environment';
