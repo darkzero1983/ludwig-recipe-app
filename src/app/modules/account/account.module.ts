@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AccountLoginComponent} from './components/login/account.login.component'
+import { MatInputModule, MatIconModule, MatCheckboxModule, MatAutocompleteModule } from '@angular/material';
 
 const routes: Routes = [
   { path: 'Einloggen', component: AccountLoginComponent }
@@ -13,7 +14,11 @@ const routes: Routes = [
   ],
   imports: [
     RouterModule.forChild(routes),
-    CommonModule
+    CommonModule,
+    MatInputModule,
+    MatIconModule,
+    MatCheckboxModule,
+    MatAutocompleteModule
   ],
   exports: [RouterModule],
   providers: []

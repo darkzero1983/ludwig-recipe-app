@@ -1,2 +1,24 @@
-Login<br>
-<a routerLink="/">Übersicht</a>
+<h1 class="headline">Einloggen</h1><br>
+
+<div class="row" style="padding-bottom:50px;">
+    <div class="col-xs-12 col-sm-12">
+        <div class="row">
+            <div class="col-xs-12 col-sm-6">
+                <mat-form-field  hintLabel="Max 10 Zeichen">
+                    <input matInput placeholder="Benutzername" #userName autocomplete='false'>
+                    <mat-hint align="end">{{userName.value?.length || 0}}/10</mat-hint>
+                </mat-form-field>
+            </div>
+            <div class="col-xs-12 col-sm-6">
+                <mat-form-field>
+                    <input matInput placeholder="Passwort" [type]="hide ? 'password' : 'text'">
+                    <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+                </mat-form-field>
+            </div>
+        </div>
+        <br>
+        <mat-checkbox formControlName="hideRequired">Eingeloggt bleiben</mat-checkbox>
+        <br><br>
+        <input type="button" class="btn " value="Einloggen">
+    </div>
+</div>
