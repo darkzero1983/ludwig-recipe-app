@@ -1,12 +1,12 @@
 <h1 class="headline">{{translation.get('Account.Headline')}}</h1><br>
 
-<form [formGroup]="loginForm" (ngSubmit)="login(loginForm.value, loginForm.valid)">
+<form [formGroup]="loginForm" (ngSubmit)="login(loginForm.value, loginForm.valid)" >
     <div class="row" style="padding-bottom:50px;">
         <div class="col-xs-12 col-sm-12">
             <div class="row">
                 <div class="col-xs-12 col-sm-6">
                     <mat-form-field  hintLabel="{{translation.get('Account.UserName.Hint', ['10'])}}">
-                        <input matInput placeholder="{{translation.get('Account.UserName.Label')}}" formControlName="userName" required>
+                        <input matInput placeholder="{{translation.get('Account.UserName.Label')}}" formControlName="userName" autocomplete="login-user" required>
                         <mat-hint align="end">{{loginForm.controls.userName.value?.length || 0}}/10</mat-hint>
                         <mat-error *ngIf="loginForm.controls.userName.errors?.required">{{translation.get('Account.UserName.Error.Required')}}</mat-error>
                         <mat-error *ngIf="loginForm.controls.userName.errors?.maxlength">{{translation.get('Account.UserName.Error.MaxLength', [loginForm.controls.userName.errors.maxlength.actualLength, loginForm.controls.userName.errors.maxlength.requiredLength])}}</mat-error>
@@ -14,7 +14,7 @@
                 </div>
                 <div class="col-xs-12 col-sm-6">
                     <mat-form-field>
-                        <input matInput placeholder="{{translation.get('Account.Password.Label')}}" [type]="hide ? 'password' : 'text'"  formControlName="password" required>
+                        <input matInput placeholder="{{translation.get('Account.Password.Label')}}" [type]="hide ? 'password' : 'text'"  formControlName="password"  autocomplete="login-user" required>
                         <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
                         <mat-error *ngIf="loginForm.controls.password.errors?.required">{{translation.get('Account.Password.Error.Required')}}</mat-error>
                     </mat-form-field>
