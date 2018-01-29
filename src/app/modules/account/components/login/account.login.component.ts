@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Title }     from '@angular/platform-browser';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators  } from '@angular/forms';
 
 @Component({
   selector: 'account-login-component',
@@ -11,7 +11,7 @@ export class AccountLoginComponent {
   private hide:boolean = true;
   //private userName: string = "Peter";
   private loginForm = new FormGroup ({
-    userName: new FormControl(),
+    userName: new FormControl('', Validators.required && Validators.maxLength(10)),
     password: new FormControl()
   });
 
@@ -19,11 +19,11 @@ export class AccountLoginComponent {
     private titleService: Title 
   ) {
     titleService.setTitle("Einloggen - Ludwigs Rezepte");
-
-   }
+  }
 
    login()
    {
+     console.info(this.loginForm.controls.userName.errors.required)
      console.info(this.loginForm);
    }
 }
