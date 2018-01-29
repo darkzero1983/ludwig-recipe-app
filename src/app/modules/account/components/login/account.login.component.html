@@ -1,6 +1,6 @@
 <h1 class="headline">{{translation.get('Account.Headline')}}</h1><br>
 
-<form [formGroup]="loginForm">
+<form [formGroup]="loginForm" (ngSubmit)="login(loginForm.value, loginForm.valid)">
     <div class="row" style="padding-bottom:50px;">
         <div class="col-xs-12 col-sm-12">
             <div class="row">
@@ -16,14 +16,14 @@
                     <mat-form-field>
                         <input matInput placeholder="{{translation.get('Account.Password.Label')}}" [type]="hide ? 'password' : 'text'"  formControlName="password" required>
                         <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
-                        <mat-error *ngIf="loginForm.controls.password.errors.required">{{translation.get('Account.Password.Error.Required')}}</mat-error>
+                        <mat-error *ngIf="loginForm.controls.password.errors?.required">{{translation.get('Account.Password.Error.Required')}}</mat-error>
                     </mat-form-field>
                 </div>
             </div>
             <br>
             <mat-checkbox formControlName="stayLoggedIn">{{translation.get('Account.StayLoggedIn.Label')}}</mat-checkbox>
             <br><br>
-            <input type="button" class="btn" (click)="login()" value="{{translation.get('Account.Button.Login')}}">
+            <input type="submit" class="btn" value="{{translation.get('Account.Button.Login')}}">
         </div>
     </div>
 </form>

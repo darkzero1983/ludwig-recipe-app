@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Title }     from '@angular/platform-browser';
 import { FormControl, FormGroup, Validators  } from '@angular/forms';
 import { TranslationService } from '../../../../shared/services';
+import { AccountLogin } from '../../models/account.login.model';
 
 @Component({
   selector: 'account-login-component',
@@ -25,16 +26,25 @@ export class AccountLoginComponent {
     titleService.setTitle("Einloggen - Ludwigs Rezepte");
   }
 
-   login()
-   {
-     if(this.isGerman)
-     {
+  login(model: AccountLogin, isValid: boolean) {
+    this.languageTest();
+    if(!isValid)
+    {
+      return;
+    }
+    console.log(model);
+
+  }
+
+  languageTest(){
+    if(this.isGerman)
+    {
       this.translation.switchCulture("en-US");
-     }
-     else
-     {
+    }
+    else
+    {
       this.translation.switchCulture("de-DE");
-     }
-     this.isGerman = !this.isGerman;
-   }
+    }
+    this.isGerman = !this.isGerman;
+  }
 }
