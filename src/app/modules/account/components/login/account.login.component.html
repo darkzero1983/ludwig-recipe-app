@@ -1,15 +1,15 @@
-<h1 class="headline">{{translationService.getTranslation('Account.Headline', [])}}</h1><br>
+<h1 class="headline">{{translationService.getTranslation('Account.Headline')}}</h1><br>
 
 <form [formGroup]="loginForm">
     <div class="row" style="padding-bottom:50px;">
         <div class="col-xs-12 col-sm-12">
             <div class="row">
                 <div class="col-xs-12 col-sm-6">
-                    <mat-form-field  hintLabel="Max 10 Zeichen">
-                        <input matInput placeholder="{{translationService.getTranslation('Account.UserName.Label', [])}}" formControlName="userName" autocomplete="login-user" required>
+                    <mat-form-field  hintLabel="{{translationService.getTranslation('Account.UserName.Hint', ['10'])}}">
+                        <input matInput placeholder="{{translationService.getTranslation('Account.UserName.Label')}}" formControlName="userName" autocomplete="login-user" required>
                         <mat-hint align="end">{{loginForm.controls.userName.value?.length || 0}}/10</mat-hint>
-                        <mat-error *ngIf="loginForm.controls.userName.errors != null && loginForm.controls.userName.errors.required">Es muss ein Name eingetragen werden</mat-error>
-                        <mat-error *ngIf="loginForm.controls.userName.errors != null && loginForm.controls.userName.errors.maxlength">Der Name ist zu lang (aktuell {{loginForm.controls.userName.errors.maxlength.actualLength}} von {{loginForm.controls.userName.errors.maxlength.requiredLength}} Zeichen)</mat-error>
+                        <mat-error *ngIf="loginForm.controls.userName.errors != null && loginForm.controls.userName.errors.required">{{translationService.getTranslation('Account.UserName.Error.Required')}}</mat-error>
+                        <mat-error *ngIf="loginForm.controls.userName.errors != null && loginForm.controls.userName.errors.maxlength">{{translationService.getTranslation('Account.UserName.Error.MaxLength', [loginForm.controls.userName.errors.maxlength.actualLength, loginForm.controls.userName.errors.maxlength.requiredLength])}}</mat-error>
                     </mat-form-field>
                 </div>
                 <div class="col-xs-12 col-sm-6">
