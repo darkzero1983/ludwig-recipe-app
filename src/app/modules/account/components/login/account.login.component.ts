@@ -14,12 +14,13 @@ export class AccountLoginComponent {
 
   private loginForm = new FormGroup ({
     userName: new FormControl('', Validators.required && Validators.maxLength(10)),
-    password: new FormControl()
+    password: new FormControl('', Validators.required),
+    stayLoggedIn: new FormControl(true, Validators.required)
   });
 
   public constructor(
     private titleService: Title,
-    private translationService: TranslationService 
+    private translation: TranslationService 
   ) {
     titleService.setTitle("Einloggen - Ludwigs Rezepte");
   }
@@ -28,11 +29,11 @@ export class AccountLoginComponent {
    {
      if(this.isGerman)
      {
-      this.translationService.switchCulture("en-US");
+      this.translation.switchCulture("en-US");
      }
      else
      {
-      this.translationService.switchCulture("de-DE");
+      this.translation.switchCulture("de-DE");
      }
      this.isGerman = !this.isGerman;
    }
