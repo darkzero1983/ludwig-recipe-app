@@ -18,7 +18,7 @@ import { AppComponent } from './components/app.component';
 import { NavigationComponent } from '@shared/components';
 
 //Services
-import { AccountService, NavigationService } from '@shared/services';
+import { AccountService, NavigationService, TranslationService } from '@shared/services';
 
 //Environment
 import { environment } from '../../../environments/environment';
@@ -54,7 +54,7 @@ const routes: Routes = [
     FormsModule
   ],
   exports: [BsDropdownModule, TooltipModule, ModalModule,RouterModule],
-  providers: [AccountService, NavigationService],
+  providers: [AccountService, NavigationService, TranslationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
