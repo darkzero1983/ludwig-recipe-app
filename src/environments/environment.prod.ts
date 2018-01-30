@@ -2,7 +2,7 @@ export const environment = {
   production: true,
   useServiceWorker: true,
   useTestData: false,
-  apiNavigation: "/api/Navigation/Load",
+  apiNavigation: "/test_data/navigation.json",
   apiNavigationTest: "/test_data/navigation.json",
   apiRecipeSearch: "https://www.ludwigs-rezepte.de/api/Recipe/Search",
   apiRecipeSearchTest: "/test_data/recipe-search-result.json",
