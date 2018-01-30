@@ -14,8 +14,7 @@ export class RecipeService  {
     ) {
     }
 
-    LoadOverview(): Observable<RecipeOverview> {
-        return this.http.get<RecipeOverview>(environment.apiRecipeOverview);
+    LoadOverview(count: number, skip: number, category: string, subCategory: string): Observable<RecipeOverview> {
+        return this.http.get<RecipeOverview>(environment.useTestData ? environment.apiRecipeOverviewTest : environment.apiRecipeOverview + "?count=" + count + "&skip=" + skip + "&category=" + category + "&subCategory=" + subCategory);
     }
-
 }

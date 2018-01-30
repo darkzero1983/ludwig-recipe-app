@@ -9,7 +9,8 @@ import { Title }     from '@angular/platform-browser';
   styleUrls: ['./recipe.overview.component.less']
 })
 export class RecipeOverviewComponent {
-  paging: number[] = new Array<number>();
+  private resultsPerPage: number = 10;
+  private paging: number[] = new Array<number>();
   categoryUrl: string;
   subCategoryUrl: string;
   recipeOverview: RecipeOverview = new RecipeOverview();
@@ -19,6 +20,6 @@ export class RecipeOverviewComponent {
     private titleService: Title 
 	) {
     titleService.setTitle("Rezept Übersicht - Ludwigs Rezepte");
-    recipeService.LoadOverview().subscribe(x => this.recipeOverview = x);
+    recipeService.LoadOverview(this.resultsPerPage, 0, "", "").subscribe(x => this.recipeOverview = x);
 	}
 }

@@ -8,7 +8,7 @@ import { Title }     from '@angular/platform-browser';
   styleUrls: ['./account.login.component.less']
 })
 export class AccountLoginComponent {
-  private hide:boolean = true;
+  public hide:boolean = true;
   private userName: string;
 
   public constructor(

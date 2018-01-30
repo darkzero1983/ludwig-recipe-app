@@ -1,7 +1,7 @@
 export const environment = {
   production: true,
   useServiceWorker: true,
-  useTestData: true,
+  useTestData: false,
   apiNavigation: "/api/Navigation/Load",
   apiNavigationTest: "/test_data/navigation.json",
   apiRecipeSearch: "https://www.ludwigs-rezepte.de/api/Recipe/Search",
@@ -10,6 +10,6 @@ export const environment = {
   apiAccountCanActiveTest: "/test_data/canActivate.txt",
   apiAccountData: "/test_data/account-data.json",
   apiAccountDataTest: "/test_data/account-data.json",
-  apiRecipeOverview: "/test_data/recipe-overview.json",
+  apiRecipeOverview: "/api/Recipe/Overview",
   apiRecipeOverviewTest: "/test_data/recipe-overview.json"
 };
