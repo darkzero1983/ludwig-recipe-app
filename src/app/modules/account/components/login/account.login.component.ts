@@ -14,7 +14,7 @@ export class AccountLoginComponent {
   private isGerman: boolean = true;
 
   private loginForm = new FormGroup ({
-    userName: new FormControl('', Validators.required && Validators.maxLength(10)),
+    userName: new FormControl('', Validators.required && Validators.maxLength(10) && Validators.pattern('^[a-zA-Z]+$')),
     password: new FormControl('', Validators.required),
     stayLoggedIn: new FormControl(true, Validators.required)
   });
