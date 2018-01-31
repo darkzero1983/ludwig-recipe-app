@@ -8,11 +8,14 @@
                     <mat-form-field  hintLabel="{{translation.get('Account.UserName.Hint', ['10'])}}">
                         <input matInput placeholder="{{translation.get('Account.UserName.Label')}}" formControlName="userName" autocomplete="login-user" required>
                         <mat-hint align="end">{{loginForm.controls.userName.value?.length || 0}}/10</mat-hint>
+                        <mat-error *ngIf="showError(loginForm.controls.userName.errors)">{{errorMessage(loginForm.controls.userName.errors)}}</mat-error> 
+<!--
                         <mat-error *ngIf="loginForm.controls.userName.errors?.required">{{translation.get('Account.UserName.Error.Required')}}</mat-error>
                         <mat-error *ngIf="loginForm.controls.userName.errors?.maxlength">{{translation.get('Account.UserName.Error.MaxLength', [loginForm.controls.userName.errors.maxlength.actualLength, loginForm.controls.userName.errors.maxlength.requiredLength])}}</mat-error>
                         <mat-error *ngIf="loginForm.controls.userName.errors?.pattern?.requiredPattern == '^[a-zA-Z]+$'">{{translation.get('Account.UserName.Error.Pattern.Letters')}}</mat-error>
                         <mat-error *ngIf="loginForm.controls.userName.errors?.pattern?.requiredPattern == '^[a-zA-Z0-9]+$'">{{translation.get('Account.UserName.Error.Pattern.LettersNumber')}}</mat-error>
                         <mat-error *ngIf="allPattern.indexOf(loginForm.controls.userName.errors?.pattern?.requiredPattern) < 0">Else</mat-error>
+-->
                     </mat-form-field>
                 </div>
                 <div class="col-xs-12 col-sm-6">
