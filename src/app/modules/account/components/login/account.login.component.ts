@@ -12,9 +12,9 @@ import { AccountLogin } from '../../models/account.login.model';
 export class AccountLoginComponent {
   private hide:boolean = true;
   private isGerman: boolean = true;
-
+  private allPattern: string[] = new Array<string>("^[a-zA-Z]+$", "^[a-zA-Z0-9]+$")
   private loginForm = new FormGroup ({
-    userName: new FormControl('', Validators.required && Validators.maxLength(10) && Validators.pattern('^[a-zA-Z]+$')),
+    userName: new FormControl('', Validators.required && Validators.maxLength(10) && Validators.pattern('^[a-zA-Z0-9]+$')),
     password: new FormControl('', Validators.required),
     stayLoggedIn: new FormControl(true, Validators.required)
   });

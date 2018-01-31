@@ -46,7 +46,8 @@ export class TranslationService  {
         this.setTranslation("Account.UserName.Hint", "Max {0} Zeichen", "Max {0} Since");
         this.setTranslation("Account.UserName.Error.Required", "Es muss ein Name eingetragen werden", "Name is required");
         this.setTranslation("Account.UserName.Error.MaxLength", "Der Name ist zu lang (aktuell {0} von {1} Zeichen)", "Name is to (currently {0} of {1} since)");
-        this.setTranslation("Account.UserName.Error.Pattern", "Es dürfen nur Zahlen und Buchstaben genommen werden", "Only letters and numbers are allowed");
+        this.setTranslation("Account.UserName.Error.Pattern.Letters", "Es dürfen nur Buchstaben genommen werden", "Only letters are allowed");
+        this.setTranslation("Account.UserName.Error.Pattern.LettersNumber", "Es dürfen nur Zahlen und Buchstaben genommen werden", "Only letters and numbers are allowed");
 
         // Account Password
         this.setTranslation("Account.Password.Label", "Passwort", "Password");
