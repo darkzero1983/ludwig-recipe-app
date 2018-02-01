@@ -13,7 +13,6 @@ import { ValidationService } from '../../../../shared/services/validation.servic
 export class AccountLoginComponent {
   private hide:boolean = true;
   private isGerman: boolean = true;
-  private allPattern: string[] = new Array<string>("^[a-zA-Z]+$", "^[a-zA-Z0-9]+$")
   private loginForm: FormGroup;
 
   public constructor(
@@ -26,7 +25,7 @@ export class AccountLoginComponent {
     this.loginForm = new FormGroup ({
       userName: new FormControl('', [Validators.required, Validators.pattern(validation.pattern.LettersNumber), Validators.maxLength(10)]),
       password: new FormControl('', [Validators.required]),
-      stayLoggedIn: new FormControl(true, Validators.required)
+      stayLoggedIn: new FormControl(true)
     });
   }
 
@@ -50,6 +49,4 @@ export class AccountLoginComponent {
     }
     this.isGerman = !this.isGerman;
   }
-
-  
 }

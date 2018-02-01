@@ -50,7 +50,8 @@ export class TranslationService  {
 
         // Error Message
         this.setTranslation("FormControl.Error.Required", "Es muss ein Wert eingetragen werden", "Value is required");
-        this.setTranslation("FormControl.Error.MaxLength", "Die Eingabe ist zu lang (aktuell {0} von {1} Zeichen)", "The value is to (currently {0} of {1} since)");
+        this.setTranslation("FormControl.Error.MinLength", "Die Eingabe ist zu kurz (aktuell {0} von mindestens {1} Zeichen)", "The value is to short(currently {0} of {1} since)");
+        this.setTranslation("FormControl.Error.MaxLength", "Die Eingabe ist zu lang (aktuell {0} von maximal {1} Zeichen)", "The value is to long(currently {0} of {1} since)");
         this.setTranslation("FormControl.Error.Pattern.Default", "Die Eingabe ist nicht valide", "The value is not valid");
         this.setTranslation("FormControl.Error.Pattern." + this.pattern.Letters, "Es dürfen nur Buchstaben genommen werden", "Only letters are allowed");
         this.setTranslation("FormControl.Error.Pattern." + this.pattern.LettersNumber, "Es dürfen nur Zahlen und Buchstaben genommen werden", "Only letters and numbers are allowed");

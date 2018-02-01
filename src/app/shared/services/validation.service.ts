@@ -22,11 +22,15 @@ export class ValidationService  {
     {
         if(error.required != null)
         {
-        return this.translation.get('FormControl.Error.Required');
+            return this.translation.get('FormControl.Error.Required');
+        }
+        if(error.minlength != null)
+        {
+            return this.translation.get('FormControl.Error.MinLength', [error.minlength.actualLength, error.minlength.requiredLength]);
         }
         if(error.maxlength != null)
         {
-        return this.translation.get('FormControl.Error.MaxLength', [error.maxlength.actualLength, error.maxlength.requiredLength]);
+            return this.translation.get('FormControl.Error.MaxLength', [error.maxlength.actualLength, error.maxlength.requiredLength]);
         }
         if(error.pattern != null)
         {
