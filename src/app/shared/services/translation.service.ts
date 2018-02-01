@@ -1,11 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Translation } from '../models/translation.model';
+import { ValidationPattern } from '../models/validation.pattern.model';
 
 @Injectable()
 export class TranslationService  {
     private currentCulture = "de-DE";
     private transaltions: Translation[];
+    private pattern: ValidationPattern;
     constructor() {
+        this.pattern = new ValidationPattern;
         this.setTranslations();
     }
 
@@ -49,8 +52,8 @@ export class TranslationService  {
         this.setTranslation("FormControl.Error.Required", "Es muss ein Wert eingetragen werden", "Value is required");
         this.setTranslation("FormControl.Error.MaxLength", "Die Eingabe ist zu lang (aktuell {0} von {1} Zeichen)", "The value is to (currently {0} of {1} since)");
         this.setTranslation("FormControl.Error.Pattern.Default", "Die Eingabe ist nicht valide", "The value is not valid");
-        this.setTranslation("FormControl.Error.Pattern.Letters", "Es dürfen nur Buchstaben genommen werden", "Only letters are allowed");
-        this.setTranslation("FormControl.Error.Pattern.LettersNumber", "Es dürfen nur Zahlen und Buchstaben genommen werden", "Only letters and numbers are allowed");
+        this.setTranslation("FormControl.Error.Pattern." + this.pattern.Letters, "Es dürfen nur Buchstaben genommen werden", "Only letters are allowed");
+        this.setTranslation("FormControl.Error.Pattern." + this.pattern.LettersNumber, "Es dürfen nur Zahlen und Buchstaben genommen werden", "Only letters and numbers are allowed");
 
         // Account Password
         this.setTranslation("Account.Password.Label", "Passwort", "Password");

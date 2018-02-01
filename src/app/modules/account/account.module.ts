@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AccountLoginComponent} from './components/login/account.login.component'
 import { MatInputModule, MatIconModule, MatCheckboxModule, MatAutocompleteModule } from '@angular/material';
+import { ValidationService } from '../../shared/services/validation.service';
 
 const routes: Routes = [
   { path: 'Einloggen', component: AccountLoginComponent }
@@ -24,6 +25,6 @@ const routes: Routes = [
     ReactiveFormsModule
   ],
   exports: [RouterModule],
-  providers: []
+  providers: [ValidationService]
 })
 export class AccountModule { }
