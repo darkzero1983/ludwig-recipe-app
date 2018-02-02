@@ -11,19 +11,20 @@ import { ValidationService } from '../../../../shared/services/validation.servic
   styleUrls: ['./account.login.component.less']
 })
 export class AccountLoginComponent {
-  private hide:boolean = true;
-  private isGerman: boolean = true;
-  private loginForm: FormGroup;
+  public hide:boolean = true;
+  public isGerman: boolean = true;
+  public loginForm: FormGroup;
 
   public constructor(
-    private titleService: Title,
-    private translation: TranslationService,
-    private validation: ValidationService
+    public titleService: Title,
+    public translation: TranslationService,
+    public validation: ValidationService
   ) {
     titleService.setTitle("Einloggen - Ludwigs Rezepte");
+    let userNameMaxLength: number = 10;
 
     this.loginForm = new FormGroup ({
-      userName: new FormControl('', [Validators.required, Validators.pattern(validation.pattern.LettersNumber), Validators.maxLength(10)]),
+      userName: new FormControl('', [Validators.required, Validators.pattern(validation.pattern.LettersNumber), Validators.maxLength(userNameMaxLength)]),
       password: new FormControl('', [Validators.required]),
       stayLoggedIn: new FormControl(true)
     });

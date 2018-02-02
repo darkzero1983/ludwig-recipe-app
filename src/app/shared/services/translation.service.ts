@@ -46,8 +46,7 @@ export class TranslationService  {
 
         // Account Username
         this.setTranslation("Account.UserName.Label", "Benutzername", "Username");
-        this.setTranslation("Account.UserName.Hint", "Max {0} Zeichen", "Max {0} Since");
-
+       
         // Error Message
         this.setTranslation("FormControl.Error.Required", "Es muss ein Wert eingetragen werden", "Value is required");
         this.setTranslation("FormControl.Error.MinLength", "Die Eingabe ist zu kurz (aktuell {0} von mindestens {1} Zeichen)", "The value is to short(currently {0} of {1} since)");
@@ -55,6 +54,10 @@ export class TranslationService  {
         this.setTranslation("FormControl.Error.Pattern.Default", "Die Eingabe ist nicht valide", "The value is not valid");
         this.setTranslation("FormControl.Error.Pattern." + this.pattern.Letters, "Es dürfen nur Buchstaben genommen werden", "Only letters are allowed");
         this.setTranslation("FormControl.Error.Pattern." + this.pattern.LettersNumber, "Es dürfen nur Zahlen und Buchstaben genommen werden", "Only letters and numbers are allowed");
+
+        // Form Hints
+        this.setTranslation("FormControl.Hints.Left.MaxLength", "Max {0} Zeichen", "Max {0} Since");
+        this.setTranslation("FormControl.Hints.Right.MaxLength", "{0} von {1}", "{0}/{1}");
 
         // Account Password
         this.setTranslation("Account.Password.Label", "Passwort", "Password");

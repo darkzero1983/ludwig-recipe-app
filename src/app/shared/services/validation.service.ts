@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { ValidationPattern } from '../models/validation.pattern.model';
 import { TranslationService } from '../services';
-import { ValidationErrors  } from '@angular/forms';
+import { FormControl, FormGroup, Validators, ValidationErrors  } from '@angular/forms';
+import { AbstractControlOptions } from '@angular/forms/src/model';
+import { ValidatorFn } from '@angular/forms/src/directives/validators';
 
 @Injectable()
 export class ValidationService  {
@@ -13,13 +15,12 @@ export class ValidationService  {
         this.pattern = new ValidationPattern();
     }
 
-    showError(error: ValidationErrors):boolean
-    {
-        return (error != null);
-    }
-
     errorMessage(error: ValidationErrors):string
     {
+        if(error == null)
+        {
+            return null;
+        }
         if(error.required != null)
         {
             return this.translation.get('FormControl.Error.Required');
