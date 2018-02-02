@@ -7,8 +7,8 @@
                 <div class="col-xs-12 col-sm-6">
                     <mat-form-field>
                         <input matInput placeholder="{{translation.get('Account.UserName.Label')}}" formControlName="userName" autocomplete="login-user">
-                        <mat-hint>{{translation.get('FormControl.Hints.Left.MaxLength', ['10'])}}</mat-hint>
-                        <mat-hint align="end">{{translation.get('FormControl.Hints.Right.MaxLength', [loginForm.controls.userName.value?.length, 10])}}</mat-hint>
+                        <mat-hint>{{translation.get('FormControl.Hints.Left.MaxLength', [userNameMaxLength])}}</mat-hint>
+                        <mat-hint align="end">{{translation.get('FormControl.Hints.Right.MaxLength', [loginForm.controls.userName.value?.length, userNameMaxLength])}}</mat-hint>
                         <mat-error>{{validation.errorMessage(loginForm.controls.userName.errors)}}</mat-error> 
                     </mat-form-field>
                 </div>

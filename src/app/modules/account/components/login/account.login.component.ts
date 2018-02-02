@@ -14,6 +14,7 @@ export class AccountLoginComponent {
   public hide:boolean = true;
   public isGerman: boolean = true;
   public loginForm: FormGroup;
+  public userNameMaxLength: number = 30;
 
   public constructor(
     public titleService: Title,
@@ -21,10 +22,9 @@ export class AccountLoginComponent {
     public validation: ValidationService
   ) {
     titleService.setTitle("Einloggen - Ludwigs Rezepte");
-    let userNameMaxLength: number = 10;
 
     this.loginForm = new FormGroup ({
-      userName: new FormControl('', [Validators.required, Validators.pattern(validation.pattern.LettersNumber), Validators.maxLength(userNameMaxLength)]),
+      userName: new FormControl('', [Validators.required, Validators.pattern(validation.pattern.LettersNumber), Validators.maxLength(this.userNameMaxLength)]),
       password: new FormControl('', [Validators.required]),
       stayLoggedIn: new FormControl(true)
     });
