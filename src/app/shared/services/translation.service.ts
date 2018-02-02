@@ -57,7 +57,7 @@ export class TranslationService  {
 
         // Form Hints
         this.setTranslation("FormControl.Hints.Left.MaxLength", "Max {0} Zeichen", "Max {0} Since");
-        this.setTranslation("FormControl.Hints.Right.MaxLength", "{0} von {1}", "{0}/{1}");
+        this.setTranslation("FormControl.Hints.Right.MaxLength", "{0}/{1}", "{0}/{1}");
 
         // Account Password
         this.setTranslation("Account.Password.Label", "Passwort", "Password");
