@@ -12,13 +12,9 @@ import { ValidationService } from '../../../../shared/services/validation.servic
 })
 export class AccountLoginComponent {
   public hide:boolean = true;
-<<<<<<< HEAD
-  private userName: string;
-=======
   public isGerman: boolean = true;
   public loginForm: FormGroup;
   public userNameMaxLength: number = 30;
->>>>>>> 2ef6bcfafcfbc02db71af52c40d906f0568b3d6f
 
   public constructor(
     public titleService: Title,
