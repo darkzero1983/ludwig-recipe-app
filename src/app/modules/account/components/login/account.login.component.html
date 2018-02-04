@@ -1,24 +1,30 @@
-<h1 class="headline">Einloggen</h1><br>
+<h1 class="headline">{{translation.get('Account.Headline')}}</h1><br>
 
-<div class="row" style="padding-bottom:50px;">
-    <div class="col-xs-12 col-sm-12">
-        <div class="row">
-            <div class="col-xs-12 col-sm-6">
-                <mat-form-field  hintLabel="Max 10 Zeichen">
-                    <input matInput placeholder="Benutzername" #userName autocomplete='false'>
-                    <mat-hint align="end">{{userName.value?.length || 0}}/10</mat-hint>
-                </mat-form-field>
+<form [formGroup]="loginForm" (ngSubmit)="login(loginForm.value, loginForm.valid)" >
+    <div class="row" style="padding-bottom:50px;">
+        <div class="col-xs-12 col-sm-12">
+            <div class="row">
+                <div class="col-xs-12 col-sm-6">
+                    <mat-form-field>
+                        <input matInput placeholder="{{translation.get('Account.UserName.Label')}}" formControlName="userName" autocomplete="login-user">
+                        <mat-hint>{{translation.get('FormControl.Hints.Left.MaxLength', [userNameMaxLength])}}</mat-hint>
+                        <mat-hint align="end">{{translation.get('FormControl.Hints.Right.MaxLength', [loginForm.controls.userName.value?.length, userNameMaxLength])}}</mat-hint>
+                        <mat-error>{{validation.errorMessage(loginForm.controls.userName.errors)}}</mat-error> 
+                    </mat-form-field>
+                </div>
+                <div class="col-xs-12 col-sm-6">
+                    <mat-form-field>
+                        <input matInput placeholder="{{translation.get('Account.Password.Label')}}" [type]="hide ? 'password' : 'text'"  formControlName="password"  autocomplete="login-user">
+                        <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+                        <mat-error>{{validation.errorMessage(loginForm.controls.password.errors)}}</mat-error> 
+                    </mat-form-field>
+                </div>
             </div>
-            <div class="col-xs-12 col-sm-6">
-                <mat-form-field>
-                    <input matInput placeholder="Passwort" [type]="hide ? 'password' : 'text'">
-                    <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
-                </mat-form-field>
-            </div>
+            <br>
+            <mat-checkbox formControlName="stayLoggedIn">{{translation.get('Account.StayLoggedIn.Label')}}</mat-checkbox>
+            <br><br>
+            <input type="submit" class="btn" value="{{translation.get('Account.Button.Login')}}">
+            <input type="button" class="btn" value="Sprachwechsel" (click)="languageTest()">
         </div>
-        <br>
-        <mat-checkbox formControlName="hideRequired">Eingeloggt bleiben</mat-checkbox>
-        <br><br>
-        <input type="button" class="btn " value="Einloggen">
     </div>
-</div>
+</form>
