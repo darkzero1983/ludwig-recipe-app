@@ -1,12 +1,13 @@
 <h1 class="headline">{{translation.get('Account.Headline')}}</h1><br>
 
+<mat-error *ngIf="showErrorMessage">{{translation.get('Account.Login.Error')}}<br><br></mat-error> 
 <form [formGroup]="loginForm" (ngSubmit)="login(loginForm.value, loginForm.valid)" >
     <div class="row" style="padding-bottom:50px;">
         <div class="col-xs-12 col-sm-12">
             <div class="row">
                 <div class="col-xs-12 col-sm-6">
                     <mat-form-field>
-                        <input matInput placeholder="{{translation.get('Account.username.Label')}}" formControlName="username" autocomplete="login-user">
+                        <input matInput placeholder="{{translation.get('Account.UserName.Label')}}" formControlName="username" autocomplete="login-user">
                         <mat-hint>{{translation.get('FormControl.Hints.Left.MaxLength', [userNameMaxLength])}}</mat-hint>
                         <mat-hint align="end">{{translation.get('FormControl.Hints.Right.MaxLength', [loginForm.controls.username.value?.length, userNameMaxLength])}}</mat-hint>
                         <mat-error>{{validation.errorMessage(loginForm.controls.username.errors)}}</mat-error> 

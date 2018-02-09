@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Title }     from '@angular/platform-browser';
+import { Router} from '@angular/router';
 import { FormControl, FormGroup, Validators, ValidationErrors  } from '@angular/forms';
 import { TranslationService, AccountService } from '../../../../shared/services';
 import { AccountLogin } from '../../../../shared/models/account.login.model';
@@ -16,15 +17,17 @@ export class AccountLoginComponent {
   public isGerman: boolean = true;
   public loginForm: FormGroup;
   public userNameMaxLength: number = 30;
-
+  private showErrorMessage:boolean = false;
+  
   public constructor(
     public titleService: Title,
     public translation: TranslationService,
     public accountService: AccountService,
-    public validation: ValidationService
+    public validation: ValidationService,
+    private router: Router,
   ) {
     titleService.setTitle("Einloggen - Ludwigs Rezepte");
-
+  
     this.loginForm = new FormGroup ({
       grant_type: new FormControl('password'),
       username: new FormControl('', [Validators.required, Validators.email]),
@@ -35,11 +38,17 @@ export class AccountLoginComponent {
   login(model: AccountLogin, isValid: boolean) {
     if(!isValid)
     {
-      //return;
+      return;
     }
-    this.accountService.LoginUser(model);
-    console.log(model);
-
+    this.accountService.LoginUser(model).subscribe(loginSuccess => {
+      if(loginSuccess)
+      {
+        this.router.navigate(['/']);
+      }
+    },
+    err => {
+     this.showErrorMessage = true;
+    });
   }
 
   languageTest(){

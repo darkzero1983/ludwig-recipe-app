@@ -8,7 +8,6 @@ import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angul
 import { environment } from '../../../environments/environment';
 import 'rxjs/add/operator/map';
 
-
 @Injectable()
 export class AccountService implements CanActivate {
   public accessToken: string;
@@ -37,7 +36,7 @@ export class AccountService implements CanActivate {
     });
   }
 
-  public LoginUser(userData: AccountLogin)
+  public LoginUser(userData: AccountLogin):Observable<boolean>
   {
     let body = "grant_type=password&username=" + userData.username + "&password=" + userData.password
     const httpOptions = {
@@ -46,15 +45,13 @@ export class AccountService implements CanActivate {
       })
     };
 
-    this.http.post<AccountLoginResult>(environment.apiAccountLogin ,body, httpOptions).subscribe(
-      data => {
-        this.accessToken = data.access_token;
-      },
-      err => {
-        console.log(err)
-      }
-    )
-    return false;
+    return this.http.post<AccountLoginResult>(environment.apiAccountLogin ,body, httpOptions)
+      .map(
+        data => {
+          this.accessToken = data.access_token;
+          return true;
+        }
+      );
   }
   private getAccountDataObservable(): Observable<UserData>
   {

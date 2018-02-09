@@ -44,9 +44,12 @@ export class TranslationService  {
         this.setTranslation("Account.Headline", "Einloggen", "Login");
         this.setTranslation("Account.Button.Login", "Einloggen", "Log in");
 
-        // Account Username
+        // Account Form
+        this.setTranslation("Account.Login.Error", "Der Benutzername oder das Passwort ist falsch", "The username or the passwort is wrong");
         this.setTranslation("Account.UserName.Label", "Benutzername", "Username");
-       
+        this.setTranslation("Account.Password.Label", "Passwort", "Password");
+        this.setTranslation("Account.Password.Error.Required", "Es muss ein Passwort eingetragen werden", "Password is required");
+
         // Error Message
         this.setTranslation("FormControl.Error.Required", "Es muss ein Wert eingetragen werden", "Value is required");
         this.setTranslation("FormControl.Error.MinLength", "Die Eingabe ist zu kurz (aktuell {0} von mindestens {1} Zeichen)", "The value is to short(currently {0} of {1} since)");
@@ -58,10 +61,6 @@ export class TranslationService  {
         // Form Hints
         this.setTranslation("FormControl.Hints.Left.MaxLength", "Max {0} Zeichen", "Max {0} Since");
         this.setTranslation("FormControl.Hints.Right.MaxLength", "{0}/{1}", "{0}/{1}");
-
-        // Account Password
-        this.setTranslation("Account.Password.Label", "Passwort", "Password");
-        this.setTranslation("Account.Password.Error.Required", "Es muss ein Passwort eingetragen werden", "Password is required");
 
         // Account Stay Logged In
         this.setTranslation("Account.StayLoggedIn.Label", "Eingeloggt bleiben", "Stay logged in");
