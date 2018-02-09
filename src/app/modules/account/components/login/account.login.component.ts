@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { Title }     from '@angular/platform-browser';
 import { FormControl, FormGroup, Validators, ValidationErrors  } from '@angular/forms';
-import { TranslationService } from '../../../../shared/services';
-import { AccountLogin } from '../../models/account.login.model';
+import { TranslationService, AccountService } from '../../../../shared/services';
+import { AccountLogin } from '../../../../shared/models/account.login.model';
 import { ValidationService } from '../../../../shared/services/validation.service';
 
 @Component({
@@ -20,22 +20,24 @@ export class AccountLoginComponent {
   public constructor(
     public titleService: Title,
     public translation: TranslationService,
+    public accountService: AccountService,
     public validation: ValidationService
   ) {
     titleService.setTitle("Einloggen - Ludwigs Rezepte");
 
     this.loginForm = new FormGroup ({
-      userName: new FormControl('', [Validators.required, Validators.pattern(validation.pattern.LettersNumber), Validators.maxLength(this.userNameMaxLength)]),
-      password: new FormControl('', [Validators.required]),
-      stayLoggedIn: new FormControl(true)
+      grant_type: new FormControl('password'),
+      username: new FormControl('', [Validators.required, Validators.email]),
+      password: new FormControl('', [Validators.required])
     });
   }
 
   login(model: AccountLogin, isValid: boolean) {
     if(!isValid)
     {
-      return;
+      //return;
     }
+    this.accountService.LoginUser(model);
     console.log(model);
 
   }

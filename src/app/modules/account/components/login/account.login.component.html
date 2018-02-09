@@ -6,10 +6,10 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-6">
                     <mat-form-field>
-                        <input matInput placeholder="{{translation.get('Account.UserName.Label')}}" formControlName="userName" autocomplete="login-user">
+                        <input matInput placeholder="{{translation.get('Account.username.Label')}}" formControlName="username" autocomplete="login-user">
                         <mat-hint>{{translation.get('FormControl.Hints.Left.MaxLength', [userNameMaxLength])}}</mat-hint>
-                        <mat-hint align="end">{{translation.get('FormControl.Hints.Right.MaxLength', [loginForm.controls.userName.value?.length, userNameMaxLength])}}</mat-hint>
-                        <mat-error>{{validation.errorMessage(loginForm.controls.userName.errors)}}</mat-error> 
+                        <mat-hint align="end">{{translation.get('FormControl.Hints.Right.MaxLength', [loginForm.controls.username.value?.length, userNameMaxLength])}}</mat-hint>
+                        <mat-error>{{validation.errorMessage(loginForm.controls.username.errors)}}</mat-error> 
                     </mat-form-field>
                 </div>
                 <div class="col-xs-12 col-sm-6">
@@ -21,7 +21,7 @@
                 </div>
             </div>
             <br>
-            <mat-checkbox formControlName="stayLoggedIn">{{translation.get('Account.StayLoggedIn.Label')}}</mat-checkbox>
+            <!--<mat-checkbox formControlName="stayLoggedIn">{{translation.get('Account.StayLoggedIn.Label')}}</mat-checkbox>-->
             <br><br>
             <input type="submit" class="btn" value="{{translation.get('Account.Button.Login')}}">
             <input type="button" class="btn" value="Sprachwechsel" (click)="languageTest()">

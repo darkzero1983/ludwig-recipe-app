@@ -6,6 +6,7 @@ export const environment = {
   useTestData: false,
 
   //API Urls
+  apiAccountLogin: "http://localhost:8030/api/Token",
   apiNavigation: "/test_data/navigation.json",
   apiRecipeSearch: "https://www.ludwigs-rezepte.de/api/Recipe/Search",
   apiAccountCanActive: "/test_data/canActivate.txt",
