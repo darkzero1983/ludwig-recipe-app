@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { Navigation, SearchResult, SearchResultRecipe } from '../../models';
-import { AccountService, NavigationService } from '../../services';
+import { NavigationService } from '../../services/navigation.service';
+import { AccountService } from '../../authentification/account.service';
 
 @Component({
   selector: 'navigation-component',

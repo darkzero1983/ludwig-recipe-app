@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { UserData } from '../models';
 import { AccountLogin } from '../models/account.login.model';
-import { AccountLoginResult } from '../models/account.login.result.model';
+import { AccountLoginInformation } from './account.login.information';
 import { Observable } from 'rxjs/Observable';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { environment } from '../../../environments/environment';
@@ -10,33 +10,24 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class AccountService implements CanActivate {
-  public accessToken: string;
-  public isUserLoggedIn?: boolean = null;
-
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private accountInformation: AccountLoginInformation
   ) {
-    
-    if(this.isUserLoggedIn == null)
-    {
-      this.getAccountDataObservable().subscribe(data => {
-        this.isUserLoggedIn = data.isUserLoggedIn;
-      });
-    }
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) : Observable<boolean> {
-    if(this.isUserLoggedIn != null)
+    if(this.accountInformation.access_token != null)
     {
-      return new Observable<boolean>( observer => { observer.next(this.isUserLoggedIn)});
+      return new Observable<boolean>( observer => { observer.next(true)});
     }
     return this.getAccountDataObservable().map(data => {
-      this.isUserLoggedIn = data.isUserLoggedIn;
-      return data.isUserLoggedIn;
+      this.accountInformation = data;
+      return true;
     });
   }
 
-  public LoginUser(userData: AccountLogin):Observable<boolean>
+  public LoginUser(userData: AccountLogin) : Observable<boolean>
   {
     let body = "grant_type=password&username=" + userData.username + "&password=" + userData.password
     const httpOptions = {
@@ -45,17 +36,17 @@ export class AccountService implements CanActivate {
       })
     };
 
-    return this.http.post<AccountLoginResult>(environment.apiAccountLogin ,body, httpOptions)
+    return this.http.post<AccountLoginInformation>(environment.apiAccountLogin ,body, httpOptions)
       .map(
         data => {
-          this.accessToken = data.access_token;
+          this.accountInformation = data;
           return true;
         }
       );
   }
-  private getAccountDataObservable(): Observable<UserData>
+  private getAccountDataObservable(): Observable<AccountLoginInformation>
   {
-    return this.http.get<UserData>(environment.useTestData ? environment.apiAccountDataTest : environment.apiAccountData);
+    return this.http.get<AccountLoginInformation>(environment.useTestData ? environment.apiAccountDataTest : environment.apiAccountData);
   }
 
 }

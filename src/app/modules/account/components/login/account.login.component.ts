@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 import { Title }     from '@angular/platform-browser';
 import { Router} from '@angular/router';
 import { FormControl, FormGroup, Validators, ValidationErrors  } from '@angular/forms';
-import { TranslationService, AccountService } from '../../../../shared/services';
+import { TranslationService } from '../../../../shared/services/translation.service';
+import { AccountService } from '../../../../shared/authentification/account.service';
 import { AccountLogin } from '../../../../shared/models/account.login.model';
 import { ValidationService } from '../../../../shared/services/validation.service';
 

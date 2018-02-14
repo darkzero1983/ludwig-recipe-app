@@ -15,15 +15,19 @@ import 'hammerjs';
 
 //Components
 import { AppComponent } from './components/app.component';
-import { NavigationComponent } from '@shared/components';
+import { NavigationComponent } from '../../shared/components';
 
 //Services
-import { AccountService, NavigationService, TranslationService } from '@shared/services';
+import { NavigationService, TranslationService } from '../../shared/services';
+import { AccountService } from '../../shared/authentification/account.service';
+import { AccountLoginInformation } from '../../shared/authentification/account.login.information';
 
 //Environment
 import { environment } from '../../../environments/environment';
 
-
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { TokenInterceptor } from '../../shared/authentification/token.interceptor';
+import { LoginRedirectInterceptor } from '../../shared/authentification/login.redirct.interceptor';
 
 const routes: Routes = [
   {
@@ -54,7 +58,20 @@ const routes: Routes = [
     FormsModule
   ],
   exports: [BsDropdownModule, TooltipModule, ModalModule,RouterModule],
-  providers: [AccountService, NavigationService, TranslationService],
+  providers: [
+    AccountService, 
+    NavigationService, 
+    TranslationService, 
+    AccountLoginInformation,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    },{
+      provide: HTTP_INTERCEPTORS,
+      useClass: LoginRedirectInterceptor,
+      multi: true
+    }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
