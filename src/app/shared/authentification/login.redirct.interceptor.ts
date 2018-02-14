@@ -26,11 +26,7 @@ export class LoginRedirectInterceptor implements HttpInterceptor {
         }, (err: any) => {
         if (err instanceof HttpErrorResponse {
             if (err.status === 401) {
-            // redirect to the login route
-            // or show a modal
-            console.info('not allowed : ' + this.router.url)
-
-            this.router.navigate(['/Benutzerverwaltung/Einloggen']);
+                this.router.navigate(['/Benutzerverwaltung/Einloggen/', {url: this.router.url}]);
             }
         }
         });

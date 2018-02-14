@@ -7,6 +7,7 @@ import { MatInputModule, MatIconModule, MatCheckboxModule, MatAutocompleteModule
 import { ValidationService } from '../../shared/services/validation.service';
 
 const routes: Routes = [
+  { path: 'Einloggen/:url', component: AccountLoginComponent },
   { path: 'Einloggen', component: AccountLoginComponent }
  ];
 
