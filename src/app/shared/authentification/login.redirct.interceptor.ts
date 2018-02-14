@@ -21,14 +21,14 @@ export class LoginRedirectInterceptor implements HttpInterceptor {
     {}
     
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        
         return next.handle(request).do((event: HttpEvent<any>) => {
         }, (err: any) => {
-        if (err instanceof HttpErrorResponse {
-            if (err.status === 401) {
-                this.router.navigate(['/Benutzerverwaltung/Einloggen/', {url: this.router.url}]);
+            if (err instanceof HttpErrorResponse) {
+
+                if (err.status === 401 && !this.router.url.startsWith('/Benutzerverwaltung/Einloggen')) {
+                    this.router.navigate(['/Benutzerverwaltung/Einloggen', {returnUrl: this.router.url}]);
+                }
             }
-        }
         });
     }
 }

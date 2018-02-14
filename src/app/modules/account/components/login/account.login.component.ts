@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Title }     from '@angular/platform-browser';
-import { Router} from '@angular/router';
+import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { FormControl, FormGroup, Validators, ValidationErrors  } from '@angular/forms';
 import { TranslationService } from '../../../../shared/services/translation.service';
 import { AccountService } from '../../../../shared/authentification/account.service';
@@ -19,16 +19,26 @@ export class AccountLoginComponent {
   public loginForm: FormGroup;
   public userNameMaxLength: number = 30;
   private showErrorMessage:boolean = false;
-  
+  private returnUrl: string;
+
+ 
   public constructor(
     public titleService: Title,
     public translation: TranslationService,
     public accountService: AccountService,
     public validation: ValidationService,
     private router: Router,
+    private route: ActivatedRoute
   ) {
     titleService.setTitle("Einloggen - Ludwigs Rezepte");
-  
+    
+    router.events.subscribe((val) => {
+      if(val instanceof NavigationEnd)
+      {
+        this.returnUrl = this.route.snapshot.paramMap.get('returnUrl');
+      }
+    });
+
     this.loginForm = new FormGroup ({
       grant_type: new FormControl('password'),
       username: new FormControl('', [Validators.required, Validators.email]),
@@ -44,7 +54,12 @@ export class AccountLoginComponent {
     this.accountService.LoginUser(model).subscribe(loginSuccess => {
       if(loginSuccess)
       {
-        this.router.navigate(['/']);
+        if(this.returnUrl == null)
+        {
+          this.returnUrl = "/";
+        }
+        console.info('redirect to: ' + this.returnUrl);
+        this.router.navigate([this.returnUrl]);
       }
     },
     err => {

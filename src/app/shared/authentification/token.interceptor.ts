@@ -14,13 +14,20 @@ export class TokenInterceptor implements HttpInterceptor {
   constructor(public auth: AccountLoginInformation) {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    /*
-    request = request.clone({
-      setHeaders: {
-        Authorization: `Bearer ${this.auth.access_token}`
-      }
-    });
-    */
+  
+    if(this.auth.getAccessToken() != null)
+    {
+        console.info('Token:');
+        console.info(this.auth.getAccessToken());
+
+        request = request.clone({
+            setHeaders: {
+              'Authorization': `Bearer ${this.auth.getAccessToken()}`
+            }
+          });
+    }
+    
+    
 
    request = request.clone();
 

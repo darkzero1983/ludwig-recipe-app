@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+
 import { UserData } from '../models';
 import { AccountLogin } from '../models/account.login.model';
 import { AccountLoginInformation } from './account.login.information';
@@ -14,6 +15,7 @@ export class AccountService implements CanActivate {
     private http: HttpClient,
     private accountInformation: AccountLoginInformation
   ) {
+    
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) : Observable<boolean> {
@@ -39,7 +41,9 @@ export class AccountService implements CanActivate {
     return this.http.post<AccountLoginInformation>(environment.apiAccountLogin ,body, httpOptions)
       .map(
         data => {
-          this.accountInformation = data;
+          
+          this.accountInformation.setAccountInformation(data);
+          
           return true;
         }
       );
