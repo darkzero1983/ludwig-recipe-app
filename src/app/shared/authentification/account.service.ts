@@ -19,7 +19,7 @@ export class AccountService implements CanActivate {
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) : Observable<boolean> {
-    if(this.accountInformation.access_token != null)
+    if(this.accountInformation.getAccessToken() != null)
     {
       return new Observable<boolean>( observer => { observer.next(true)});
     }
