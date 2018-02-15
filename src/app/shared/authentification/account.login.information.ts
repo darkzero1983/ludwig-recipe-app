@@ -9,6 +9,7 @@ export class AccountLoginInformation{
 
     constructor() {
         this.clearLoginData();
+        this.access_token = localStorage.getItem('access_token');
     }
     public getAccessToken() : string
     {
@@ -17,6 +18,7 @@ export class AccountLoginInformation{
     public setAccountInformation(accountData: AccountLoginInformation)
     {
         this.access_token = accountData.access_token;
+        localStorage.setItem('access_token', accountData.access_token);
     }
 
     public clearLoginData() : void

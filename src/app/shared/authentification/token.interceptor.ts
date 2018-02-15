@@ -17,9 +17,6 @@ export class TokenInterceptor implements HttpInterceptor {
   
     if(this.auth.getAccessToken() != null)
     {
-        console.info('Token:');
-        console.info(this.auth.getAccessToken());
-
         request = request.clone({
             setHeaders: {
               Authorization: 'Bearer ' +this.auth.getAccessToken()

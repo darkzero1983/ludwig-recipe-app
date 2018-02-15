@@ -9,7 +9,8 @@ import { Title }     from '@angular/platform-browser';
   templateUrl: './recipe.overview.component.html',
   styleUrls: ['./recipe.overview.component.less']
 })
-export class RecipeOverviewComponent  {
+export class RecipeOverviewComponent {
+  private hasSubscript: boolean = false;
   private resultsPerPage: number = 10;
   private paging: number[] = new Array<number>();
   categoryUrl: string;
@@ -22,15 +23,19 @@ export class RecipeOverviewComponent  {
     private recipeService: RecipeService,
     private titleService: Title 
 	) {
-    router.events.subscribe((val) => {
-      if(val instanceof NavigationEnd)
-      {
-        this.categoryUrl = this.route.snapshot.paramMap.get('categoryUrl');
-        this.subCategoryUrl = this.route.snapshot.paramMap.get('subCategoryUrl');
+    router.events.filter(event => event instanceof NavigationEnd).subscribe((val) => {
+        if(!this.hasSubscript)
+        {
+          this.categoryUrl = this.route.snapshot.paramMap.get('categoryUrl');
+          this.subCategoryUrl = this.route.snapshot.paramMap.get('subCategoryUrl');
 
-        this.titleService.setTitle("Rezept Übersicht - Ludwigs Rezepte");
-        this.recipeService.LoadOverview(this.resultsPerPage, 0, this.categoryUrl, this.subCategoryUrl).subscribe(x => this.recipeOverview = x);
-      }
+          this.titleService.setTitle("Rezept Übersicht - Ludwigs Rezepte");
+          this.recipeService.LoadOverview(this.resultsPerPage, 0, this.categoryUrl, this.subCategoryUrl).subscribe(x => this.recipeOverview = x);
+          this.hasSubscript = true;
+        }
     });
+
+    
   }
+
 }

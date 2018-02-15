@@ -43,7 +43,6 @@ export class AccountService implements CanActivate {
         data => {
           
           this.accountInformation.setAccountInformation(data);
-          
           return true;
         }
       );
