@@ -22,9 +22,9 @@ export class TokenInterceptor implements HttpInterceptor {
 
         request = request.clone({
             setHeaders: {
-              'Authorization': `Bearer ${this.auth.getAccessToken()}`
+              Authorization: 'Bearer ' +this.auth.getAccessToken()
             }
-          });
+          }); 
     }
     
     

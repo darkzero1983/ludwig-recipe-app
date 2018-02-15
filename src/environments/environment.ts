@@ -11,7 +11,7 @@ export const environment = {
   apiRecipeSearch: "https://www.ludwigs-rezepte.de/api/Recipe/Search",
   apiAccountCanActive: "/test_data/canActivate.txt",
   apiAccountData: "/test_data/account-data.json",
-  apiRecipeOverview: "http://localhost:8030/Recipe/Overview",
+  apiRecipeOverview: "http://localhost:8030/api/Recipe/Overview",
   
   //Test URLs
   apiNavigationTest: "/test_data/navigation.json",
