@@ -23,18 +23,15 @@ export class RecipeOverviewComponent {
     private recipeService: RecipeService,
     private titleService: Title 
 	) {
-    router.events.filter(event => event instanceof NavigationEnd).subscribe((val) => {
-        if(!this.hasSubscript)
-        {
-          this.categoryUrl = this.route.snapshot.paramMap.get('categoryUrl');
-          this.subCategoryUrl = this.route.snapshot.paramMap.get('subCategoryUrl');
+    route.paramMap.subscribe(
+      params => {
+          this.categoryUrl = params.get('categoryUrl');
+          this.subCategoryUrl = params.get('subCategoryUrl');
 
           this.titleService.setTitle("Rezept Übersicht - Ludwigs Rezepte");
           this.recipeService.LoadOverview(this.resultsPerPage, 0, this.categoryUrl, this.subCategoryUrl).subscribe(x => this.recipeOverview = x);
-          this.hasSubscript = true;
         }
-    });
-
+     );
     
   }
 
