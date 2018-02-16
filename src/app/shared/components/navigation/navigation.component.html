@@ -12,8 +12,8 @@
 			<a *ngFor="let navSubItem of navItem.items" class="nav-link" [ngClass]="{active: navSubItem.active}" routerLink="/Rezepte/{{navItem.categoryUrl}}/{{navSubItem.subCategoryUrl}}">&nbsp;&nbsp;&nbsp;{{navSubItem.name}}</a>
 		</div>
 
-		<a routerLink="/Benutzerverwaltung/Einloggen" class="nav-link nav-login-link" [hidden]="accountService.isUserLoggedIn">Anmelden</a>
-		<a routerLink="/Benutzerverwaltung/Ausloggen" class="nav-link nav-login-link" [hidden]="!accountService.isUserLoggedIn">Abmelden</a>
+		<a routerLink="/Benutzerverwaltung/Einloggen" class="nav-link nav-login-link" [hidden]="auth.isUserLoggedIn">Anmelden</a>
+		<a routerLink="/Benutzerverwaltung/Ausloggen" class="nav-link nav-login-link" [hidden]="!auth.isUserLoggedIn">Abmelden</a>
 	</div>
 </div>
 <nav class="navbar navbar-light bg-faded hidden-md-up navbar-fixed-top">
@@ -43,8 +43,8 @@
     <nav class="navbar navbar-light bg-faded hidden-sm-down">
         <a class="navbar-brand" routerLink="/"><img src="/img/Logo.png" class="header-logo"></a>
         <div class="navbar-login">
-            <a routerLink="/Benutzerverwaltung/Einloggen" [hidden]="accountService.isUserLoggedIn">Anmelden</a>
-            <a routerLink="/Benutzerverwaltung/Ausloggen" [hidden]="!accountService.isUserLoggedIn">Abmelden</a>
+            <a routerLink="/Benutzerverwaltung/Einloggen" [hidden]="auth.isUserLoggedIn">Anmelden</a>
+            <a routerLink="/Benutzerverwaltung/Ausloggen" [hidden]="!auth.isUserLoggedIn">Abmelden</a>
         </div>
 
         <form class="form-inline pull-xs-right navbar-search">

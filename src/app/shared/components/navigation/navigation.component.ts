@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 
 import { Navigation, SearchResult, SearchResultRecipe } from '../../models';
 import { NavigationService } from '../../services/navigation.service';
-import { AccountService } from '../../authentification/account.service';
+import { AccountLoginInformation } from '../../authentification/account.login.information';
 
 @Component({
   selector: 'navigation-component',
@@ -15,7 +15,7 @@ export class NavigationComponent {
   searchResult: SearchResult = new SearchResult();
   navigation: Navigation = new Navigation();
   constructor(
-    public accountService: AccountService,
+    public auth: AccountLoginInformation,
     public navigationService: NavigationService,
     private router: Router
   ) { 

@@ -14,10 +14,7 @@ export class AccountLoginInformation implements CanActivate{
     ) {
         this.access_token = localStorage.getItem('access_token');
         this.userName = localStorage.getItem('userName');
-        if(this.access_token != null)
-        {
-           this.isUserLoggedIn; 
-        }
+        this.isUserLoggedIn = (this.access_token != null);
     }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) : Observable<boolean> {
@@ -39,10 +36,7 @@ export class AccountLoginInformation implements CanActivate{
         this.userName = accountData.userName;
         localStorage.setItem('access_token', accountData.access_token);
         localStorage.setItem('userName', accountData.userName);
-        if(this.access_token != null)
-        {
-           this.isUserLoggedIn; 
-        }
+        this.isUserLoggedIn = (this.access_token != null);
     }
 
     public LogOut() : void
