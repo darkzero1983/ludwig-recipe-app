@@ -3,7 +3,7 @@
     <div class="recipe-overview-item" *ngFor="let recipe of recipeOverview.recipes">
         <a routerLink="/Rezept/{{recipe.url}}/{{recipe.id}}">
             <div class="teaser-image">
-                <img src="{{recipe.teaserImageUrl}}?w=640&h=480&mode=crop">
+                <img src="{{imageManagerDomain}}{{recipe.teaserImageUrl}}?w=640&h=480&mode=crop">
             </div>
             <div class="teaser-text">
                 <div class="recipe-name">{{recipe.name}}</div>

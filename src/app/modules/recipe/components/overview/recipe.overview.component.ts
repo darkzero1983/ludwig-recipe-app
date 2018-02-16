@@ -3,6 +3,7 @@ import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { RecipeOverview } from '../../models';
 import { RecipeService } from '../../services';
 import { Title }     from '@angular/platform-browser';
+import { environment } from '../../../../../environments/environment';
 
 @Component({
   selector: 'recipe-overview-component',
@@ -13,6 +14,7 @@ export class RecipeOverviewComponent {
   private hasSubscript: boolean = false;
   private resultsPerPage: number = 10;
   private paging: number[] = new Array<number>();
+  private imageManagerDomain: string;
   categoryUrl: string;
   subCategoryUrl: string;
   recipeOverview: RecipeOverview = new RecipeOverview();
@@ -21,8 +23,11 @@ export class RecipeOverviewComponent {
     private router: Router,
     private route: ActivatedRoute,
     private recipeService: RecipeService,
-    private titleService: Title 
+    private titleService: Title,
+    
 	) {
+    this.imageManagerDomain = environment.imageManagerDomain;
+
     route.paramMap.subscribe(
       params => {
           this.categoryUrl = params.get('categoryUrl');
