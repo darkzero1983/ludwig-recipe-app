@@ -58,7 +58,6 @@ export class AccountLoginComponent {
         {
           this.returnUrl = "/";
         }
-        console.info('redirect to: ' + this.returnUrl);
         this.router.navigate([this.returnUrl]);
       }
     },

@@ -1,10 +1,5 @@
 import { Injectable } from '@angular/core';
-import {
-  HttpRequest,
-  HttpHandler,
-  HttpEvent,
-  HttpInterceptor
-} from '@angular/common/http';
+import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor} from '@angular/common/http';
 import { AccountLoginInformation } from './account.login.information';
 import { Observable } from 'rxjs/Observable';
 
@@ -23,10 +18,6 @@ export class TokenInterceptor implements HttpInterceptor {
             }
           }); 
     }
-    
-    
-
-   request = request.clone();
 
     return next.handle(request);
   }

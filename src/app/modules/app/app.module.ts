@@ -31,7 +31,7 @@ import { LoginRedirectInterceptor } from '../../shared/authentification/login.re
 
 const routes: Routes = [
   {
-    path: 'CMS', loadChildren: '../cms/cms.module#CmsModule', canActivate: [AccountService]
+    path: 'CMS', loadChildren: '../cms/cms.module#CmsModule', canActivate: [AccountLoginInformation]
   },
   {
     path: 'Benutzerverwaltung', loadChildren: '../account/account.module#AccountModule'
