@@ -1,7 +1,7 @@
 import { Component  } from '@angular/core';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
-import { RecipeOverview } from '../../models';
-import { RecipeService } from '../../services';
+import { RecipeOverview } from '../../models/recipe.overview.model';
+import { RecipeService } from '../../services/recipe.service';
 import { Title }     from '@angular/platform-browser';
 import { environment } from '../../../../../environments/environment';
 

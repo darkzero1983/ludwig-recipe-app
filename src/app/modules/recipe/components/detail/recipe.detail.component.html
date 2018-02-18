@@ -1,2 +1,61 @@
-Detailseite
-<a routerLink="/">Übersicht</a>
+<ol class="breadcrumb">
+    <li><a [routerLink]="['Home']">Ludwigs Rezepte</a></li>
+    <li class="active">Rezept Detail</li>
+</ol>
+
+
+
+<div *ngIf="recipe != null">
+    <div class="row">
+        <div class="col-xs-10 col-sm-9" style="padding-left:0;">
+            <h1 class="headline">{{recipe.name}}</h1>
+        </div>
+        <div class="col-xs-2 col-sm-3 text-right">
+            <div class="recipe-detail-menu">
+                <a href="/Drucken/Rezept/{{recipe.id}}" target="_blank"><i class="fa fa-print"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="recipe-detail-content">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-3 text-center recipe-left-element-distance no-padding">
+                <img src="{{imageManagerDomain}}{{recipe.teaserImageUrl}}?w=640&h=480&mode=crop" class="detail-image" />
+            </div>
+            <span class="recipe-detail-description" [innerHTML]="recipe.description"></span>
+        </div>
+        <div class="row">
+            <div class="recipe-detail-content-text">
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-3 recipe-left-element-distance no-padding">
+                    <h2>Zutaten</h2>
+                    <div class="row">
+                        <div class="col-xs-8 no-padding">
+                            für <input type="text" style="width:30px;display:inline-block;border:none;padding:0;text-align:center;" [(ngModel)]="costumAmount" (change)="replaceContentNumbers()"> {{recipe.measurement.name}}
+                        </div>
+                        <div class="col-xs-4 no-padding text-right">
+                            <i class="fa fa-minus-square-o" style="padding:5px 0px 5px 20px;cursor:pointer;" (click)="subtractCostumAmount();"></i>
+                            <i class="fa fa-plus-square-o" style="padding:5px 0px 5px 20px;cursor:pointer;" (click)="addCostumAmount()"></i>
+                        </div>
+                    </div>
+                    <table class="table table-striped recipe-detail-ingredients">
+                        <tr *ngFor="let ingredient of recipe.ingredients">
+                            <td class="text-right"><span *ngIf="ingredient.Amount != 0">{{ingredient.amount}}</span> {{ingredient.measurement}}</td>
+                            <td class="text-left">{{ingredient.ingredient}}</td>
+                        </tr>
+                    </table>
+                    <h2>Rezept Informationen</h2>
+                    <table class="table table-striped recipe-detail-ingredients">
+                        <tr *ngIf="recipe.preparationTime > 0">
+                            <td class="text-left">Vorbereitungszeit:</td>
+                            <td class="text-right">{{recipe.preparationTime}} Min</td>
+                        </tr>
+                        <tr *ngIf="recipe.waitingTime > 0">
+                            <td class="text-left">Zubereitungszeit:</td>
+                            <td class="text-right">{{recipe.waitingTime}} Min</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7 col-xl-8" [innerHTML]="recipe.content"></div>
+            </div>
+        </div>
+    </div>
+</div>

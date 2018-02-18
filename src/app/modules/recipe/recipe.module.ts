@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { RecipeDetailComponent, RecipeOverviewComponent } from './components/';
 import { RecipeService } from './services';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 const routes: Routes = [
   { path: '', component: RecipeOverviewComponent },
   { path: 'Rezepte/:categoryUrl', component: RecipeOverviewComponent },
@@ -17,7 +18,8 @@ const routes: Routes = [
   ],
   imports: [
     RouterModule.forChild(routes),
-    CommonModule 
+    CommonModule,
+    FormsModule,
   ],
   exports: [RouterModule],
   providers: [RecipeService]

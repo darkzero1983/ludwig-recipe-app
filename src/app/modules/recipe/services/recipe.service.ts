@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Observable } from 'rxjs/Observable';
-import { RecipeOverview } from '../models';
+import { RecipeOverview } from '../models/recipe.overview.model';
+import { RecipeDetail } from '../models/recipe.detail.model';
 
 import { environment } from '../../../../environments/environment';
 import { AccountLoginInformation } from '../../../shared/authentification/account.login.information';
@@ -28,5 +29,10 @@ export class RecipeService  {
         
         let requestUrl: string = environment.useTestData ? environment.apiRecipeOverviewTest : environment.apiRecipeOverview + "?count=" + count + "&skip=" + skip + "&category=" + category + "&subCategory=" + subCategory;
         return this.http.get<RecipeOverview>(requestUrl);
+    }
+
+    LoadDetail(id: string): Observable<RecipeDetail> {
+        let requestUrl: string = environment.apiRecipeDetail + id;
+        return this.http.get<RecipeDetail>(requestUrl);
     }
 }
