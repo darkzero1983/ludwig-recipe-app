@@ -6,12 +6,12 @@ export const environment = {
   useTestData: false,
   
   //API Urls
-  apiAccountLogin: "/api/Token",
+  apiAccountLogin: "/api/api/Token",
   apiNavigation: "/test_data/navigation.json",
   apiRecipeSearch: "/test_data/recipe-search-result.json",
   apiAccountCanActive: "/test_data/canActivate.txt",
   apiAccountData: "/test_data/account-data.json",
-  apiRecipeOverview: "/api/Recipe/Overview",
+  apiRecipeOverview: "/api/api//Recipe/Overview",
 
   //Test URLs
   apiNavigationTest: "/test_data/navigation.json",

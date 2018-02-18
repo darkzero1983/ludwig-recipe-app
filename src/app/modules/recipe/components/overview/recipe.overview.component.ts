@@ -13,8 +13,8 @@ import { environment } from '../../../../../environments/environment';
 export class RecipeOverviewComponent {
   private hasSubscript: boolean = false;
   private resultsPerPage: number = 10;
-  private paging: number[] = new Array<number>();
   private imageManagerDomain: string;
+  private currentPage: number = 1;
   categoryUrl: string;
   subCategoryUrl: string;
   recipeOverview: RecipeOverview = new RecipeOverview();
@@ -38,6 +38,30 @@ export class RecipeOverviewComponent {
         }
      );
     
+  }
+
+  loadRecipes(page: number)
+  {
+    this.currentPage = page;
+    this.recipeService.LoadOverview(this.resultsPerPage, (page * this.resultsPerPage) - this.resultsPerPage, this.categoryUrl, this.subCategoryUrl).subscribe(x => this.recipeOverview = x);
+  }
+
+  private pageItems(): Array<number>
+  {
+    let items: number[] = new Array<number>();
+    for (var _i = 1; _i <= this.pageCount(); _i++) {
+      items.push(_i);
+    }
+    return items;
+  }
+
+  private pageCount(): number
+  {
+    return this.precisionRound(this.recipeOverview.count / this.resultsPerPage, 0)
+  }
+  private precisionRound(number, precision) {
+    var factor = Math.pow(10, precision);
+    return Math.round(number * factor) / factor;
   }
 
 }

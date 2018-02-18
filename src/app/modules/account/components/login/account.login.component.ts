@@ -18,7 +18,7 @@ export class AccountLoginComponent {
   public isGerman: boolean = true;
   public loginForm: FormGroup;
   public userNameMaxLength: number = 30;
-  private showErrorMessage:boolean = false;
+  public showErrorMessage:boolean = false;
   private returnUrl: string;
 
  
