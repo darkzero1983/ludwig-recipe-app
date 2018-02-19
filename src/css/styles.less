@@ -12,6 +12,41 @@ html {
     text-shadow: 1px 1px #D6D6D6;
 }
 
+.breadcrumb {
+	background: none;
+	padding: 0;
+
+	a {
+		color: @color-red;
+	}
+}
+
+.breadcrumb > li + li::before {
+	content: "/";
+}
+
+.row {
+	margin-left: 0;
+	margin-right: 0;
+	margin-bottom: 5px;
+}
+
+.text-right {
+    text-align: right !important;
+}
+
+.recipe-left-element-distance
+{
+    margin-right:20px;
+    margin-bottom:20px;
+}
+.no-padding {
+    padding-top: 0 !important;
+    padding-right: 0 !important;
+    padding-bottom: 0 !important;
+    padding-left: 0 !important;
+}
+    
 @media (max-width: @breakpoint-mobile-max) {
     .active-mobile-search {
         position: fixed;
@@ -41,4 +76,32 @@ html {
         border-top: 1px solid #999;
         overflow-y: scroll;
     }
+}
+
+.recipe-detail-content
+{
+	td{
+		padding:3px;
+	}
+	h2
+	{
+		line-height:32px;
+		color: #C1282D;
+		font-size: 24px;
+	}
+	h3
+	{
+		margin-top:30px;
+		line-height:28px;
+		color: #C1282D;
+		font-size: 18px;
+	}
+}
+
+.no-number {
+	list-style-type: none;
+}
+
+.default-color {
+	color: @color-red;
 }
