@@ -31,8 +31,32 @@ html {
 	margin-bottom: 5px;
 }
 
+.text-left {
+	text-align: left !important;
+}
+
+.text-center {
+	text-align: center !important;
+}
+
 .text-right {
-    text-align: right !important;
+	text-align: right !important;
+}
+
+.body-content {
+	padding: 0 10px;
+}
+
+.bordered-box {
+	border: 1px solid #c1282d;
+	border-radius: 5px;
+
+	h2 {
+		background-color: #c1282d;
+		color: #FFFFFF;
+		font-size: 20px;
+		padding: 5px;
+	}
 }
 
 .recipe-left-element-distance
@@ -104,4 +128,15 @@ html {
 
 .default-color {
 	color: @color-red;
+}
+
+footer {
+	border-top: 1px solid #D6D6D6;
+	padding: 15px 0;
+	text-align: center;
+
+	a, a:hover, a:focus, a:visited {
+		color: @color-red;
+		text-decoration: none;
+	}
 }
