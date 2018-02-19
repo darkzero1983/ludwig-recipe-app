@@ -38,7 +38,7 @@
                     </div>
                     <table class="table table-striped recipe-detail-ingredients">
                         <tr *ngFor="let ingredient of recipe.ingredients">
-                            <td class="text-right"><span *ngIf="ingredient.Amount != 0">{{ingredient.amount}}</span> {{ingredient.measurement}}</td>
+                            <td class="text-right"><span *ngIf="ingredient.amount != 0">{{ingredient.amount | division : recipe.ingredientCount | multiplication : costumAmount | numberFormat : 2}}</span> {{ingredient.measurement}}</td>
                             <td class="text-left">{{ingredient.ingredient}}</td>
                         </tr>
                     </table>

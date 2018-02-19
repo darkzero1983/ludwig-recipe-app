@@ -27,10 +27,10 @@ export class RecipeDetailComponent {
     route.paramMap.subscribe(
       params => {
         this.titleService.setTitle("Rezept Übersicht - Ludwigs Rezepte");
-          
+    
         this.recipeService.LoadDetail(params.get('id')).subscribe(x => {
           this.recipe = x;
-          console.info(this.recipe.name);
+          this.costumAmount = x.ingredientCount;
         });
       }
     );

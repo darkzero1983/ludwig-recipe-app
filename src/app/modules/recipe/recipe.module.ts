@@ -4,6 +4,10 @@ import { RouterModule, Routes } from '@angular/router';
 import { RecipeDetailComponent, RecipeOverviewComponent } from './components/';
 import { RecipeService } from './services';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DivisionPipe } from './pipes/division.pipe';
+import { MultiplicationPipe } from './pipes/multiplication.pipe';
+import { NumberFormatPipe } from './pipes/number.format.pipe';
+
 const routes: Routes = [
   { path: '', component: RecipeOverviewComponent },
   { path: 'Rezepte/:categoryUrl', component: RecipeOverviewComponent },
@@ -14,12 +18,15 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     RecipeDetailComponent,
-    RecipeOverviewComponent
+    RecipeOverviewComponent,
+    DivisionPipe,
+    MultiplicationPipe,
+    NumberFormatPipe
   ],
   imports: [
     RouterModule.forChild(routes),
     CommonModule,
-    FormsModule,
+    FormsModule
   ],
   exports: [RouterModule],
   providers: [RecipeService]
