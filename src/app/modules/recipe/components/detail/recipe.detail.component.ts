@@ -46,11 +46,13 @@ export class RecipeDetailComponent {
     this.replaceContentNumbers();
   }
   replaceContentNumbers() {
+    
     var match = this.recipe.content.match(/\bd n="([^"]*)"/g);
     if (match != null) {
       for (var n = 0; n < match.length; n++) {
         var amount: number = Number(match[n].replace("d n=\"", "").replace("\"", ""));
         if (!isNaN(amount)) {
+          
           var parse: string = "<d n=\"" + amount + "\">[^>]*<\/d>";
           var re = new RegExp(parse, "g");
           this.recipe.content = this.recipe.content.replace(re, "<d n=\"" + amount + "\">" + (amount / this.recipe.ingredientCount * this.costumAmount).toFixed(2).toString().replace(".", ",").replace(",00", "") + "<\/d>");

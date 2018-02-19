@@ -7,6 +7,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DivisionPipe } from './pipes/division.pipe';
 import { MultiplicationPipe } from './pipes/multiplication.pipe';
 import { NumberFormatPipe } from './pipes/number.format.pipe';
+import { NoSanitizePipe } from './pipes/no.sanitize.pipe';
 
 const routes: Routes = [
   { path: '', component: RecipeOverviewComponent },
@@ -21,7 +22,8 @@ const routes: Routes = [
     RecipeOverviewComponent,
     DivisionPipe,
     MultiplicationPipe,
-    NumberFormatPipe
+    NumberFormatPipe,
+    NoSanitizePipe
   ],
   imports: [
     RouterModule.forChild(routes),
