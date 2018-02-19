@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Navigation, SearchResult, SearchResultRecipe } from '../../models';
 import { NavigationService } from '../../services/navigation.service';
 import { AccountLoginInformation } from '../../authentification/account.login.information';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'navigation-component',
@@ -14,11 +15,14 @@ export class NavigationComponent {
   searchTerm: string = "";
   searchResult: SearchResult = new SearchResult();
   navigation: Navigation = new Navigation();
+  private imageManagerDomain: string;
+
   constructor(
     public auth: AccountLoginInformation,
     public navigationService: NavigationService,
     private router: Router
   ) { 
+    this.imageManagerDomain = environment.imageManagerDomain;
     this.navigationService.Load(false).subscribe(result => {this.navigation = result;});
   }
 

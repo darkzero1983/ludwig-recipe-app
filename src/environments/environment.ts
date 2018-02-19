@@ -8,7 +8,7 @@ export const environment = {
   //API Urls
   apiAccountLogin: "http://localhost:8030/api/Token",
   apiNavigation: "/test_data/navigation.json",
-  apiRecipeSearch: "https://www.ludwigs-rezepte.de/api/Recipe/Search",
+  apiRecipeSearch: "http://localhost:8030/api/Recipe/Search",
   apiAccountCanActive: "/test_data/canActivate.txt",
   apiAccountData: "/test_data/account-data.json",
   apiRecipeOverview: "http://localhost:8030/api/Recipe/Overview",

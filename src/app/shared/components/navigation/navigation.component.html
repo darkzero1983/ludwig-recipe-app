@@ -36,7 +36,7 @@
 	<div style="clear:both;"></div>
 </div>
 <div class="search-result mobile-search-result" *ngIf="searchResult.recipes.length > 0">
-	<div class="result-item" *ngFor="let recipe of searchResult.recipes" (click)="selectSearchResult(recipe)"><img src="{{recipe.teaserImageUrl}}?w=40&h=30&mode=crop">{{recipe.name}}</div>
+	<div class="result-item" *ngFor="let recipe of searchResult.recipes" (click)="selectSearchResult(recipe)"><img src="{{imageManagerDomain}}{{recipe.teaserImageUrl}}?w=40&h=30&mode=crop">{{recipe.name}}</div>
 </div>
 
 <div class="container body-content" (click)="navigationService.deactivateMobileSearch()">
@@ -55,7 +55,7 @@
 				</span>
 			</div>
 			<div class="search-result" *ngIf="searchResult.recipes.length > 0">
-				<div class="result-item" *ngFor="let recipe of searchResult.recipes" (click)="selectSearchResult(recipe)" routerLink="/Rezept/{{recipe.url}}/{{recipe.id}}"><img src="{{recipe.teaserImageUrl}}?w=40&h=30&mode=crop">{{recipe.name}}</div>
+				<div class="result-item" *ngFor="let recipe of searchResult.recipes" (click)="selectSearchResult(recipe)" routerLink="/Rezept/{{recipe.url}}/{{recipe.id}}"><img src="{{imageManagerDomain}}{{recipe.teaserImageUrl}}?w=40&h=30&mode=crop">{{recipe.name}}</div>
 			</div>
 		</form>
         <div style="clear:both" class="hidden-xs"></div>

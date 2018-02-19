@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient , HttpHeaders, HttpParams} from '@angular/common/http';
+import { RequestOptions} from '@angular/http';
 
 import { environment } from '../../../environments/environment';
 
@@ -24,14 +25,20 @@ export class NavigationService  {
     }
 
     public Search(term: string): Observable<SearchResult> {
-        let myData = JSON.stringify(term);
+        const httpOptions = {
+          headers: new HttpHeaders({
+            'Content-Type':  'application/json'
+          })
+        };
+
+
         if(environment.useTestData)
         {
             return this.http.get<SearchResult>(environment.apiRecipeSearchTest);
         }
         else
         {
-            return this.http.post<SearchResult>(environment.apiRecipeSearch, myData);
+            return this.http.post<SearchResult>(environment.apiRecipeSearch ,JSON.stringify(term), httpOptions);
         }
         
     }
