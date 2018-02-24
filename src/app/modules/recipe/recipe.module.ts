@@ -13,7 +13,7 @@ const routes: Routes = [
   { path: '', component: RecipeOverviewComponent },
   { path: 'Rezepte/:categoryUrl', component: RecipeOverviewComponent },
   { path: 'Rezepte/:categoryUrl/:subCategoryUrl', component: RecipeOverviewComponent },
-  { path: 'Rezept/:url/:id', component: RecipeDetailComponent } 
+  { path: 'Rezept/:url/:id', component: RecipeDetailComponent }
  ];
 
 @NgModule({
