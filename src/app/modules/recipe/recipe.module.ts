@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { RecipeDetailComponent, RecipeOverviewComponent } from './components/';
-import { RecipeService } from './services';
+import { RecipeService } from './services/recipe.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DivisionPipe } from './pipes/division.pipe';
 import { MultiplicationPipe } from './pipes/multiplication.pipe';

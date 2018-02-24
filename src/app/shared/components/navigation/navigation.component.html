@@ -11,7 +11,7 @@
 			<a class="nav-link" *ngIf="navItem.categoryUrl != null" [ngClass]="{active: navItem.active}" routerLink="/Rezepte/{{navItem.categoryUrl}}">{{navItem.name}}</a>
 			<a *ngFor="let navSubItem of navItem.items" class="nav-link" [ngClass]="{active: navSubItem.active}" routerLink="/Rezepte/{{navItem.categoryUrl}}/{{navSubItem.subCategoryUrl}}">&nbsp;&nbsp;&nbsp;{{navSubItem.name}}</a>
 		</div>
-
+		<a class="nav-link" [hidden]="!auth.isUserLoggedIn" routerLinkActive="active" [routerLinkActiveOptions]="{exact: false}" href="/CMS">CMS</a>
 		<a routerLink="/Benutzerverwaltung/Einloggen" class="nav-link nav-login-link" [hidden]="auth.isUserLoggedIn">Anmelden</a>
 		<a routerLink="/Benutzerverwaltung/Ausloggen" class="nav-link nav-login-link" [hidden]="!auth.isUserLoggedIn">Abmelden</a>
 	</div>
@@ -80,6 +80,14 @@
 				<div class="dropdown-menu">
 					<a class="dropdown-item" [ngClass]="{active: navItem.active}" routerLink="/Rezepte/{{navItem.categoryUrl}}">Alle</a>
 					<a *ngFor="let navSubItem of navItem.items" class="dropdown-item" routerLink="/Rezepte/{{navItem.categoryUrl}}/{{navSubItem.subCategoryUrl}}">{{navSubItem.name}}</a>
+				</div>
+			</li>
+
+			<li class="nav-item dropdown" [hidden]="!auth.isUserLoggedIn">
+				<a class="nav-link" data-toggle="dropdown" href="#">CMS</a>
+				<div class="dropdown-menu">
+					<a class="dropdown-item" routerLinkActive="active" routerLink="/CMS">Übersicht</a>
+					<a class="dropdown-item" routerLinkActive="active" routerLink="/CMS/Rezepte">Rezepte</a>
 				</div>
 			</li>
 		</ul>

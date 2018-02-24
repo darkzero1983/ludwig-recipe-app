@@ -1,21 +1,28 @@
+import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-
-import { CmsOverviewComponent } from './components';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CmsOverviewComponent } from './components/overview/cms.overview.component';
+import { CmsRecipeOverviewComponent } from './components/recipe/cms.recipe.overview.component';
+import { CmsService } from './services/cms.service';
 
 const routes: Routes = [
+  { path: 'Rezepte', component: CmsRecipeOverviewComponent },
   { path: '', component: CmsOverviewComponent }
  ];
 
 @NgModule({
   declarations: [
-    CmsOverviewComponent
+    CmsOverviewComponent,
+    CmsRecipeOverviewComponent
   ],
   imports: [
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    CommonModule,
+    FormsModule
   ],
   exports: [RouterModule],
-  providers: []
+  providers: [CmsService]
 })
 export class CmsModule { }

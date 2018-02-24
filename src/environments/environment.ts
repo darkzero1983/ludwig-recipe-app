@@ -14,6 +14,8 @@ export const environment = {
   apiRecipeOverview: "http://localhost:8030/api/Recipe/Overview",
   apiRecipeDetail: "http://localhost:8030/api/Recipe/Detail/",
   
+  apiCmsRecipeOverview: "http://localhost:8030/api/Cms/Recipe/Overview",
+
   //Test URLs
   apiNavigationTest: "/test_data/navigation.json",
   apiRecipeSearchTest: "/test_data/recipe-search-result.json",
