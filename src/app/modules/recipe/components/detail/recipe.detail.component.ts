@@ -11,7 +11,7 @@ import { environment } from '../../../../../environments/environment';
   styleUrls: ['./recipe.detail.component.less'],
 })
 export class RecipeDetailComponent {
-  private recipe: RecipeDetail;
+  public recipe: RecipeDetail;
   public costumAmount: number;
   private imageManagerDomain: string;
 

@@ -55,7 +55,7 @@ export class RecipeOverviewComponent {
     return items;
   }
 
-  private pageCount(): number
+  public pageCount(): number
   {
     return this.precisionRound(this.recipeOverview.count / this.resultsPerPage, 0)
   }

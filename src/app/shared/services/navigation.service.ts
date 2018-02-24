@@ -42,16 +42,4 @@ export class NavigationService  {
         }
         
     }
-
-    public activeMobileSearch() {
-        this.isMobileSearchActive = true;
-        //ToDo: Fill Function
-    }
-
-    public deactivateMobileSearch()
-    {
-        this.isMobileSearchActive = false;
-        //ToDo: Fill Function
-    }
-
 }

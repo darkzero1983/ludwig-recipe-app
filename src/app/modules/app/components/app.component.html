@@ -1,7 +1,7 @@
 <body [ngClass]="{'active-mobile-search': navigationService.isMobileSearchActive}">
   <navigation-component></navigation-component>
 
-  <div class="container body-content" (click)="navigationService.deactivateMobileSearch()">
+  <div class="container body-content">
       <div class="content-body">
           <router-outlet></router-outlet>
       </div>

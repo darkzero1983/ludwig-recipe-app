@@ -26,7 +26,7 @@
 <div class="hidden-md-up bg-faded navbar-search">
 	<form class="">
 		<div class="input-group">
-			<input class="form-control" type="text" placeholder="Rezepte suchen" [(ngModel)]="searchTerm" name="searchTerm" (keyup)="changeSearchTerm()" (focus)="navigationService.activeMobileSearch()">
+			<input class="form-control" type="text" placeholder="Rezepte suchen" [(ngModel)]="searchTerm" name="searchTerm" (keyup)="changeSearchTerm()">
 			<span class="input-group-btn">
 				<button class="btn btn-success-outline" type="submit"><i class="fa fa-search"></i></button>
 			</span>
@@ -36,10 +36,10 @@
 	<div style="clear:both;"></div>
 </div>
 <div class="search-result mobile-search-result" *ngIf="searchResult.recipes.length > 0">
-	<div class="result-item" *ngFor="let recipe of searchResult.recipes" (click)="selectSearchResult(recipe)"><img src="{{imageManagerDomain}}{{recipe.teaserImageUrl}}?w=40&h=30&mode=crop">{{recipe.name}}</div>
+	<div class="result-item" *ngFor="let recipe of searchResult.recipes" (click)="clearSearchResult()" routerLink="/Rezept/{{recipe.url}}/{{recipe.id}}"><img src="{{imageManagerDomain}}{{recipe.teaserImageUrl}}?w=40&h=30&mode=crop">{{recipe.name}}</div>
 </div>
 
-<div class="container body-content" (click)="navigationService.deactivateMobileSearch()">
+<div class="container body-content" (click)="clearSearchResult()">
     <nav class="navbar navbar-light bg-faded hidden-sm-down">
         <a class="navbar-brand" routerLink="/"><img src="/img/Logo.png" class="header-logo"></a>
         <div class="navbar-login">
@@ -55,7 +55,7 @@
 				</span>
 			</div>
 			<div class="search-result" *ngIf="searchResult.recipes.length > 0">
-				<div class="result-item" *ngFor="let recipe of searchResult.recipes" (click)="selectSearchResult(recipe)" routerLink="/Rezept/{{recipe.url}}/{{recipe.id}}"><img src="{{imageManagerDomain}}{{recipe.teaserImageUrl}}?w=40&h=30&mode=crop">{{recipe.name}}</div>
+				<div class="result-item" *ngFor="let recipe of searchResult.recipes" (click)="clearSearchResult()" routerLink="/Rezept/{{recipe.url}}/{{recipe.id}}"><img src="{{imageManagerDomain}}{{recipe.teaserImageUrl}}?w=40&h=30&mode=crop">{{recipe.name}}</div>
 			</div>
 		</form>
         <div style="clear:both" class="hidden-xs"></div>

@@ -29,10 +29,12 @@ export class NavigationComponent {
   changeSearchTerm() {
 		if (this.searchTerm.length < 1)
 		{
-			this.searchResult = new SearchResult();
+      this.searchResult = new SearchResult();
+      this.navigationService.isMobileSearchActive = false;
 			return;
     }
     
+    this.navigationService.isMobileSearchActive = true;
 		this.navigationService.Search(this.searchTerm).subscribe((result: SearchResult) => {
 			if (result.searchTerm == this.searchTerm) {
 				this.searchResult = result;
@@ -46,7 +48,7 @@ export class NavigationComponent {
 
   }
   
-  selectSearchResult(recipe: SearchResultRecipe)
+  clearSearchResult()
 	{
 		this.searchResult = new SearchResult();
     this.searchTerm = "";

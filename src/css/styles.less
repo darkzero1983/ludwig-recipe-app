@@ -75,8 +75,8 @@ html {
     .active-mobile-search {
         position: fixed;
         top: 0;
-        margin-top: 55px;
-
+        margin-top: 0;
+		height:100vh;
     }
         
     .active-mobile-search .navbar {
@@ -84,9 +84,9 @@ html {
     }
 
     .active-mobile-search .navbar-search {
-        margin-top: 0;
-        position: fixed;
-        top: 0;
+        margin-top: 0 !important;
+        position: fixed !important;
+        top: 0 !important;
     }
 
     .active-mobile-search .mobile-search-result {
@@ -98,7 +98,8 @@ html {
         z-index: 999;
         width: 100%;
         border-top: 1px solid #999;
-        overflow-y: scroll;
+		overflow-y: scroll;
+		height:~"calc(100vh - 58px)";
     }
 }
 

@@ -12,7 +12,7 @@ export const environment = {
   apiAccountCanActive: "/test_data/canActivate.txt",
   apiAccountData: "/test_data/account-data.json",
   apiRecipeOverview: "/api/api//Recipe/Overview",
-  apiRecipeDetail: "/api/Recipe/Detail/",
+  apiRecipeDetail: "/api/api/Recipe/Detail/",
   
   //Test URLs
   apiNavigationTest: "/test_data/navigation.json",
