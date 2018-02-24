@@ -7,7 +7,7 @@
 <h1 class="headline">Rezepte</h1>
 <form id="my-form" class="form-inline">
     <div class="recipe-overview-item" *ngFor="let recipe of recipeOverview.recipes">
-        <a routerLink="/Rezept/{{recipe.url}}/{{recipe.id}}">
+        <a routerLink="/CMS/Rezept/{{recipe.id}}">
             <div class="teaser-image">
                 <img src="{{imageManagerDomain}}{{recipe.teaserImageUrl}}?w=640&h=480&mode=crop">
             </div>
@@ -19,12 +19,13 @@
                     Erstellt: {{recipe.publishDate}}
                 </div>
             </div>
-            <div style="clear:both"></div>
-            <div class="text-right" style="margin-top:10px;">
-                <span class="btn btn-success" (click)="router.parent.navigate(['CMS_RecipeEdit', {id: recipe.Id}])">Bearbeiten</span>
-                <span class="btn btn-danger" (click)="delete(recipe.Id)">Löschen</span>
-            </div>
         </a>
+        <div style="clear:both"></div>
+        <div class="text-right" style="margin-top:10px;">
+            <span class="btn btn-success" routerLink="/CMS/Rezept/{{recipe.id}}">Bearbeiten</span>
+            <span class="btn btn-danger" (click)="delete(recipe.Id)">Löschen</span>
+        </div>
+        
     </div>
 </form>
 <nav class="text-center" *ngIf="recipeOverview && pageCount() > 1">

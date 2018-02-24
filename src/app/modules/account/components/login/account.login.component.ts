@@ -25,8 +25,9 @@ export class AccountLoginComponent {
   public constructor(
     public titleService: Title,
     public translation: TranslationService,
-    public accountService: AccountService,
     public validation: ValidationService,
+    public accountService: AccountService,
+    
     private router: Router,
     private route: ActivatedRoute
   ) {
