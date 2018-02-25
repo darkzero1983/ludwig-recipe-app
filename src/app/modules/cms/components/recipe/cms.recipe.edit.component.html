@@ -21,25 +21,26 @@
             </div>            
 
             <h2 class="sub-headline">Zutaten</h2>
-
-            <div>
-                <div class="col-xs-12 col-sm-3">
-                    <mat-form-field>
-                        <input matInput placeholder="Anzahl"autocomplete="recipe-edit" style="text-align: right">
-                        <mat-error>{{validation.errorMessage(recipeForm.controls.preparationTime.errors)}}</mat-error> 
-                    </mat-form-field>
-                </div>
-                <div class="col-xs-12 col-sm-3">
-                    <mat-form-field>
-                        <input matInput placeholder="Einheit" autocomplete="recipe-edit">
-                        <mat-error>{{validation.errorMessage(recipeForm.controls.preparationTime.errors)}}</mat-error> 
-                    </mat-form-field>
-                </div>
-                <div class="col-xs-12 col-sm-6">
-                    <mat-form-field>
-                        <input matInput placeholder="Art" autocomplete="recipe-edit">
-                        <mat-error>{{validation.errorMessage(recipeForm.controls.preparationTime.errors)}}</mat-error> 
-                    </mat-form-field>
+            <div formArrayName="ingredientList">
+                <div *ngFor="let item of recipeForm.controls.ingredientList.controls; let i = index;" [formGroupName]="i">
+                    <div class="col-xs-12 col-sm-2">
+                        <mat-form-field>
+                            <input matInput placeholder="Anzahl" formControlName="amount" autocomplete="recipe-edit" style="text-align: right">
+                            <mat-error>{{validation.errorMessage(recipeForm.controls.preparationTime.errors)}}</mat-error> 
+                        </mat-form-field>
+                    </div>
+                    <div class="col-xs-12 col-sm-3">
+                        <mat-form-field>
+                            <input matInput placeholder="Einheit" formControlName="measurementName" autocomplete="recipe-edit">
+                            <mat-error>{{validation.errorMessage(recipeForm.controls.preparationTime.errors)}}</mat-error> 
+                        </mat-form-field>
+                    </div>
+                    <div class="col-xs-12 col-sm-7">
+                        <mat-form-field>
+                            <input matInput placeholder="Art" formControlName="ingredientName" autocomplete="recipe-edit">
+                            <mat-error>{{validation.errorMessage(recipeForm.controls.preparationTime.errors)}}</mat-error> 
+                        </mat-form-field>
+                    </div>
                 </div>
             </div>
             <h2 class="sub-headline">Rezept Informationen</h2>

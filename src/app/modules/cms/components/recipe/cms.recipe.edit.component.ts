@@ -2,7 +2,7 @@ import { Component  } from '@angular/core';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { CmsService } from '../../services/cms.service';
 import { RecipeEdit } from '../../models/recipe.edit.model';
-import { FormControl, FormGroup, Validators, ValidationErrors, FormArray  } from '@angular/forms';
+import { FormControl, FormGroup, Validators, ValidationErrors, FormArray, FormBuilder  } from '@angular/forms';
 import { Title }     from '@angular/platform-browser';
 import { environment } from '../../../../../environments/environment';
 import { TranslationService } from '../../../../shared/services/translation.service';
@@ -44,14 +44,7 @@ export class CmsRecipeEditComponent {
         id: new FormControl(0, []),
         name: new FormControl("", []),
       }),
-      ingredientList: new FormControl ([{
-        id: new FormControl(0, []),
-        amount: new FormControl(0, []),
-        measurementId: new FormControl(0, []),
-        measurementName: new FormControl("", []),
-        ingredientId: new FormControl(0, []),
-        ingredientName: new FormControl("", []),
-      }]),
+      ingredientList: new FormArray ([]),
       authors: new FormControl("", []),
       seoTags: new FormControl("", []),
       categories: new FormControl("", []),
@@ -63,8 +56,12 @@ export class CmsRecipeEditComponent {
       params => {
           this.titleService.setTitle("Rezept Detail - Ludwigs Rezepte");
           this.cmsService.LoadRecipe(params.get('id')).subscribe(x => {
+            
+            
+            this.recipeForm.controls.ingredientList = this.ingredientListArray(x.ingredientList.length);
             this.recipeForm.setValue(x);
-            console.info(this.recipeForm.value);
+            //console.info(this.recipeForm.controls.ingredientList);
+           // console.info(this.recipeForm.controls.ingredientList.controls[0]);
           });
         }
     );
@@ -72,5 +69,23 @@ export class CmsRecipeEditComponent {
 
   savRecipe(recipe: RecipeEdit, isValid: boolean) {
     console.info(this.recipeForm);
+  }
+
+  ingredientListArray(listCount: number) : FormArray
+  {
+    let ingredientList: FormGroup[] = new Array<FormGroup>();
+    for (var _i = 0; _i < listCount; _i++) {
+      ingredientList.push(
+        new FormGroup ({
+          id: new FormControl(0, []),
+          amount: new FormControl(0, []),
+          measurementId: new FormControl(0, []),
+          measurementName: new FormControl("", []),
+          ingredientId: new FormControl(0, []),
+          ingredientName: new FormControl("", []),
+        })
+      )
+    }
+    return new FormArray(ingredientList);
   }
 }
