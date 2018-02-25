@@ -17,7 +17,7 @@ export class CmsRecipeEditComponent {
   private imageManagerDomain: string;
   public recipeForm : FormGroup;
   public nameMaxLength: number = 500;
-  public recipe:RecipeEdit;
+  public recipe:RecipeEdit = new RecipeEdit();
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -67,7 +67,6 @@ export class CmsRecipeEditComponent {
 
   savRecipe(recipe: RecipeEdit, isValid: boolean) {
     
-    alert(recipe.ingredientList[0].amount);
     console.info(recipe);
   }
 
