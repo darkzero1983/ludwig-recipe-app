@@ -60,15 +60,14 @@ export class CmsRecipeEditComponent {
             
             this.recipeForm.controls.ingredientList = this.ingredientListArray(x.ingredientList.length);
             this.recipeForm.setValue(x);
-            //console.info(this.recipeForm.controls.ingredientList);
-           // console.info(this.recipeForm.controls.ingredientList.controls[0]);
           });
         }
     );
   }
 
   savRecipe(recipe: RecipeEdit, isValid: boolean) {
-    console.info(this.recipeForm);
+    console.info(recipe.name);
+    console.info(recipe.ingredientList[0]);
   }
 
   ingredientListArray(listCount: number) : FormArray

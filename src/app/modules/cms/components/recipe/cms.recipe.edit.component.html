@@ -6,7 +6,7 @@
 </ol>
 <h1 class="headline">Rezept Bearbeiten</h1>
 
-<form [formGroup]="recipeForm" (ngSubmit)="savRecipe(recipeForm.value, recipeForm.valid)">
+<form [formGroup]="recipeForm" (ngSubmit)="savRecipe(recipeForm.value, recipeForm.valid);">
     <input type="hidden" formControlName="id" />
 
     
@@ -21,7 +21,7 @@
             </div>            
 
             <h2 class="sub-headline">Zutaten</h2>
-            <div formArrayName="ingredientList">
+            <div formArrayName="ingredientList" class="ingredient-list">
                 <div *ngFor="let item of recipeForm.controls.ingredientList.controls; let i = index;" [formGroupName]="i">
                     <div class="col-xs-12 col-sm-2">
                         <mat-form-field>
