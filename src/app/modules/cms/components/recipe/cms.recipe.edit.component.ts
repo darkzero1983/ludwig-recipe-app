@@ -2,7 +2,7 @@ import { Component  } from '@angular/core';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { CmsService } from '../../services/cms.service';
 import { RecipeEdit } from '../../models/recipe.edit.model';
-import { FormControl, FormGroup, Validators, ValidationErrors  } from '@angular/forms';
+import { FormControl, FormGroup, Validators, ValidationErrors, FormArray  } from '@angular/forms';
 import { Title }     from '@angular/platform-browser';
 import { environment } from '../../../../../environments/environment';
 import { TranslationService } from '../../../../shared/services/translation.service';
@@ -40,8 +40,18 @@ export class CmsRecipeEditComponent {
       content: new FormControl("", []),
       teaserImageUrl: new FormControl("", []),
       ingredientCount: new FormControl("", []),
-      measurement: new FormControl("", []),
-      ingredientList: new FormControl("", []),
+      measurement:  new FormControl ({
+        id: new FormControl(0, []),
+        name: new FormControl("", []),
+      }),
+      ingredientList: new FormControl ([{
+        id: new FormControl(0, []),
+        amount: new FormControl(0, []),
+        measurementId: new FormControl(0, []),
+        measurementName: new FormControl("", []),
+        ingredientId: new FormControl(0, []),
+        ingredientName: new FormControl("", []),
+      }]),
       authors: new FormControl("", []),
       seoTags: new FormControl("", []),
       categories: new FormControl("", []),
@@ -54,12 +64,13 @@ export class CmsRecipeEditComponent {
           this.titleService.setTitle("Rezept Detail - Ludwigs Rezepte");
           this.cmsService.LoadRecipe(params.get('id')).subscribe(x => {
             this.recipeForm.setValue(x);
+            console.info(this.recipeForm.value);
           });
         }
     );
   }
 
   savRecipe(recipe: RecipeEdit, isValid: boolean) {
-    console.info(recipe);
+    console.info(this.recipeForm);
   }
 }

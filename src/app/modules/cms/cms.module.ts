@@ -30,7 +30,7 @@ const routes: Routes = [
     MatInputModule,
     MatIconModule,
     MatCheckboxModule,
-    MatAutocompleteModule,
+    MatAutocompleteModule
   ],
   exports: [RouterModule],
   providers: [CmsService, ValidationService]
