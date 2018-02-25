@@ -17,7 +17,7 @@ export class CmsRecipeEditComponent {
   private imageManagerDomain: string;
   public recipeForm : FormGroup;
   public nameMaxLength: number = 500;
-
+  public recipe:RecipeEdit;
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -56,18 +56,19 @@ export class CmsRecipeEditComponent {
       params => {
           this.titleService.setTitle("Rezept Detail - Ludwigs Rezepte");
           this.cmsService.LoadRecipe(params.get('id')).subscribe(x => {
-            
+            this.recipe = x;
             
             this.recipeForm.controls.ingredientList = this.ingredientListArray(x.ingredientList.length);
-            this.recipeForm.setValue(x);
+            this.recipeForm.setValue(this.recipe);
           });
         }
     );
   }
 
   savRecipe(recipe: RecipeEdit, isValid: boolean) {
-    console.info(recipe.name);
-    console.info(recipe.ingredientList[0]);
+    
+    alert(recipe.ingredientList[0].amount);
+    console.info(recipe);
   }
 
   ingredientListArray(listCount: number) : FormArray
@@ -86,5 +87,26 @@ export class CmsRecipeEditComponent {
       )
     }
     return new FormArray(ingredientList);
+  }
+
+  amountChange(value: number, id: number)
+  {
+    this.recipe = this.recipeForm.value;
+    this.recipe.ingredientList[id].amount = value;
+    this.recipeForm.setValue(this.recipe);
+  }
+
+  measurementNameChange(value: string, id: number)
+  {
+    this.recipe = this.recipeForm.value;
+    this.recipe.ingredientList[id].measurementName = value;
+    this.recipeForm.setValue(this.recipe);
+  }
+
+  ingredientNameChange(value: string, id: number)
+  {
+    this.recipe = this.recipeForm.value;
+    this.recipe.ingredientList[id].ingredientName = value;
+    this.recipeForm.setValue(this.recipe);
   }
 }
