@@ -7,6 +7,7 @@ import { Title }     from '@angular/platform-browser';
 import { environment } from '../../../../../environments/environment';
 import { TranslationService } from '../../../../shared/services/translation.service';
 import { ValidationService } from '../../../../shared/services/validation.service';
+import { IngredientListItem } from '../../models/ingredient.listI.iem.model';
 
 @Component({
   selector: 'cms-recipe-edit-component',
@@ -93,6 +94,7 @@ export class CmsRecipeEditComponent {
     this.recipe = this.recipeForm.value;
     this.recipe.ingredientList[id].amount = value;
     this.recipeForm.setValue(this.recipe);
+    this.ingredientListChange();
   }
 
   measurementNameChange(value: string, id: number)
@@ -100,6 +102,7 @@ export class CmsRecipeEditComponent {
     this.recipe = this.recipeForm.value;
     this.recipe.ingredientList[id].measurementName = value;
     this.recipeForm.setValue(this.recipe);
+    this.ingredientListChange();
   }
 
   ingredientNameChange(value: string, id: number)
@@ -107,5 +110,32 @@ export class CmsRecipeEditComponent {
     this.recipe = this.recipeForm.value;
     this.recipe.ingredientList[id].ingredientName = value;
     this.recipeForm.setValue(this.recipe);
+    this.ingredientListChange();
+  }
+
+  ingredientListChange()
+  {
+    if(this.recipe.ingredientList == null)
+    {
+      return;
+    }
+    let item: IngredientListItem = this.recipe.ingredientList[this.recipe.ingredientList.length-1];
+    if(item == undefined)
+    {
+      return;
+    }
+    if((item.amount != null && item.amount.toString() != "") || (item.ingredientName != null && item.ingredientName != "") || (item.measurementName != null && item.measurementName != ""))
+    {
+      let newItem: IngredientListItem = new IngredientListItem();
+      newItem.id = null;
+      newItem.amount = null;
+      newItem.ingredientId = null;
+      newItem.ingredientName = null;
+      newItem.measurementId = null;
+      newItem.measurementName = null;
+      this.recipe.ingredientList.push(newItem);
+      this.recipeForm.controls.ingredientList = this.ingredientListArray(this.recipe.ingredientList.length);
+      this.recipeForm.setValue(this.recipe);
+    }
   }
 }
