@@ -88,24 +88,12 @@ export class CmsRecipeEditComponent {
 
   public ingredientListChange()
   {
-    this.recipe = this.recipeForm.getRawValue();
-    
     if(this.recipe.ingredientList == null)
     {
       return;
     }
     
-    for (var _i = this.recipe.ingredientList.length - 2; _i >= 0; _i--) {
-      if(this.recipe.ingredientList[_i] != null)
-      {
-        if(this.isIngredientListItemEmpty(this.recipe.ingredientList[_i]))
-        {
-          const control = <FormArray>this.recipeForm.controls['ingredientList'];
-          control.removeAt(_i);
-        }
-      }
-    };
-   if(this.recipeForm.getRawValue().ingredientList.length > 0)
+    if(this.recipeForm.getRawValue().ingredientList.length > 0)
     {
       let item: IngredientListItem = this.recipeForm.getRawValue().ingredientList[this.recipeForm.getRawValue().ingredientList.length - 1];
       if(item == undefined)
@@ -114,16 +102,25 @@ export class CmsRecipeEditComponent {
       }
       if(!this.isIngredientListItemEmpty(item))
       {
-        const control = <FormArray>this.recipeForm.controls['ingredientList'];
-        control.push(new FormGroup ({
-            id: new FormControl(),
-            amount: new FormControl(),
-            measurementName: new FormControl(),
-            ingredientName: new FormControl(),
-        }));
+        this.addIngredientListItem();
       }
     }
+    else
+    {
+      this.addIngredientListItem();
+    }
     
+  }
+
+  private addIngredientListItem()
+  {
+    const control = <FormArray>this.recipeForm.controls['ingredientList'];
+    control.push(new FormGroup ({
+        id: new FormControl(),
+        amount: new FormControl(),
+        measurementName: new FormControl(),
+        ingredientName: new FormControl()
+    }));
   }
 
   private isIngredientListItemEmpty(item: IngredientListItem): boolean

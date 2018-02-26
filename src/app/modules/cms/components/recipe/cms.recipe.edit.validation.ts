@@ -40,7 +40,7 @@ export class CmsRecipeEditValidation {
                         id: new FormControl(item.id, []),
                         amount: new FormControl(item.amount, []),
                         measurementName: new FormControl(item.measurementName, []),
-                        ingredientName: new FormControl(item.ingredientName, []),
+                        ingredientName: new FormControl(item.ingredientName, [])
                     })
                 )
             }
