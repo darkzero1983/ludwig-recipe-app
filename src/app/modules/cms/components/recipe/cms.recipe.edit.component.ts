@@ -40,10 +40,12 @@ export class CmsRecipeEditComponent {
     route.paramMap.subscribe(
       params => {
           this.titleService.setTitle("Rezept Detail - Ludwigs Rezepte");
-          this.cmsService.LoadMeasurements().subscribe(x => {this.measurements = x; console.info(x)});
+          this.cmsService.LoadMeasurements().subscribe(x => this.measurements = x);
           this.cmsService.LoadIngredients().subscribe(x => this.ingredients = x);
           this.cmsService.LoadRecipe(params.get('id')).subscribe(x => {
             this.recipe = x;
+            this.recipeForm.controls.ingredientList = this.recipeValigation.getIngredientListArray(this.recipe.ingredientList.length);
+            this.recipeForm.setValue(this.recipe);
             this.ingredientListChange();
           });
         }
@@ -55,7 +57,7 @@ export class CmsRecipeEditComponent {
     {
       return [];
     }
-    return this.ingredients.filter(x => x.toLowerCase().indexOf(this.ingredientSearchTerm.toLocaleLowerCase()) >= 0)
+    return this.ingredients.filter(x => x.toLowerCase().indexOf(this.ingredientSearchTerm.toLocaleLowerCase()) >= 0);
   }
   setIngredientSearchTerm(term: string)
   {
@@ -68,7 +70,7 @@ export class CmsRecipeEditComponent {
     {
       return [];
     }
-    return this.measurements.filter(x => x.toLowerCase().indexOf(this.measurementSearchTerm.toLocaleLowerCase()) >= 0)
+    return this.measurements.filter(x => x.toLowerCase().indexOf(this.measurementSearchTerm.toLocaleLowerCase()) >= 0);
   }
   setMeasurementSearchTerm(term: string)
   {
@@ -109,34 +111,37 @@ export class CmsRecipeEditComponent {
     {
       return;
     }
-
-    for (var _i = 0; _i < this.recipe.ingredientList.length; _i++) {
+    
+    for (var _i = 0; _i < this.recipe.ingredientList.length - 1; _i++) {
       if(this.recipe.ingredientList[_i] != null)
       {
         if(this.isIngredientListItemEmpty(this.recipe.ingredientList[_i]))
         {
-          //this.recipe.ingredientList = this.recipe.ingredientList.filter(obj => obj !== this.recipe.ingredientList[_i]);
+          /*
+          this.recipe.ingredientList = this.recipe.ingredientList.filter(obj => obj !== this.recipe.ingredientList[_i]);
+          this.recipeForm.controls.ingredientList = this.recipeValigation.getIngredientListArray(this.recipe.ingredientList.length);
+          this.recipeForm.setValue(this.recipe);
+          _i = _i -1;
+          */
         }
       }
     };
-
-    let item: IngredientListItem = this.recipe.ingredientList[this.recipe.ingredientList.length-1];
-    if(item == undefined)
+    
+    if( this.recipe.ingredientList.length > 0)
     {
-      return;
+      let item: IngredientListItem = this.recipe.ingredientList[this.recipe.ingredientList.length-1];
+      if(item == undefined)
+      {
+        return;
+      }
+      if(!this.isIngredientListItemEmpty(item))
+      {
+        //this.recipe.ingredientList.push({id: this.recipe.ingredientList.length, amount: 0, measurementName: "", ingredientName: ""});
+        //this.recipeForm.controls.ingredientList = this.recipeValigation.getIngredientListArray(this.recipe.ingredientList.length);
+        //this.recipeForm.setValue(this.recipe);
+      }
     }
-    if(!this.isIngredientListItemEmpty(item))
-    {
-      let newItem: IngredientListItem = new IngredientListItem();
-      
-      newItem.id = null;
-      newItem.amount = null;
-      newItem.ingredientName = null;
-      newItem.measurementName = null;
-      this.recipe.ingredientList.push(newItem);
-      this.recipeForm.controls.ingredientList = this.recipeValigation.getIngredientListArray(this.recipe.ingredientList.length);
-      this.recipeForm.setValue(this.recipe);
-    }
+    
   }
 
   private isIngredientListItemEmpty(item: IngredientListItem): boolean
