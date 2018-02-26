@@ -58,9 +58,7 @@ export class CmsRecipeEditComponent {
           this.titleService.setTitle("Rezept Detail - Ludwigs Rezepte");
           this.cmsService.LoadRecipe(params.get('id')).subscribe(x => {
             this.recipe = x;
-            
-            this.recipeForm.controls.ingredientList = this.ingredientListArray(x.ingredientList.length);
-            this.recipeForm.setValue(this.recipe);
+            this.ingredientListChange();
           });
         }
     );
@@ -119,6 +117,14 @@ export class CmsRecipeEditComponent {
     {
       return;
     }
+
+    for (var _i = 0; _i < this.recipe.ingredientList.length; _i++) {
+      if((this.recipe.ingredientList[_i].amount == null || this.recipe.ingredientList[_i].amount.toString() == "") && (this.recipe.ingredientList[_i].ingredientName == null || this.recipe.ingredientList[_i].ingredientName == "") && (this.recipe.ingredientList[_i].measurementName == null || this.recipe.ingredientList[_i].measurementName == ""))
+      {
+        this.recipe.ingredientList = this.recipe.ingredientList.filter(obj => obj !== this.recipe.ingredientList[_i]);
+      }
+    };
+
     let item: IngredientListItem = this.recipe.ingredientList[this.recipe.ingredientList.length-1];
     if(item == undefined)
     {
