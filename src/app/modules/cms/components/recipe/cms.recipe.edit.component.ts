@@ -8,6 +8,7 @@ import { environment } from '../../../../../environments/environment';
 import { TranslationService } from '../../../../shared/services/translation.service';
 import { ValidationService } from '../../../../shared/services/validation.service';
 import { IngredientListItem } from '../../models/ingredient.listI.iem.model';
+import { CmsRecipeEditValidation } from './cms.recipe.edit.validation';
 
 @Component({
   selector: 'cms-recipe-edit-component',
@@ -19,6 +20,8 @@ export class CmsRecipeEditComponent {
   public recipeForm : FormGroup;
   public nameMaxLength: number = 500;
   public recipe:RecipeEdit = new RecipeEdit();
+  private recipeValigation: CmsRecipeEditValidation = new CmsRecipeEditValidation();
+  public ingredientSearchTerm: string = "";
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -28,30 +31,7 @@ export class CmsRecipeEditComponent {
     public validation: ValidationService,
 	) {
     this.imageManagerDomain = environment.imageManagerDomain;
-    
-    this.recipeForm = new FormGroup ({
-      id: new FormControl(0, [Validators.required]),
-      isPublished: new FormControl(false, [Validators.required]),
-      isOnlyForFriends: new FormControl("", []),
-      publishDate: new FormControl("", []),
-      publishHour: new FormControl("", []),
-      publishMinute: new FormControl("", []),
-      name: new FormControl("", [Validators.required, Validators.maxLength(this.nameMaxLength)]),
-      description: new FormControl("", []),
-      content: new FormControl("", []),
-      teaserImageUrl: new FormControl("", []),
-      ingredientCount: new FormControl("", []),
-      measurement:  new FormControl ({
-        id: new FormControl(0, []),
-        name: new FormControl("", []),
-      }),
-      ingredientList: new FormArray ([]),
-      authors: new FormControl("", []),
-      seoTags: new FormControl("", []),
-      categories: new FormControl("", []),
-      preparationTime: new FormControl("", []),
-      waitingTime: new FormControl("", []),
-    });
+    this.recipeForm = this.recipeValigation.getRecipeForm(this.nameMaxLength);
 
     route.paramMap.subscribe(
       params => {
@@ -63,28 +43,21 @@ export class CmsRecipeEditComponent {
         }
     );
   }
-
-  savRecipe(recipe: RecipeEdit, isValid: boolean) {
-    
-    console.info(recipe);
+  options(): string[]
+  {
+    if(this.ingredientSearchTerm == "")
+    {
+      return [];
+    }
+    return ['Zucker', 'Bier', 'Paprikaschote(n) (Rot)', 'Lauchzwiebeln', 'Knoblauchzehen'].filter(x => x.toLowerCase().indexOf(this.ingredientSearchTerm.toLocaleLowerCase()) >= 0)
+  }
+  setIngredientSearchTerm(term: string)
+  {
+    this.ingredientSearchTerm = term;
   }
 
-  ingredientListArray(listCount: number) : FormArray
-  {
-    let ingredientList: FormGroup[] = new Array<FormGroup>();
-    for (var _i = 0; _i < listCount; _i++) {
-      ingredientList.push(
-        new FormGroup ({
-          id: new FormControl(0, []),
-          amount: new FormControl(0, []),
-          measurementId: new FormControl(0, []),
-          measurementName: new FormControl("", []),
-          ingredientId: new FormControl(0, []),
-          ingredientName: new FormControl("", []),
-        })
-      )
-    }
-    return new FormArray(ingredientList);
+  savRecipe(recipe: RecipeEdit, isValid: boolean) {
+    console.info(recipe);
   }
 
   amountChange(value: number, id: number)
@@ -119,9 +92,12 @@ export class CmsRecipeEditComponent {
     }
 
     for (var _i = 0; _i < this.recipe.ingredientList.length; _i++) {
-      if(this.isIngredientListItemEmpty(this.recipe.ingredientList[_i]))
+      if(this.recipe.ingredientList[_i] != null)
       {
-        this.recipe.ingredientList = this.recipe.ingredientList.filter(obj => obj !== this.recipe.ingredientList[_i]);
+        if(this.isIngredientListItemEmpty(this.recipe.ingredientList[_i]))
+        {
+          //this.recipe.ingredientList = this.recipe.ingredientList.filter(obj => obj !== this.recipe.ingredientList[_i]);
+        }
       }
     };
 
@@ -141,13 +117,17 @@ export class CmsRecipeEditComponent {
       newItem.measurementId = null;
       newItem.measurementName = null;
       this.recipe.ingredientList.push(newItem);
-      this.recipeForm.controls.ingredientList = this.ingredientListArray(this.recipe.ingredientList.length);
+      this.recipeForm.controls.ingredientList = this.recipeValigation.getIngredientListArray(this.recipe.ingredientList.length);
       this.recipeForm.setValue(this.recipe);
     }
   }
 
   private isIngredientListItemEmpty(item: IngredientListItem): boolean
   {
+    if(item == null || item == undefined)
+    {
+      return true;
+    }
     return (
       (item.amount == null || item.amount.toString() == "" || item.amount == 0) && 
       (item.ingredientName == null ||item.ingredientName == "") && 
