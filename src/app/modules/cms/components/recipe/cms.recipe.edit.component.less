@@ -24,6 +24,13 @@ mat-form-field
 .ingredient-list
 {
     font-size:12px;
+    .col-xs-2,
+    .col-xs-3,
+    .col-xs-7
+    {
+        padding-left:0;
+        padding-right:5px;
+    }
 }
 
 .mat-option
@@ -32,4 +39,19 @@ mat-form-field
     padding:0 4px;
     line-height: 20px;
     height: 20px;
+}
+
+@media (min-width:@breakpoint-desktop-min) {
+    .recipe-left-column
+    {
+        width:300px;
+        float: left;
+    }
+
+    .recipe-right-column
+    {
+        width:~"calc(100% - 320px)";
+        float: right;
+    }
+  
 }
