@@ -6,7 +6,7 @@
 </ol>
 <h1 class="headline">Rezept Bearbeiten</h1>
 
-<form [formGroup]="recipeForm" (ngSubmit)="savRecipe(recipeForm.value, recipeForm.valid);">
+<form [formGroup]="recipeForm" (ngSubmit)="saveRecipe();">
     <input type="hidden" formControlName="id" />
 
     
@@ -23,20 +23,20 @@
                 <div *ngFor="let item of recipeForm.controls.ingredientList.controls; let i = index;" [formGroupName]="i">
                     <div class="col-xs-2 col-sm-2">
                         <mat-form-field>
-                            <input matInput placeholder="Anzahl" (change)="amountChange($event.target.value, i);" formControlName="amount" autocomplete="recipe-edit" style="text-align: right">
+                            <input matInput placeholder="Anzahl" (change)="ingredientListChange();" formControlName="amount" autocomplete="recipe-edit" style="text-align: right">
                             <mat-error>{{validation.errorMessage(recipeForm.controls.preparationTime.errors)}}</mat-error> 
                         </mat-form-field>
                     </div>
                     <div class="col-xs-3 col-sm-3">
                         <mat-form-field>
-                            <input matInput placeholder="Einheit" (change)="measurementNameChange($event.target.value, i);setMeasurementSearchTerm($event.target.value)" (keyup)="setMeasurementSearchTerm($event.target.value)" (focus)="setMeasurementSearchTerm($event.target.value)" formControlName="measurementName" autocomplete="recipe-edit" [matAutocomplete]="autoMeasurement">
+                            <input matInput placeholder="Einheit" (change)="ingredientListChange();setMeasurementSearchTerm($event.target.value)" (keyup)="setMeasurementSearchTerm($event.target.value)" (focus)="setMeasurementSearchTerm($event.target.value)" formControlName="measurementName" autocomplete="recipe-edit" [matAutocomplete]="autoMeasurement">
                            
                             <mat-error>{{validation.errorMessage(recipeForm.controls.preparationTime.errors)}}</mat-error> 
                         </mat-form-field>
                     </div>
                     <div class="col-xs-7 col-sm-7">
                         <mat-form-field>
-                            <input matInput placeholder="Art" (change)="ingredientNameChange($event.target.value, i);setIngredientSearchTerm($event.target.value)" (keyup)="setIngredientSearchTerm($event.target.value)" (focus)="setIngredientSearchTerm($event.target.value)" formControlName="ingredientName" autocomplete="recipe-edit" [matAutocomplete]="auto">
+                            <input matInput placeholder="Art" (change)="ingredientListChange();setIngredientSearchTerm($event.target.value)" (keyup)="setIngredientSearchTerm($event.target.value)" (focus)="setIngredientSearchTerm($event.target.value)" formControlName="ingredientName" autocomplete="recipe-edit" [matAutocomplete]="auto">
                             
                             <mat-error>{{validation.errorMessage(recipeForm.controls.preparationTime.errors)}}</mat-error> 
                         </mat-form-field>

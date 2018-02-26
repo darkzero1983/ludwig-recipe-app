@@ -1,4 +1,5 @@
 import { FormGroup, FormControl, FormArray, Validators  } from '@angular/forms';
+import { IngredientListItem } from '../../models/ingredient.listI.iem.model';
 
 export class CmsRecipeEditValidation {
     public getRecipeForm(nameMaxLength: number): FormGroup
@@ -28,19 +29,22 @@ export class CmsRecipeEditValidation {
           });;
     }
 
-    public getIngredientListArray(listCount: number) : FormArray
+    public getIngredientListArray(items: IngredientListItem[]) : FormArray
     {
         let ingredientList: FormGroup[] = new Array<FormGroup>();
-        for (var _i = 0; _i < listCount; _i++) {
-            ingredientList.push(
-            new FormGroup ({
-                id: new FormControl(0, []),
-                amount: new FormControl(0, []),
-                measurementName: new FormControl("", []),
-                ingredientName: new FormControl("", []),
-            })
-            )
-        }
+        items.forEach(item => {
+            if(item != undefined)
+            {
+                ingredientList.push(
+                    new FormGroup ({
+                        id: new FormControl(item.id, []),
+                        amount: new FormControl(item.amount, []),
+                        measurementName: new FormControl(item.measurementName, []),
+                        ingredientName: new FormControl(item.ingredientName, []),
+                    })
+                )
+            }
+        });
         return new FormArray(ingredientList);
     }
 }

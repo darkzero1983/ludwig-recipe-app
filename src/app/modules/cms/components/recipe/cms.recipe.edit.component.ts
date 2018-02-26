@@ -44,8 +44,8 @@ export class CmsRecipeEditComponent {
           this.cmsService.LoadIngredients().subscribe(x => this.ingredients = x);
           this.cmsService.LoadRecipe(params.get('id')).subscribe(x => {
             this.recipe = x;
-            this.recipeForm.controls.ingredientList = this.recipeValigation.getIngredientListArray(this.recipe.ingredientList.length);
-            this.recipeForm.setValue(this.recipe);
+            this.recipeForm.controls.ingredientList = this.recipeValigation.getIngredientListArray(this.recipe.ingredientList);
+            this.recipeForm.setValue(x);
             this.ingredientListChange();
           });
         }
@@ -77,36 +77,19 @@ export class CmsRecipeEditComponent {
     this.measurementSearchTerm = term;
   }
 
-  savRecipe(recipe: RecipeEdit, isValid: boolean) {
-    console.info(recipe);
-  }
-
-  amountChange(value: number, id: number)
-  {
-    this.recipe = this.recipeForm.value;
-    this.recipe.ingredientList[id].amount = value;
-    this.recipeForm.setValue(this.recipe);
-    this.ingredientListChange();
-  }
-
-  measurementNameChange(value: string, id: number)
-  {
-    this.recipe = this.recipeForm.value;
-    this.recipe.ingredientList[id].measurementName = value;
-    this.recipeForm.setValue(this.recipe);
-    this.ingredientListChange();
-  }
-
-  ingredientNameChange(value: string, id: number)
-  {
-    this.recipe = this.recipeForm.value;
-    this.recipe.ingredientList[id].ingredientName = value;
-    this.recipeForm.setValue(this.recipe);
-    this.ingredientListChange();
+  saveRecipe() {
+    if(!this.recipeForm.valid)
+    {
+      return;
+    }
+    this.recipe = this.recipeForm.getRawValue();
+    console.info(this.recipe);
   }
 
   public ingredientListChange()
   {
+    this.recipe = this.recipeForm.getRawValue();
+    
     if(this.recipe.ingredientList == null)
     {
       return;
@@ -117,28 +100,31 @@ export class CmsRecipeEditComponent {
       {
         if(this.isIngredientListItemEmpty(this.recipe.ingredientList[_i]))
         {
-          /*
-          this.recipe.ingredientList = this.recipe.ingredientList.filter(obj => obj !== this.recipe.ingredientList[_i]);
-          this.recipeForm.controls.ingredientList = this.recipeValigation.getIngredientListArray(this.recipe.ingredientList.length);
-          this.recipeForm.setValue(this.recipe);
-          _i = _i -1;
-          */
+          //this.recipe.ingredientList = this.recipe.ingredientList.filter(obj => obj !== this.recipe.ingredientList[_i]);
+          //this.recipeForm.controls.ingredientList = this.recipeValigation.getIngredientListArray(this.recipe.ingredientList);
+          //_i = _i -1;
         }
       }
     };
-    
-    if( this.recipe.ingredientList.length > 0)
+   if(this.recipeForm.getRawValue().ingredientList.length > 0)
     {
-      let item: IngredientListItem = this.recipe.ingredientList[this.recipe.ingredientList.length-1];
+      let item: IngredientListItem = this.recipeForm.getRawValue().ingredientList[this.recipeForm.getRawValue().ingredientList.length - 1];
       if(item == undefined)
       {
         return;
       }
       if(!this.isIngredientListItemEmpty(item))
       {
-        //this.recipe.ingredientList.push({id: this.recipe.ingredientList.length, amount: 0, measurementName: "", ingredientName: ""});
-        //this.recipeForm.controls.ingredientList = this.recipeValigation.getIngredientListArray(this.recipe.ingredientList.length);
-        //this.recipeForm.setValue(this.recipe);
+        const control = <FormArray>this.recipeForm.controls['ingredientList'];
+        control.push(new FormGroup ({
+            id: new FormControl(),
+            amount: new FormControl(),
+            measurementName: new FormControl(),
+            ingredientName: new FormControl(),
+        }));
+
+        //this.recipe.ingredientList.push({id: 0, amount: null, measurementName: null, ingredientName: null});
+        //this.recipeForm.controls.ingredientList = this.recipeValigation.getIngredientListArray(this.recipe.ingredientList);
       }
     }
     
