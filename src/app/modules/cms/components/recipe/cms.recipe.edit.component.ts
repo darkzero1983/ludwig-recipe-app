@@ -95,14 +95,13 @@ export class CmsRecipeEditComponent {
       return;
     }
     
-    for (var _i = 0; _i < this.recipe.ingredientList.length - 1; _i++) {
+    for (var _i = this.recipe.ingredientList.length - 2; _i >= 0; _i--) {
       if(this.recipe.ingredientList[_i] != null)
       {
         if(this.isIngredientListItemEmpty(this.recipe.ingredientList[_i]))
         {
-          //this.recipe.ingredientList = this.recipe.ingredientList.filter(obj => obj !== this.recipe.ingredientList[_i]);
-          //this.recipeForm.controls.ingredientList = this.recipeValigation.getIngredientListArray(this.recipe.ingredientList);
-          //_i = _i -1;
+          const control = <FormArray>this.recipeForm.controls['ingredientList'];
+          control.removeAt(_i);
         }
       }
     };
@@ -122,9 +121,6 @@ export class CmsRecipeEditComponent {
             measurementName: new FormControl(),
             ingredientName: new FormControl(),
         }));
-
-        //this.recipe.ingredientList.push({id: 0, amount: null, measurementName: null, ingredientName: null});
-        //this.recipeForm.controls.ingredientList = this.recipeValigation.getIngredientListArray(this.recipe.ingredientList);
       }
     }
     
