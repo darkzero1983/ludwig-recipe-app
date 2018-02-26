@@ -36,9 +36,7 @@ export class CmsRecipeEditValidation {
             new FormGroup ({
                 id: new FormControl(0, []),
                 amount: new FormControl(0, []),
-                measurementId: new FormControl(0, []),
                 measurementName: new FormControl("", []),
-                ingredientId: new FormControl(0, []),
                 ingredientName: new FormControl("", []),
             })
             )

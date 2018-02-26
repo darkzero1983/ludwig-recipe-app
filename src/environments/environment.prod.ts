@@ -16,6 +16,8 @@ export const environment = {
   
   apiCmsRecipeOverview: "/api/api/Cms/Recipe/Overview",
   apiCmsRecipe: "/api/api/Cms/Recipe/",
+  apiCmsMeasurements: "/api/api/Cms/Measurements",
+  apiCmsIngredients: "/api/api/Cms/Ingredients",
 
   //Test URLs
   apiNavigationTest: "/test_data/navigation.json",

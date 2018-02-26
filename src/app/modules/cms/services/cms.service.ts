@@ -24,4 +24,14 @@ export class CmsService  {
         let requestUrl: string = environment.apiCmsRecipe + id;
         return this.http.get<RecipeEdit>(requestUrl);
     }
+
+    LoadIngredients(): Observable<string[]> {
+        let requestUrl: string = environment.apiCmsIngredients;
+        return this.http.get<Array<string>>(requestUrl);
+    }
+
+    LoadMeasurements(): Observable<string[]> {
+        let requestUrl: string = environment.apiCmsMeasurements;
+        return this.http.get<Array<string>>(requestUrl);
+    }
 }

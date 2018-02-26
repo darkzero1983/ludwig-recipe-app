@@ -22,6 +22,10 @@ export class CmsRecipeEditComponent {
   public recipe:RecipeEdit = new RecipeEdit();
   private recipeValigation: CmsRecipeEditValidation = new CmsRecipeEditValidation();
   public ingredientSearchTerm: string = "";
+  public measurementSearchTerm: string = "";
+  private ingredients: string[];
+  private measurements: string[];
+
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -36,6 +40,8 @@ export class CmsRecipeEditComponent {
     route.paramMap.subscribe(
       params => {
           this.titleService.setTitle("Rezept Detail - Ludwigs Rezepte");
+          this.cmsService.LoadMeasurements().subscribe(x => {this.measurements = x; console.info(x)});
+          this.cmsService.LoadIngredients().subscribe(x => this.ingredients = x);
           this.cmsService.LoadRecipe(params.get('id')).subscribe(x => {
             this.recipe = x;
             this.ingredientListChange();
@@ -43,17 +49,30 @@ export class CmsRecipeEditComponent {
         }
     );
   }
-  options(): string[]
+  ingredientOptions(): string[]
   {
     if(this.ingredientSearchTerm == "")
     {
       return [];
     }
-    return ['Zucker', 'Bier', 'Paprikaschote(n) (Rot)', 'Lauchzwiebeln', 'Knoblauchzehen'].filter(x => x.toLowerCase().indexOf(this.ingredientSearchTerm.toLocaleLowerCase()) >= 0)
+    return this.ingredients.filter(x => x.toLowerCase().indexOf(this.ingredientSearchTerm.toLocaleLowerCase()) >= 0)
   }
   setIngredientSearchTerm(term: string)
   {
     this.ingredientSearchTerm = term;
+  }
+
+  measurementOptions(): string[]
+  {
+    if(this.measurementSearchTerm == "")
+    {
+      return [];
+    }
+    return this.measurements.filter(x => x.toLowerCase().indexOf(this.measurementSearchTerm.toLocaleLowerCase()) >= 0)
+  }
+  setMeasurementSearchTerm(term: string)
+  {
+    this.measurementSearchTerm = term;
   }
 
   savRecipe(recipe: RecipeEdit, isValid: boolean) {
@@ -112,9 +131,7 @@ export class CmsRecipeEditComponent {
       
       newItem.id = null;
       newItem.amount = null;
-      newItem.ingredientId = null;
       newItem.ingredientName = null;
-      newItem.measurementId = null;
       newItem.measurementName = null;
       this.recipe.ingredientList.push(newItem);
       this.recipeForm.controls.ingredientList = this.recipeValigation.getIngredientListArray(this.recipe.ingredientList.length);

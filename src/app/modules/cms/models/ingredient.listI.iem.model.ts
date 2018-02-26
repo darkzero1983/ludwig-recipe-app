@@ -1,8 +1,6 @@
 export class IngredientListItem {
-	id: number;
+	id: number | null;
 	amount: number;
-	measurementId: number;  
 	measurementName: string;
-	ingredientId: number;
 	ingredientName: string;
 }
