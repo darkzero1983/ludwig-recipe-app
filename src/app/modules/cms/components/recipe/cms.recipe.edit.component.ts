@@ -111,7 +111,7 @@ export class CmsRecipeEditComponent {
     this.ingredientListChange();
   }
 
-  ingredientListChange()
+  public ingredientListChange()
   {
     if(this.recipe.ingredientList == null)
     {
@@ -119,7 +119,7 @@ export class CmsRecipeEditComponent {
     }
 
     for (var _i = 0; _i < this.recipe.ingredientList.length; _i++) {
-      if((this.recipe.ingredientList[_i].amount == null || this.recipe.ingredientList[_i].amount.toString() == "") && (this.recipe.ingredientList[_i].ingredientName == null || this.recipe.ingredientList[_i].ingredientName == "") && (this.recipe.ingredientList[_i].measurementName == null || this.recipe.ingredientList[_i].measurementName == ""))
+      if(this.isIngredientListItemEmpty(this.recipe.ingredientList[_i]))
       {
         this.recipe.ingredientList = this.recipe.ingredientList.filter(obj => obj !== this.recipe.ingredientList[_i]);
       }
@@ -130,9 +130,10 @@ export class CmsRecipeEditComponent {
     {
       return;
     }
-    if((item.amount != null && item.amount.toString() != "") || (item.ingredientName != null && item.ingredientName != "") || (item.measurementName != null && item.measurementName != ""))
+    if(!this.isIngredientListItemEmpty(item))
     {
       let newItem: IngredientListItem = new IngredientListItem();
+      
       newItem.id = null;
       newItem.amount = null;
       newItem.ingredientId = null;
@@ -143,5 +144,14 @@ export class CmsRecipeEditComponent {
       this.recipeForm.controls.ingredientList = this.ingredientListArray(this.recipe.ingredientList.length);
       this.recipeForm.setValue(this.recipe);
     }
+  }
+
+  private isIngredientListItemEmpty(item: IngredientListItem): boolean
+  {
+    return (
+      (item.amount == null || item.amount.toString() == "" || item.amount == 0) && 
+      (item.ingredientName == null ||item.ingredientName == "") && 
+      (item.measurementName == null || item.measurementName == "")
+    );
   }
 }
