@@ -16,7 +16,7 @@ import { CmsRecipeEditValidation } from './cms.recipe.edit.validation';
   styleUrls: ['./cms.recipe.edit.component.less']
 })
 export class CmsRecipeEditComponent {
-  private imageManagerDomain: string;
+  public imageManagerDomain: string;
   public recipeForm : FormGroup;
   public nameMaxLength: number = 500;
   public recipe:RecipeEdit = new RecipeEdit();

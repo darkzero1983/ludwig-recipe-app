@@ -17,10 +17,22 @@
             <div class="row">
                 <img src="{{imageManagerDomain}}{{recipe.teaserImageUrl}}" style="width:100%">
             </div>            
-
+            <h2 class="sub-headline">Rezept Für</h2>
+            <div class="row">
+                <div class="col-xs-2 col-sm-5">
+                    <mat-form-field>
+                        <input matInput placeholder="Anzahl" formControlName="ingredientCount" autocomplete="recipe-edit" style="text-align: right">
+                    </mat-form-field>
+                </div>
+                <div class="col-xs-7 col-sm-7">
+                        <mat-form-field>
+                            <input matInput placeholder="Art" (change)="setIngredientSearchTerm($event.target.value)" (keyup)="setIngredientSearchTerm($event.target.value)" (focus)="setIngredientSearchTerm($event.target.value)" formControlName="measurement" autocomplete="recipe-edit" [matAutocomplete]="auto">
+                        </mat-form-field>
+                    </div>
+            </div>
             <h2 class="sub-headline">Zutaten</h2>
             <div formArrayName="ingredientList" class="ingredient-list">
-                <div *ngFor="let item of recipeForm.controls.ingredientList.controls; let i = index;" [formGroupName]="i">
+                <div *ngFor="let item of recipeForm.controls['ingredientList'].controls; let i = index;" [formGroupName]="i">
                     <div class="col-xs-2 col-sm-2">
                         <mat-form-field>
                             <input matInput placeholder="Anzahl" (change)="ingredientListChange();" formControlName="amount" autocomplete="recipe-edit" style="text-align: right">

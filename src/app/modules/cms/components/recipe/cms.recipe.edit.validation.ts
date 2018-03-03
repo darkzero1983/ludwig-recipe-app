@@ -16,10 +16,7 @@ export class CmsRecipeEditValidation {
             content: new FormControl("", []),
             teaserImageUrl: new FormControl("", []),
             ingredientCount: new FormControl("", []),
-            measurement:  new FormControl ({
-              id: new FormControl(0, []),
-              name: new FormControl("", []),
-            }),
+            measurement:  new FormControl (""),
             ingredientList: new FormArray ([]),
             authors: new FormControl("", []),
             seoTags: new FormControl("", []),
