@@ -18,7 +18,7 @@ export const environment = {
   apiCmsRecipe: "http://localhost:8030/api/Cms/Recipe/",
   apiCmsMeasurements: "http://localhost:8030/api/Cms/Measurements",
   apiCmsIngredients: "http://localhost:8030/api/Cms/Ingredients",
-  apiCmsUploadTeaserImage: "http://localhost:8030/api/Cms/UploadTeaserImage",
+  apiCmsUploadTeaserImage: "http://localhost:8030/api/Cms/UploadTeaserImage/",
 
   //Test URLs
   apiNavigationTest: "/test_data/navigation.json",

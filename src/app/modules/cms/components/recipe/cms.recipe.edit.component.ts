@@ -62,7 +62,7 @@ export class CmsRecipeEditComponent {
     let token = this.accountLoginInformation.getAccessToken();  // <----  get token
     const event: UploadInput = {
       type: 'uploadAll',
-      url: environment.apiCmsUploadTeaserImage,
+      url: environment.apiCmsUploadTeaserImage + this.recipe.id.toString(),
       method: 'POST',
       headers: { 'Authorization': 'Bearer ' + token }
     };
