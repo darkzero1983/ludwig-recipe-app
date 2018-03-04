@@ -15,7 +15,10 @@
         <div class="recipe-left-column">
 <!--Left Column-->
             <div class="row">
-                <img src="{{imageManagerDomain}}{{recipe.teaserImageUrl}}" style="width:100%">
+                <file-drop (onFileDrop)="dropped($event)">
+                    <img src="{{imageManagerDomain}}{{recipe.teaserImageUrl}}" style="width:100%">
+                </file-drop>
+                
             </div>            
             <h2 class="sub-headline">Rezept Für</h2>
             <div class="row">

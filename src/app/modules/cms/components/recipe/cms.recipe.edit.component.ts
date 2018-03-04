@@ -9,6 +9,7 @@ import { TranslationService } from '../../../../shared/services/translation.serv
 import { ValidationService } from '../../../../shared/services/validation.service';
 import { IngredientListItem } from '../../models/ingredient.listI.iem.model';
 import { CmsRecipeEditValidation } from './cms.recipe.edit.validation';
+import { UploadEvent, UploadFile } from 'ngx-file-drop';
 
 @Component({
   selector: 'cms-recipe-edit-component',
@@ -25,6 +26,18 @@ export class CmsRecipeEditComponent {
   public measurementSearchTerm: string = "";
   private ingredients: string[];
   private measurements: string[];
+  public files: UploadFile[] = [];
+
+  public dropped(event: UploadEvent) {
+    this.files = event.files;
+    for (const file of event.files) {
+      console.info(file);
+      this.cmsService.UploadTeaserImage(file);
+      file.fileEntry.file(info => {
+        console.log(info);
+      });
+    }
+  }
 
   constructor(
     private router: Router,

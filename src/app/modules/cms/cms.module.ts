@@ -9,6 +9,7 @@ import { CmsRecipeEditComponent } from './components/recipe/cms.recipe.edit.comp
 import { CmsService } from './services/cms.service';
 import { MatInputModule, MatIconModule, MatCheckboxModule, MatAutocompleteModule } from '@angular/material';
 import { ValidationService } from '../../shared/services/validation.service';
+import { FileDropModule } from 'ngx-file-drop';
 
 const routes: Routes = [
   { path: 'Rezepte', component: CmsRecipeOverviewComponent },
@@ -30,7 +31,8 @@ const routes: Routes = [
     MatInputModule,
     MatIconModule,
     MatCheckboxModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    FileDropModule
   ],
   exports: [RouterModule],
   providers: [CmsService, ValidationService]
