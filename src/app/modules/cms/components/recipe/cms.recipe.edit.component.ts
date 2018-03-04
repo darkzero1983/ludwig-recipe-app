@@ -1,4 +1,4 @@
-import { Component  } from '@angular/core';
+import { Component, EventEmitter } from '@angular/core';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { CmsService } from '../../services/cms.service';
 import { RecipeEdit } from '../../models/recipe.edit.model';
@@ -9,7 +9,8 @@ import { TranslationService } from '../../../../shared/services/translation.serv
 import { ValidationService } from '../../../../shared/services/validation.service';
 import { IngredientListItem } from '../../models/ingredient.listI.iem.model';
 import { CmsRecipeEditValidation } from './cms.recipe.edit.validation';
-import { UploadEvent, UploadFile } from 'ngx-file-drop';
+import { UploadOutput, UploadFile, UploadInput, humanizeBytes, UploaderOptions } from 'ngx-uploader';
+import { AccountLoginInformation } from '../../../../shared/authentification/account.login.information';
 
 @Component({
   selector: 'cms-recipe-edit-component',
@@ -26,17 +27,47 @@ export class CmsRecipeEditComponent {
   public measurementSearchTerm: string = "";
   private ingredients: string[];
   private measurements: string[];
-  public files: UploadFile[] = [];
+  
+  //Drag Optioons
+  options: UploaderOptions;
+  formData: FormData;
+  files: UploadFile[];
+  uploadInput: EventEmitter<UploadInput>;
+  humanizeBytes: Function;
+  dragOver: boolean;
 
-  public dropped(event: UploadEvent) {
-    this.files = event.files;
-    for (const file of event.files) {
-      console.info(file);
-      this.cmsService.UploadTeaserImage(file);
-      file.fileEntry.file(info => {
-        console.log(info);
-      });
+  onUploadOutput(output: UploadOutput): void {
+    console.info('onUploadOutput');
+    if (output.type === 'allAddedToQueue') { // when all files added in queue
+      this.startUpload();
+    } else if (output.type === 'addedToQueue'  && typeof output.file !== 'undefined') { // add file to array when added
+      this.files.push(output.file);
+    } else if (output.type === 'uploading' && typeof output.file !== 'undefined') {
+      // update current data in files array for uploading file
+      const index = this.files.findIndex(file => typeof output.file !== 'undefined' && file.id === output.file.id);
+      this.files[index] = output.file;
+    } else if (output.type === 'removed') {
+      // remove file from array when removed
+      this.files = this.files.filter((file: UploadFile) => file !== output.file);
+    } else if (output.type === 'dragOver') {
+      this.dragOver = true;
+    } else if (output.type === 'dragOut') {
+      this.dragOver = false;
+    } else if (output.type === 'drop') {
+      this.dragOver = false;
     }
+  }
+
+  startUpload(): void {
+    let token = this.accountLoginInformation.getAccessToken();  // <----  get token
+    const event: UploadInput = {
+      type: 'uploadAll',
+      url: environment.apiCmsUploadTeaserImage,
+      method: 'POST',
+      headers: { 'Authorization': 'Bearer ' + token }
+    };
+  
+    this.uploadInput.emit(event);
   }
 
   constructor(
@@ -46,6 +77,7 @@ export class CmsRecipeEditComponent {
     private titleService: Title,
     public translation: TranslationService,
     public validation: ValidationService,
+    public accountLoginInformation: AccountLoginInformation
 	) {
     this.imageManagerDomain = environment.imageManagerDomain;
     this.recipeForm = this.recipeValigation.getRecipeForm(this.nameMaxLength);
@@ -63,6 +95,10 @@ export class CmsRecipeEditComponent {
           });
         }
     );
+
+    this.files = []; // local uploading files array
+    this.uploadInput = new EventEmitter<UploadInput>(); // input events, we use this to emit data to ngx-uploader
+    this.humanizeBytes = humanizeBytes;
   }
   ingredientOptions(): string[]
   {
