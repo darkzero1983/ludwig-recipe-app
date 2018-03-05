@@ -15,10 +15,10 @@
         <div class="recipe-left-column">
 <!--Left Column-->
             <div class="row">
-                <div class="drop-container" ngFileDrop [options]="options" (uploadOutput)="onUploadOutput($event);" [uploadInput]="uploadInput" [ngClass]="{ 'is-drop-over': dragOver }">
+                <div class="drop-container" ngFileDrop (click)="openTeaserImageUpload()" [options]="options" (uploadOutput)="onUploadOutput($event);" [uploadInput]="uploadInput" [ngClass]="{ 'is-drop-over': dragOver }">
                     <img src="{{imageManagerDomain}}{{recipe.teaserImageUrl}}" style="width:100%">
                 </div>
-                <input type="file" style="display:none;" ngFileSelect [options]="options" (uploadOutput)="onUploadOutput($event);" [uploadInput]="uploadInput" (change)="startUpload()" multiple>
+                <input type="file" style="display:none;" ngFileSelect [options]="options" (uploadOutput)="onUploadOutput($event);" [uploadInput]="uploadInput" id="teaser-image-upload-input" multiple>
             </div>            
             <h2 class="sub-headline">Rezept Für</h2>
             <div class="row">

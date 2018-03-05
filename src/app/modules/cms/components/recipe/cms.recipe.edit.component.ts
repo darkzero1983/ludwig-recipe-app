@@ -37,7 +37,6 @@ export class CmsRecipeEditComponent {
   dragOver: boolean;
 
   onUploadOutput(output: UploadOutput): void {
-    console.info('onUploadOutput');
     if (output.type === 'allAddedToQueue') { // when all files added in queue
       this.startUpload();
     } else if (output.type === 'addedToQueue'  && typeof output.file !== 'undefined') { // add file to array when added
@@ -57,7 +56,11 @@ export class CmsRecipeEditComponent {
       this.dragOver = false;
     }
   }
-
+  openTeaserImageUpload()
+  {
+    let element: HTMLElement = document.getElementById('teaser-image-upload-input') as HTMLElement;
+    element.click();
+  }
   startUpload(): void {
     let token = this.accountLoginInformation.getAccessToken();  // <----  get token
     const event: UploadInput = {
@@ -68,6 +71,7 @@ export class CmsRecipeEditComponent {
     };
   
     this.uploadInput.emit(event);
+    this.recipe.teaserImageUrl = "/media/LudwigsRezepte/" + this.recipe.id + "/" +  this.files[0].name
   }
 
   constructor(
