@@ -54,6 +54,11 @@ export class CmsRecipeEditComponent {
       this.dragOver = false;
     } else if (output.type === 'drop') {
       this.dragOver = false;
+    } else if (output.type === 'start') {
+      //Start Upload
+    } else if (output.type === 'done') {
+      this.recipe.teaserImageUrl = "/media/LudwigsRezepte/" + this.recipe.id + "/" +  this.files[0].name;
+      this.files = [];
     }
   }
   openTeaserImageUpload()
@@ -67,11 +72,12 @@ export class CmsRecipeEditComponent {
       type: 'uploadAll',
       url: environment.apiCmsUploadTeaserImage + this.recipe.id.toString(),
       method: 'POST',
-      headers: { 'Authorization': 'Bearer ' + token }
+      headers: { 'Authorization': 'Bearer ' + token },
     };
   
     this.uploadInput.emit(event);
-    this.recipe.teaserImageUrl = "/media/LudwigsRezepte/" + this.recipe.id + "/" +  this.files[0].name
+
+    
   }
 
   constructor(
