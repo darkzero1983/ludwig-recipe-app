@@ -12,6 +12,7 @@
 			<a *ngFor="let navSubItem of navItem.items" class="nav-link" [ngClass]="{active: navSubItem.active}" routerLink="/Rezepte/{{navItem.categoryUrl}}/{{navSubItem.subCategoryUrl}}">&nbsp;&nbsp;&nbsp;{{navSubItem.name}}</a>
 		</div>
 		<a class="nav-link" [hidden]="!auth.isUserLoggedIn" routerLinkActive="active" [routerLinkActiveOptions]="{exact: false}" href="/CMS">CMS</a>
+		<a class="nav-link" [hidden]="!auth.isUserLoggedIn" routerLinkActive="active" [routerLinkActiveOptions]="{exact: false}" href="/CMS/Rezepte">&nbsp;&nbsp;Rezepte</a>
 		<a routerLink="/Benutzerverwaltung/Einloggen" class="nav-link nav-login-link" [hidden]="auth.isUserLoggedIn">Anmelden</a>
 		<a routerLink="/Benutzerverwaltung/Ausloggen" class="nav-link nav-login-link" [hidden]="!auth.isUserLoggedIn">Abmelden</a>
 	</div>
