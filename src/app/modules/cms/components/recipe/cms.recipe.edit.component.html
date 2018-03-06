@@ -2,7 +2,7 @@
     <li><a routerLink="/">Ludwigs Rezepte</a></li>
     <li><a routerLink="/CMS">CMS</a></li>
     <li><a routerLink="/CMS/Rezepte">Rezepte</a></li>
-    <li class="active">Eidt</li>
+    <li class="active">Edit</li>
 </ol>
 <h1 class="headline">Rezept Bearbeiten</h1>
 
@@ -35,7 +35,7 @@
             </div>
             <h2 class="sub-headline">Zutaten</h2>
             <div formArrayName="ingredientList" class="ingredient-list">
-                <div *ngFor="let item of recipeForm.controls['ingredientList'].controls; let i = index;" [formGroupName]="i">
+                <div *ngFor="let item of recipeForm.controls['ingredientList']['controls']; let i = index;" [formGroupName]="i">
                     <div class="col-xs-2 col-sm-2">
                         <mat-form-field>
                             <input matInput placeholder="Anzahl" (change)="ingredientListChange();" formControlName="amount" autocomplete="recipe-edit" style="text-align: right">
