@@ -21,12 +21,15 @@ mat-form-field
 	border-bottom: 1px solid @color-red;
 }
 
-.ingredient-list
+.ingredient-list,
+.recipe-ingredient
 {
     font-size:12px;
     .col-xs-2,
     .col-xs-3,
-    .col-xs-7
+    .col-xs-5,
+    .col-xs-7,
+    .col-xs-10
     {
         padding-left:0;
         padding-right:5px;
@@ -59,4 +62,11 @@ mat-form-field
 .drop-container
 {
     cursor: pointer;
+}
+
+@media (max-width:@breakpoint-mobile-max) {
+    .cdk-overlay-pane
+    {
+        position: relative !important;
+    }
 }

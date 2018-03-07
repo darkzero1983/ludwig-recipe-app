@@ -1,9 +1,8 @@
 <div class="collapse bg-faded hidden-md-up mobile-menu" id="bird">
 	<div class="p-a mobile-menu-height" (click)="openMobileMenu();" data-toggle="collapse" data-target="#bird">
+		<a class="nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Übersicht</a>
 		<div *ngFor="let navItem of navigation.mainNavigation">
-			<a *ngIf="navItem.items.length <= 1 && navItem.href != null" class="nav-link" [ngClass]="{active: navItem.active}" href="{{navItem.href}}">{{navItem.name}}</a>
-			<a class="nav-link" *ngIf="navItem.categoryUrl == null && navItem.href == null" [ngClass]="{active: navItem.active}" routerLink="/">{{navItem.name}}</a>
-			<a class="nav-link" *ngIf="navItem.categoryUrl != null && navItem.href == null" [ngClass]="{active: navItem.active}" routerLink="/Rezepte/{navItem.categoryUrl}">{{navItem.name}}</a>
+			<a class="nav-link" *ngIf="navItem.categoryUrl != null " [ngClass]="{active: navItem.active}" routerLink="/Rezepte/{{navItem.categoryUrl}}">{{navItem.name}}</a>
 			<a *ngFor="let navSubItem of navItem.items" class="nav-link" [ngClass]="{active: navSubItem.active}" routerLink="/Rezepte/{{navItem.categoryUrl}}/{{navSubItem.subCategoryUrl}}">&nbsp;&nbsp;&nbsp;{{navSubItem.name}}</a>
 		</div>
 		<div *ngFor="let navItem of navigation.subNavigation">
@@ -11,8 +10,7 @@
 			<a class="nav-link" *ngIf="navItem.categoryUrl != null" [ngClass]="{active: navItem.active}" routerLink="/Rezepte/{{navItem.categoryUrl}}">{{navItem.name}}</a>
 			<a *ngFor="let navSubItem of navItem.items" class="nav-link" [ngClass]="{active: navSubItem.active}" routerLink="/Rezepte/{{navItem.categoryUrl}}/{{navSubItem.subCategoryUrl}}">&nbsp;&nbsp;&nbsp;{{navSubItem.name}}</a>
 		</div>
-		<a class="nav-link" [hidden]="!auth.isUserLoggedIn" routerLinkActive="active" [routerLinkActiveOptions]="{exact: false}" href="/CMS">CMS</a>
-		<a class="nav-link" [hidden]="!auth.isUserLoggedIn" routerLinkActive="active" [routerLinkActiveOptions]="{exact: false}" href="/CMS/Rezepte">&nbsp;&nbsp;Rezepte</a>
+		<a class="nav-link" [hidden]="!auth.isUserLoggedIn" routerLinkActive="active" [routerLinkActiveOptions]="{exact: false}" routerLink="/CMS/Rezepte">CMS - Rezepte</a>
 		<a routerLink="/Benutzerverwaltung/Einloggen" class="nav-link nav-login-link" [hidden]="auth.isUserLoggedIn">Anmelden</a>
 		<a routerLink="/Benutzerverwaltung/Ausloggen" class="nav-link nav-login-link" [hidden]="!auth.isUserLoggedIn">Abmelden</a>
 	</div>
