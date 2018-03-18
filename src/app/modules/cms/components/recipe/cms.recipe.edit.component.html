@@ -126,6 +126,16 @@
                     </mat-form-field>
                 </div>
             </div>
+
+            <h2 class="sub-headline">Kategorien</h2>
+
+            <div formArrayName="categories" class="row">
+                <div *ngFor="let category of recipeForm.controls['categories']['controls']; let i = index;" [formGroupName]="i">
+                    <div class="col-xs-6 col-sm-3">
+                        <mat-checkbox formControlName="isSelected">{{category.controls.name.value}}</mat-checkbox>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 

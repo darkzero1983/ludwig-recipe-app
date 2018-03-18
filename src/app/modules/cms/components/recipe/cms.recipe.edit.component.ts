@@ -7,7 +7,7 @@ import { Title }     from '@angular/platform-browser';
 import { environment } from '../../../../../environments/environment';
 import { TranslationService } from '../../../../shared/services/translation.service';
 import { ValidationService } from '../../../../shared/services/validation.service';
-import { IngredientListItem } from '../../models/ingredient.listI.iem.model';
+import { IngredientListItem } from '../../models/ingredient.list.item.model';
 import { CmsRecipeEditValidation } from './cms.recipe.edit.validation';
 import { UploadOutput, UploadFile, UploadInput, humanizeBytes, UploaderOptions } from 'ngx-uploader';
 import { AccountLoginInformation } from '../../../../shared/authentification/account.login.information';
@@ -100,6 +100,7 @@ export class CmsRecipeEditComponent {
           this.cmsService.LoadRecipe(params.get('id')).subscribe(x => {
             this.recipe = x;
             this.recipeForm.controls.ingredientList = this.recipeValigation.getIngredientListArray(this.recipe.ingredientList);
+            this.recipeForm.controls.categories = this.recipeValigation.getCategoryArray(this.recipe.categories);
             this.recipeForm.setValue(x);
             this.ingredientListChange();
           });

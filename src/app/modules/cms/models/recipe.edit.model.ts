@@ -1,6 +1,6 @@
 import { IdName } from '../../../shared/models/id.name.model';
 import { Category } from './category.model';
-import { IngredientListItem } from './ingredient.listI.iem.model';
+import { IngredientListItem } from './ingredient.list.item.model';
 
 export class RecipeEdit {
 	id: number;
