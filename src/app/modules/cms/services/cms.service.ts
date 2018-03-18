@@ -25,6 +25,11 @@ export class CmsService  {
         return this.http.get<RecipeEdit>(requestUrl);
     }
 
+    SaveRecipe(recipe: RecipeEdit): Observable<number> {
+        let requestUrl: string = environment.apiCmsRecipe;
+        return this.http.post<number>(requestUrl, recipe);
+    }
+
     LoadIngredients(): Observable<string[]> {
         let requestUrl: string = environment.apiCmsIngredients;
         return this.http.get<Array<string>>(requestUrl);

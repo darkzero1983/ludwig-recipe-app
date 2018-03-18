@@ -9,7 +9,8 @@ import 'rxjs/add/operator/do';
 export class LoginRedirectInterceptor implements HttpInterceptor {
 
     constructor(
-        private router: Router
+        private router: Router,
+        private accountLoginInformation: AccountLoginInformation
     )
     {}
     
@@ -18,6 +19,7 @@ export class LoginRedirectInterceptor implements HttpInterceptor {
         }, (err: any) => {
             if (err instanceof HttpErrorResponse) {
                 if (err.status === 401 && !this.router.url.startsWith('/Benutzerverwaltung/Einloggen')) {
+                    this.accountLoginInformation.LogOut();
                     this.router.navigate(['/Benutzerverwaltung/Einloggen', {returnUrl: this.router.url}]);
                 }
             }

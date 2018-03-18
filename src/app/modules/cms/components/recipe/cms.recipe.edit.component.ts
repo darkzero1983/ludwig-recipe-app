@@ -142,7 +142,7 @@ export class CmsRecipeEditComponent {
       return;
     }
     this.recipe = this.recipeForm.getRawValue();
-    console.info(this.recipe);
+    this.cmsService.SaveRecipe(this.recipe).subscribe(x => console.info(x));
   }
 
   public ingredientListChange()
