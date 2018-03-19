@@ -14,14 +14,18 @@ export class CmsRecipeEditValidation {
     public getRecipeForm(recipe: RecipeEdit): FormGroup
     {
         let formGroup: FormGroup = this.formBuilder.group(recipe);
+        
+        //Arrays
         formGroup.controls.ingredientList = this.getIngredientListArray(recipe.ingredientList);
         formGroup.controls.categories = this.getCategoryArray(recipe.categories);
+
+        //Validators
         formGroup.controls.isPublished.setValidators([Validators.required])
         formGroup.controls.name.setValidators([Validators.required, Validators.maxLength(500)])
         return formGroup;
     }
 
-    getIngredientListArray(items: IngredientListItem[]) : FormArray
+    private getIngredientListArray(items: IngredientListItem[]) : FormArray
     {
         let result: FormGroup[] = new Array<FormGroup>();
         items.forEach(item => {
@@ -30,7 +34,7 @@ export class CmsRecipeEditValidation {
         return this.formBuilder.array(result);
     }
 
-    getCategoryArray(items: Category[]) : FormArray
+    private getCategoryArray(items: Category[]) : FormArray
     {
         let result: FormGroup[] = new Array<FormGroup>();
         items.forEach(item => {
@@ -41,7 +45,7 @@ export class CmsRecipeEditValidation {
         return this.formBuilder.array(result);
     }
 
-    getSubCategoryArray(items: SubCategory[]) : FormArray
+    private getSubCategoryArray(items: SubCategory[]) : FormArray
     {
         let result: FormGroup[] = new Array<FormGroup>();
         items.forEach(item => {
