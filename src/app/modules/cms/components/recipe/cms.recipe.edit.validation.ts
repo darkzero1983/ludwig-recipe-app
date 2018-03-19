@@ -1,79 +1,52 @@
-import { FormGroup, FormControl, FormArray, Validators  } from '@angular/forms';
+import { FormGroup, FormControl, FormArray, Validators, FormBuilder } from '@angular/forms';
 import { IngredientListItem } from '../../models/ingredient.list.item.model';
 import { Category } from '../../models/category.model';
+import { SubCategory } from '../../models/sub.category.model';
+import { RecipeEdit } from '../../models/recipe.edit.model';
 
 export class CmsRecipeEditValidation {
-    public getRecipeForm(nameMaxLength: number): FormGroup
-    {
-        return  new FormGroup ({
-            id: new FormControl(0, [Validators.required]),
-            isPublished: new FormControl(false, [Validators.required]),
-            isOnlyForFriends: new FormControl("", []),
-            publishDate: new FormControl("", []),
-            publishHour: new FormControl("", []),
-            publishMinute: new FormControl("", []),
-            name: new FormControl("", [Validators.required, Validators.maxLength(nameMaxLength)]),
-            description: new FormControl("", []),
-            content: new FormControl("", []),
-            teaserImageUrl: new FormControl("", []),
-            ingredientCount: new FormControl("", []),
-            measurement:  new FormControl (""),
-            ingredientList: new FormArray ([]),
-            authors: new FormControl("", []),
-            seoTags: new FormControl("", []),
-            categories: new FormArray([]),
-            preparationTime: new FormControl("", []),
-            waitingTime: new FormControl("", []),
-          });;
+    private formBuilder: FormBuilder;
+    
+    constructor(_formBuilder: FormBuilder) {
+        this.formBuilder = _formBuilder;
     }
 
-    public getIngredientListArray(items: IngredientListItem[]) : FormArray
+    public getRecipeForm(recipe: RecipeEdit): FormGroup
     {
-        let ingredientList: FormGroup[] = new Array<FormGroup>();
-        items.forEach(item => {
-            if(item != undefined)
-            {
-                ingredientList.push(
-                    new FormGroup ({
-                        id: new FormControl(item.id, []),
-                        amount: new FormControl(item.amount, []),
-                        measurementName: new FormControl(item.measurementName, []),
-                        ingredientName: new FormControl(item.ingredientName, [])
-                    })
-                )
-            }
-        });
-        return new FormArray(ingredientList);
+        let formGroup: FormGroup = this.formBuilder.group(recipe);
+        formGroup.controls.ingredientList = this.getIngredientListArray(recipe.ingredientList);
+        formGroup.controls.categories = this.getCategoryArray(recipe.categories);
+        formGroup.controls.isPublished.setValidators([Validators.required])
+        formGroup.controls.name.setValidators([Validators.required, Validators.maxLength(500)])
+        return formGroup;
     }
 
-    public getCategoryArray(items: Category[]) : FormArray
+    getIngredientListArray(items: IngredientListItem[]) : FormArray
     {
-        let categories: FormGroup[] = new Array<FormGroup>();
-        
+        let result: FormGroup[] = new Array<FormGroup>();
         items.forEach(item => {
-            if(item != undefined)
-            {
-                let categoryFormGroup : FormGroup = new FormGroup ({
-                    id: new FormControl(item.id, []),
-                    name: new FormControl(item.name, []),
-                    isSelected: new FormControl(item.isSelected, []),
-                    subCategories: new FormArray ([])
-                });
-                let subCategories: FormGroup[] = new Array<FormGroup>();
-
-                item.subCategories.forEach(subItem => {
-                    subCategories.push(new FormGroup ({
-                        id: new FormControl(subItem.id, []),
-                        name: new FormControl(subItem.name, []),
-                        isSelected: new FormControl(subItem.isSelected, [])
-                    }))
-                });
-                categoryFormGroup.controls.subCategories = new FormArray(subCategories);
-                categories.push(categoryFormGroup);
-                
-            }
+            result.push( this.formBuilder.group(item));
         });
-        console.info(new FormArray(categories));
-        return new FormArray(categories);
+        return this.formBuilder.array(result);
+    }
+
+    getCategoryArray(items: Category[]) : FormArray
+    {
+        let result: FormGroup[] = new Array<FormGroup>();
+        items.forEach(item => {
+            let group: FormGroup = this.formBuilder.group(item);
+            group.controls.subCategories = this.getSubCategoryArray(item.subCategories);
+            result.push(group);
+        });
+        return this.formBuilder.array(result);
+    }
+
+    getSubCategoryArray(items: SubCategory[]) : FormArray
+    {
+        let result: FormGroup[] = new Array<FormGroup>();
+        items.forEach(item => {
+            result.push( this.formBuilder.group(item));
+        });
+        return this.formBuilder.array(result);
     }
 }

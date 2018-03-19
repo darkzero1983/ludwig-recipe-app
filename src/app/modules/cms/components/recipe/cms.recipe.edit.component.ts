@@ -21,8 +21,8 @@ export class CmsRecipeEditComponent {
   public imageManagerDomain: string;
   public recipeForm : FormGroup;
   public nameMaxLength: number = 500;
-  public recipe:RecipeEdit = new RecipeEdit();
-  private recipeValigation: CmsRecipeEditValidation = new CmsRecipeEditValidation();
+  public recipe: RecipeEdit = new RecipeEdit();
+  private recipeValigation: CmsRecipeEditValidation;
   public ingredientSearchTerm: string = "";
   public measurementSearchTerm: string = "";
   private ingredients: string[];
@@ -35,6 +35,39 @@ export class CmsRecipeEditComponent {
   uploadInput: EventEmitter<UploadInput>;
   humanizeBytes: Function;
   dragOver: boolean;
+
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private cmsService: CmsService,
+    private titleService: Title,
+    public translation: TranslationService,
+    public validation: ValidationService,
+    public accountLoginInformation: AccountLoginInformation,
+    private formBuilder: FormBuilder
+	) {
+    this.recipeValigation = new CmsRecipeEditValidation(formBuilder);
+    this.imageManagerDomain = environment.imageManagerDomain;
+    this.recipeForm = null;
+
+    route.paramMap.subscribe(
+      params => {
+          this.titleService.setTitle("Rezept Detail - Ludwigs Rezepte");
+          this.cmsService.LoadMeasurements().subscribe(x => this.measurements = x);
+          this.cmsService.LoadIngredients().subscribe(x => this.ingredients = x);
+          this.cmsService.LoadRecipe(params.get('id')).subscribe(x => {
+            this.recipe = x;
+            this.recipeForm = this.recipeValigation.getRecipeForm(this.recipe);
+            console.info(this.recipeForm);
+            //this.ingredientListChange();
+          });
+        }
+    );
+
+    this.files = []; // local uploading files array
+    this.uploadInput = new EventEmitter<UploadInput>(); // input events, we use this to emit data to ngx-uploader
+    this.humanizeBytes = humanizeBytes;
+  }
 
   onUploadOutput(output: UploadOutput): void {
     if (output.type === 'allAddedToQueue') { // when all files added in queue
@@ -74,43 +107,10 @@ export class CmsRecipeEditComponent {
       method: 'POST',
       headers: { 'Authorization': 'Bearer ' + token },
     };
-  
     this.uploadInput.emit(event);
-
-    
   }
 
-  constructor(
-    private router: Router,
-    private route: ActivatedRoute,
-    private cmsService: CmsService,
-    private titleService: Title,
-    public translation: TranslationService,
-    public validation: ValidationService,
-    public accountLoginInformation: AccountLoginInformation
-	) {
-    this.imageManagerDomain = environment.imageManagerDomain;
-    this.recipeForm = this.recipeValigation.getRecipeForm(this.nameMaxLength);
-
-    route.paramMap.subscribe(
-      params => {
-          this.titleService.setTitle("Rezept Detail - Ludwigs Rezepte");
-          this.cmsService.LoadMeasurements().subscribe(x => this.measurements = x);
-          this.cmsService.LoadIngredients().subscribe(x => this.ingredients = x);
-          this.cmsService.LoadRecipe(params.get('id')).subscribe(x => {
-            this.recipe = x;
-            this.recipeForm.controls.ingredientList = this.recipeValigation.getIngredientListArray(this.recipe.ingredientList);
-            this.recipeForm.controls.categories = this.recipeValigation.getCategoryArray(this.recipe.categories);
-            this.recipeForm.setValue(x);
-            this.ingredientListChange();
-          });
-        }
-    );
-
-    this.files = []; // local uploading files array
-    this.uploadInput = new EventEmitter<UploadInput>(); // input events, we use this to emit data to ngx-uploader
-    this.humanizeBytes = humanizeBytes;
-  }
+  
   ingredientOptions(): string[]
   {
     if(this.ingredientSearchTerm == "")
@@ -148,6 +148,10 @@ export class CmsRecipeEditComponent {
 
   public ingredientListChange()
   {
+    return;
+    /*
+    this.recipe = this.recipeForm.getRawValue();
+
     if(this.recipe.ingredientList == null)
     {
       return;
@@ -155,7 +159,7 @@ export class CmsRecipeEditComponent {
     
     if(this.recipeForm.getRawValue().ingredientList.length > 0)
     {
-      let item: IngredientListItem = this.recipeForm.getRawValue().ingredientList[this.recipeForm.getRawValue().ingredientList.length - 1];
+      let item: IngredientListItem = this.recipe.ingredientList[this.recipe.ingredientList.length - 1];
       if(item == undefined)
       {
         return;
@@ -169,18 +173,13 @@ export class CmsRecipeEditComponent {
     {
       this.addIngredientListItem();
     }
-    
+    */
   }
 
   private addIngredientListItem()
   {
-    const control = <FormArray>this.recipeForm.controls['ingredientList'];
-    control.push(new FormGroup ({
-        id: new FormControl(),
-        amount: new FormControl(),
-        measurementName: new FormControl(),
-        ingredientName: new FormControl()
-    }));
+    this.recipe.ingredientList.push(new IngredientListItem());
+    this.recipeForm = this.recipeValigation.getRecipeForm(this.recipe);
   }
 
   private isIngredientListItemEmpty(item: IngredientListItem): boolean

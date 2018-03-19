@@ -6,7 +6,7 @@
 </ol>
 <h1 class="headline">Rezept Bearbeiten</h1>
 
-<form [formGroup]="recipeForm" (ngSubmit)="saveRecipe();">
+<form [formGroup]="recipeForm" (ngSubmit)="saveRecipe();" *ngIf="recipeForm">
     <input type="hidden" formControlName="id" />
 
     
