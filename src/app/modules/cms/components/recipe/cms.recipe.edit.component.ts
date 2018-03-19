@@ -58,8 +58,7 @@ export class CmsRecipeEditComponent {
           this.cmsService.LoadRecipe(params.get('id')).subscribe(x => {
             this.recipe = x;
             this.recipeForm = this.recipeValigation.getRecipeForm(this.recipe);
-            console.info(this.recipeForm);
-            //this.ingredientListChange();
+            this.ingredientListChange();
           });
         }
     );
@@ -148,8 +147,6 @@ export class CmsRecipeEditComponent {
 
   public ingredientListChange()
   {
-    return;
-    /*
     this.recipe = this.recipeForm.getRawValue();
 
     if(this.recipe.ingredientList == null)
@@ -157,14 +154,14 @@ export class CmsRecipeEditComponent {
       return;
     }
     
-    if(this.recipeForm.getRawValue().ingredientList.length > 0)
+    if(this.recipe.ingredientList.length > 0)
     {
       let item: IngredientListItem = this.recipe.ingredientList[this.recipe.ingredientList.length - 1];
       if(item == undefined)
       {
         return;
       }
-      if(!this.isIngredientListItemEmpty(item))
+      if(!item.isEmpty)
       {
         this.addIngredientListItem();
       }
@@ -173,25 +170,12 @@ export class CmsRecipeEditComponent {
     {
       this.addIngredientListItem();
     }
-    */
+    
   }
 
   private addIngredientListItem()
   {
     this.recipe.ingredientList.push(new IngredientListItem());
     this.recipeForm = this.recipeValigation.getRecipeForm(this.recipe);
-  }
-
-  private isIngredientListItemEmpty(item: IngredientListItem): boolean
-  {
-    if(item == null || item == undefined)
-    {
-      return true;
-    }
-    return (
-      (item.amount == null || item.amount.toString() == "" || item.amount == 0) && 
-      (item.ingredientName == null ||item.ingredientName == "") && 
-      (item.measurementName == null || item.measurementName == "")
-    );
   }
 }
