@@ -161,7 +161,7 @@ export class CmsRecipeEditComponent {
       {
         return;
       }
-      if(!item.isEmpty)
+      if(!this.isIngredientListItemEmpty(item))
       {
         this.addIngredientListItem();
       }
@@ -172,6 +172,15 @@ export class CmsRecipeEditComponent {
     }
     
   }
+
+  public isIngredientListItemEmpty(item : IngredientListItem): boolean
+	{
+		return (
+			(item.amount == null || item.amount.toString() == "" || item.amount == 0) && 
+			(item.ingredientName == null || item.ingredientName == "") && 
+			(item.measurementName == null || item.measurementName == "")
+		);
+	}
 
   private addIngredientListItem()
   {
