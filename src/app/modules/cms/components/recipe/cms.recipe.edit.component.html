@@ -133,6 +133,11 @@
                 <div *ngFor="let category of recipeForm.controls['categories']['controls']; let i = index;" [formGroupName]="i">
                     <div class="col-xs-6 col-sm-3">
                         <mat-checkbox formControlName="isSelected">{{category.controls.name.value}}</mat-checkbox>
+                        <div formArrayName="subCategories" class="row">
+                            <div *ngFor="let subCategory of category['controls'].subCategories['controls']; let j = index;" [formGroupName]="j">
+                                <mat-checkbox formControlName="isSelected" style="margin-left:20px;">{{subCategory.controls.name.value}}</mat-checkbox>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
