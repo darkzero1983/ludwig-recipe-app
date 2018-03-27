@@ -29,7 +29,7 @@
                 </div>
                 <div class="col-xs-10 col-sm-7">
                         <mat-form-field>
-                            <input matInput placeholder="Art" (change)="setIngredientSearchTerm($event.target.value)" (keyup)="setIngredientSearchTerm($event.target.value)" (focus)="setIngredientSearchTerm($event.target.value)" formControlName="measurement" autocomplete="recipe-edit" [matAutocomplete]="auto">
+                            <input matInput placeholder="Einheit" (change)="setMeasurementSearchTerm($event.target.value)" (keyup)="setMeasurementSearchTerm($event.target.value)" (focus)="setMeasurementSearchTerm($event.target.value)" formControlName="measurement" autocomplete="recipe-edit" [matAutocomplete]="autoMeasurement">
                         </mat-form-field>
                     </div>
             </div>
