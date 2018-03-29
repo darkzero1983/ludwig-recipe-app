@@ -187,4 +187,15 @@ export class CmsRecipeEditComponent {
     this.recipe.ingredientList.push(new IngredientListItem());
     this.recipeForm = this.recipeValigation.getRecipeForm(this.recipe);
   }
+
+  public deleteRecipe()
+  {
+    this.cmsService.DeleteRecipe(this.recipe.id).subscribe(x => {
+      if(x)
+      {
+        this.router.navigate(['/CMS/Rezepte']);
+      }
+    });
+    
+  }
 }

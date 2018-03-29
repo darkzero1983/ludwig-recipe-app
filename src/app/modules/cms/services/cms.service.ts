@@ -30,6 +30,11 @@ export class CmsService  {
         return this.http.post<number>(requestUrl, recipe);
     }
 
+    DeleteRecipe(id: number): Observable<Boolean> {
+        let requestUrl: string = environment.apiCmsDeleteRecipe + id;
+        return this.http.get<Boolean>(requestUrl);
+    }
+
     LoadIngredients(): Observable<string[]> {
         let requestUrl: string = environment.apiCmsIngredients;
         return this.http.get<Array<string>>(requestUrl);
