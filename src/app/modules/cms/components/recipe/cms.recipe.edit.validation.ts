@@ -2,6 +2,7 @@ import { FormGroup, FormControl, FormArray, Validators, FormBuilder } from '@ang
 import { IngredientListItem } from '../../models/ingredient.list.item.model';
 import { Category } from '../../models/category.model';
 import { SubCategory } from '../../models/sub.category.model';
+import { RecipeContent } from '../../models/recipe.content.model';
 import { RecipeEdit } from '../../models/recipe.edit.model';
 
 export class CmsRecipeEditValidation {
@@ -16,8 +17,9 @@ export class CmsRecipeEditValidation {
         let formGroup: FormGroup = this.formBuilder.group(recipe);
         
         //Arrays
-        formGroup.controls.ingredientList = this.getIngredientListArray(recipe.ingredientList);
+        formGroup.controls.ingredientList = this.getFormArray(recipe.ingredientList);
         formGroup.controls.categories = this.getCategoryArray(recipe.categories);
+        formGroup.controls.contentItems = this.getFormArray(recipe.contentItems);
 
         //Validators
         formGroup.controls.isPublished.setValidators([Validators.required])
@@ -25,12 +27,15 @@ export class CmsRecipeEditValidation {
         return formGroup;
     }
 
-    private getIngredientListArray(items: IngredientListItem[]) : FormArray
+    public getFormArray(items: any[]) : FormArray
     {
         let result: FormGroup[] = new Array<FormGroup>();
-        items.forEach(item => {
-            result.push( this.formBuilder.group(item));
-        });
+        if(items != undefined)
+        {
+            items.forEach(item => {
+                result.push( this.formBuilder.group(item));
+            });
+        }
         return this.formBuilder.array(result);
     }
 
@@ -39,17 +44,8 @@ export class CmsRecipeEditValidation {
         let result: FormGroup[] = new Array<FormGroup>();
         items.forEach(item => {
             let group: FormGroup = this.formBuilder.group(item);
-            group.controls.subCategories = this.getSubCategoryArray(item.subCategories);
+            group.controls.subCategories = this.getFormArray(item.subCategories);
             result.push(group);
-        });
-        return this.formBuilder.array(result);
-    }
-
-    private getSubCategoryArray(items: SubCategory[]) : FormArray
-    {
-        let result: FormGroup[] = new Array<FormGroup>();
-        items.forEach(item => {
-            result.push( this.formBuilder.group(item));
         });
         return this.formBuilder.array(result);
     }

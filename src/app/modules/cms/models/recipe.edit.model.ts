@@ -1,7 +1,7 @@
 import { IdName } from '../../../shared/models/id.name.model';
 import { Category } from './category.model';
 import { IngredientListItem } from './ingredient.list.item.model';
-
+import { RecipeContent } from './recipe.content.model';
 export class RecipeEdit {
 	id: number;
 	isPublished: boolean;
@@ -21,6 +21,7 @@ export class RecipeEdit {
 	categories: Category[];
 	preparationTime: number;
 	waitingTime: number;
+	contentItems: RecipeContent[];
 
 	constructor() {
 		this.ingredientList = new Array<IngredientListItem>();
@@ -28,5 +29,6 @@ export class RecipeEdit {
 		this.seoTags = new Array<IdName>();
 		this.categories = new Array<Category>();
 		this.measurement = new IdName();
+		this.contentItems = new Array<RecipeContent>();
 	}
 }

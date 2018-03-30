@@ -2,6 +2,8 @@ import { Component, EventEmitter } from '@angular/core';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { CmsService } from '../../services/cms.service';
 import { RecipeEdit } from '../../models/recipe.edit.model';
+import { RecipeContent } from '../../models/recipe.content.model';
+import { RecipeContentType } from '../../models/recipe.content.type.enum';
 import { FormControl, FormGroup, Validators, ValidationErrors, FormArray, FormBuilder  } from '@angular/forms';
 import { Title }     from '@angular/platform-browser';
 import { environment } from '../../../../../environments/environment';
@@ -27,7 +29,8 @@ export class CmsRecipeEditComponent {
   public measurementSearchTerm: string = "";
   private ingredients: string[];
   private measurements: string[];
-  
+  public recipeContentType: RecipeContentType;
+
   //Drag Optioons
   options: UploaderOptions;
   formData: FormData;
@@ -57,6 +60,9 @@ export class CmsRecipeEditComponent {
           this.cmsService.LoadIngredients().subscribe(x => this.ingredients = x);
           this.cmsService.LoadRecipe(params.get('id')).subscribe(x => {
             this.recipe = x;
+            this.recipe.contentItems = new Array<RecipeContent>();
+            this.recipe.contentItems.push({id: 1, content: "", contentType: RecipeContentType.headline, sortOrder: 1});
+            this.recipe.contentItems.push({id: 2, content: "", contentType: RecipeContentType.listItem, sortOrder: 2});
             this.recipeForm = this.recipeValigation.getRecipeForm(this.recipe);
             this.ingredientListChange();
           });
@@ -196,6 +202,49 @@ export class CmsRecipeEditComponent {
         this.router.navigate(['/CMS/Rezepte']);
       }
     });
-    
+  }
+
+  public addRecipeContentHeadline()
+  {
+    this.addRecipeContent(RecipeContentType.headline)
+  }
+  public addRecipeContentSubHeadline()
+  {
+    this.addRecipeContent(RecipeContentType.subHeadline)
+  }
+
+  public addRecipeContentListItem()
+  {
+    this.addRecipeContent(RecipeContentType.listItem)
+  }
+
+  public addRecipeContent(type: RecipeContentType)
+  {
+    this.recipe = this.recipeForm.getRawValue();
+    this.recipe.contentItems.push({
+      id: 0,
+      contentType: type,
+      content: type.toString(),
+      sortOrder: this.recipe.contentItems.length
+    });
+
+    this.recipe.contentItems.sort(function(a, b){
+      return a.sortOrder == b.sortOrder ? 0 : +(a.sortOrder > b.sortOrder) || -1;
+    });
+
+    this.recipeForm.controls.contentItems = this.recipeValigation.getFormArray(this.recipe.contentItems);
+  }
+
+  public getRecipeContentPlaceholer(type: RecipeContentType)
+  {
+    switch(type)
+    {
+      case RecipeContentType.headline:
+        return "Überschrift";
+      case RecipeContentType.subHeadline:
+        return "Unterüberschrift";
+      case RecipeContentType.listItem:
+        return "Auflistung";
+    }
   }
 }
