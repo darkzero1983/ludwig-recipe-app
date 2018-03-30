@@ -1,5 +1,6 @@
 import { Measurement } from './measurement.model';
 import { IngredientList } from './ingredient.list.model';
+import { RecipeContent } from './recipe.content.model';
 
 export class RecipeDetail {
 	id: number;

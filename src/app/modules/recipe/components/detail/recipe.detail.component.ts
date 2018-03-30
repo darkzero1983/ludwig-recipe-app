@@ -3,6 +3,8 @@ import { Title }     from '@angular/platform-browser';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { RecipeService } from '../../services/recipe.service';
 import { RecipeDetail } from '../../models/recipe.detail.model';
+import { RecipeContent } from '../../models/recipe.content.model';
+import { RecipeContentType } from '../../models/recipe.content.type.enum';
 import { environment } from '../../../../../environments/environment';
 
 @Component({
@@ -59,5 +61,22 @@ export class RecipeDetailComponent {
         }
       }
     }
+  }
+
+  startOl(contents: RecipeContent[], index: number): boolean
+  {
+    if(index == 1 && contents[index].contentType == RecipeContentType.listItem)
+    {
+      return true;
+    }
+    return false;
+  }
+  stopOl(contents: RecipeContent[], index: number): boolean
+  {
+    if(index == 1 && contents[index].contentType == RecipeContentType.listItem)
+    {
+      return true;  
+    }
+    return false;
   }
 }

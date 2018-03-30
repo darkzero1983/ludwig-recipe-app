@@ -54,7 +54,15 @@
                         </tr>
                     </table>
                 </div>
-                <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7 col-xl-8" [innerHTML]="recipe.content | noSanitize"></div>
+                <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7 col-xl-8">
+                    <ol>
+                        <ng-container *ngFor="let item of recipe.contentItems; let i = index">
+                            <h2 *ngIf="item.contentType == 1">{{item.content}}</h2>
+                            <li *ngIf="item.contentType == 3">{{item.content}}</li>
+                            <h3 *ngIf="item.contentType == 2">{{item.content}}</h3>
+                        </ng-container>
+                    </ol>
+                </div>
             </div>
         </div>
     </div>
