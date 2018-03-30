@@ -122,18 +122,18 @@
             
             <h2 class="sub-headline">Inhalt</h2>
 
-            <div class="row" formArrayName="contentItems">
-                <div class="col-xs-12 col-sm-12" *ngFor="let contentItem of recipeForm['controls']['contentItems']['controls']; let c = index;" [formGroupName]="c">
+            <div class="row content-items" formArrayName="contentItems">
+                <div class="col-xs-12 col-sm-12" *ngFor="let contentItem of recipeForm['controls']['contentItems']['controls']; let c = index;" [formGroupName]="c" [ngClass]="{'input-headline': contentItem.controls.contentType.value == 1, 'input-subheadline': contentItem.controls.contentType.value == 2, 'input-listitem': contentItem.controls.contentType.value == 3}">
                     <mat-form-field>
-                        <textarea matInput placeholder="{{getRecipeContentPlaceholer(contentItem.controls.contentType.value)}}" formControlName="content" autocomplete="recipe-edit" matTextareaAutosize matAutosizeMinRows="1" matAutosizeMaxRows="500"></textarea>
+                        <textarea matInput placeholder="{{getRecipeContentPlaceholer(contentItem.controls.contentType.value)}}" formControlName="content" autocomplete="recipe-edit" matTextareaAutosize matAutosizeMinRows="1" matAutosizeMaxRows="500" (change)="manageRecipeContentItems()"></textarea>
                     </mat-form-field>
                 </div>
             </div>
             <div class="row">
                 <div class="col-xs-12 col-sm-12">
-                    <input type="button" class="btn" value="Überschrift hinzufügen" (click)="addRecipeContentHeadline();">
-                    <input type="button" class="btn" value="Unterüberschrift hinzufügen" (click)="addRecipeContentSubHeadline();">
-                    <input type="button" class="btn" value="Auflistung hinzufügen" (click)="addRecipeContentListItem();">
+                    <input type="button" class="btn" value="Überschrift" (click)="addRecipeContentHeadline();">
+                    <input type="button" class="btn" value="Zwischenüberschrift" (click)="addRecipeContentSubHeadline();">
+                    <input type="button" class="btn" value="Auflistung" (click)="addRecipeContentListItem();">
                 </div>
             </div>
 

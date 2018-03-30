@@ -60,10 +60,8 @@ export class CmsRecipeEditComponent {
           this.cmsService.LoadIngredients().subscribe(x => this.ingredients = x);
           this.cmsService.LoadRecipe(params.get('id')).subscribe(x => {
             this.recipe = x;
-            this.recipe.contentItems = new Array<RecipeContent>();
-            this.recipe.contentItems.push({id: 1, content: "", contentType: RecipeContentType.headline, sortOrder: 1});
-            this.recipe.contentItems.push({id: 2, content: "", contentType: RecipeContentType.listItem, sortOrder: 2});
             this.recipeForm = this.recipeValigation.getRecipeForm(this.recipe);
+            this.manageRecipeContentItems();
             this.ingredientListChange();
           });
         }
@@ -242,9 +240,67 @@ export class CmsRecipeEditComponent {
       case RecipeContentType.headline:
         return "Überschrift";
       case RecipeContentType.subHeadline:
-        return "Unterüberschrift";
+        return "Zwischenüberschrift";
       case RecipeContentType.listItem:
-        return "Auflistung";
+        //return "Auflistung";
+    }
+  }
+
+  public manageRecipeContentItems()
+  {
+    this.recipe = this.recipeForm.getRawValue();
+    let changeItems: boolean = false;
+    
+    //Add default content
+    if(this.recipe.contentItems.length == 0)
+    {
+      this.recipe.contentItems.push({id: 0, content: "Zubereitung", contentType: RecipeContentType.headline, sortOrder: 1});
+      this.recipe.contentItems.push({id: 0, content: "", contentType: RecipeContentType.listItem, sortOrder: 2});
+      this.recipe.contentItems.push({id: 0, content: "Guten Appetit!", contentType: RecipeContentType.subHeadline, sortOrder: 3});
+      changeItems = true;
+    }
+
+    //Add ListItem if last item is not empty
+    let addedContentCount: number = 0;
+    let lastContent: RecipeContent = null;    
+    for (let index = 0; index < this.recipe.contentItems.length; index++) {
+      const contentItem = this.recipe.contentItems[index];
+      
+      if(index > 0 && contentItem.contentType != RecipeContentType.listItem && lastContent.contentType == RecipeContentType.listItem && lastContent.content != "")
+      {
+        //add between
+        this.recipe.contentItems.push({
+          id: 0,
+          content: "",
+          contentType: RecipeContentType.listItem,
+          sortOrder: index
+        });
+        addedContentCount = addedContentCount + 1;
+        contentItem.sortOrder = contentItem.sortOrder + addedContentCount;
+        changeItems = true;
+      }
+      else if (index == this.recipe.contentItems.length -1 && contentItem.contentType == RecipeContentType.listItem && contentItem.content != "")
+      {
+        //add last
+        this.recipe.contentItems.push({
+          id: 0,
+          content: "",
+          contentType: RecipeContentType.listItem,
+          sortOrder: index + 2
+        });
+        changeItems = true;
+      }
+
+      contentItem.sortOrder = contentItem.sortOrder + addedContentCount;
+      lastContent = contentItem;
+    }
+
+    if(changeItems)
+    {
+      this.recipe.contentItems.sort(function(a, b){
+        return a.sortOrder == b.sortOrder ? 0 : +(a.sortOrder > b.sortOrder) || -1;
+      });
+      this.recipeForm = this.recipeValigation.getRecipeForm(this.recipe);
     }
   }
 }
