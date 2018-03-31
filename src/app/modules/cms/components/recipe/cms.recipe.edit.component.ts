@@ -226,7 +226,6 @@ export class CmsRecipeEditComponent {
       sortOrder: this.recipe.contentItems.length + 1
     });
 
-    console.info(this.recipe.contentItems);
     this.recipeForm.controls.contentItems = this.recipeValigation.getFormArray(this.recipe.contentItems);
   }
 
