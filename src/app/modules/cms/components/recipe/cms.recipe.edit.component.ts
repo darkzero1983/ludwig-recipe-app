@@ -222,14 +222,11 @@ export class CmsRecipeEditComponent {
     this.recipe.contentItems.push({
       id: 0,
       contentType: type,
-      content: type.toString(),
-      sortOrder: this.recipe.contentItems.length
+      content: "",
+      sortOrder: this.recipe.contentItems.length + 1
     });
 
-    this.recipe.contentItems.sort(function(a, b){
-      return a.sortOrder == b.sortOrder ? 0 : +(a.sortOrder > b.sortOrder) || -1;
-    });
-
+    console.info(this.recipe.contentItems);
     this.recipeForm.controls.contentItems = this.recipeValigation.getFormArray(this.recipe.contentItems);
   }
 
@@ -276,7 +273,6 @@ export class CmsRecipeEditComponent {
           sortOrder: index
         });
         addedContentCount = addedContentCount + 1;
-        contentItem.sortOrder = contentItem.sortOrder + addedContentCount;
         changeItems = true;
       }
       else if (index == this.recipe.contentItems.length -1 && contentItem.contentType == RecipeContentType.listItem && contentItem.content != "")
@@ -290,7 +286,6 @@ export class CmsRecipeEditComponent {
         });
         changeItems = true;
       }
-
       contentItem.sortOrder = contentItem.sortOrder + addedContentCount;
       lastContent = contentItem;
     }
