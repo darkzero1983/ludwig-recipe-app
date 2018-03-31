@@ -72,7 +72,8 @@ export class CmsRecipeEditComponent {
     this.humanizeBytes = humanizeBytes;
   }
 
-  onUploadOutput(output: UploadOutput): void {
+  onUploadOutput(output: UploadOutput): void 
+  {
     if (output.type === 'allAddedToQueue') { // when all files added in queue
       this.startUpload();
     } else if (output.type === 'addedToQueue'  && typeof output.file !== 'undefined') { // add file to array when added
@@ -97,12 +98,15 @@ export class CmsRecipeEditComponent {
       this.files = [];
     }
   }
-  openTeaserImageUpload()
+
+  openTeaserImageUpload() 
   {
     let element: HTMLElement = document.getElementById('teaser-image-upload-input') as HTMLElement;
     element.click();
   }
-  startUpload(): void {
+
+  startUpload(): void 
+  {
     let token = this.accountLoginInformation.getAccessToken();  // <----  get token
     const event: UploadInput = {
       type: 'uploadAll',
@@ -112,7 +116,6 @@ export class CmsRecipeEditComponent {
     };
     this.uploadInput.emit(event);
   }
-
   
   ingredientOptions(): string[]
   {
@@ -122,7 +125,8 @@ export class CmsRecipeEditComponent {
     }
     return this.ingredients.filter(x => x.toLowerCase().indexOf(this.ingredientSearchTerm.toLocaleLowerCase()) >= 0);
   }
-  setIngredientSearchTerm(term: string)
+
+  setIngredientSearchTerm(term: string) 
   {
     this.ingredientSearchTerm = term;
   }
@@ -135,12 +139,14 @@ export class CmsRecipeEditComponent {
     }
     return this.measurements.filter(x => x.toLowerCase().indexOf(this.measurementSearchTerm.toLocaleLowerCase()) >= 0);
   }
+
   setMeasurementSearchTerm(term: string)
   {
     this.measurementSearchTerm = term;
   }
 
-  saveRecipe() {
+  saveRecipe() 
+  {
     if(!this.recipeForm.valid)
     {
       return;
@@ -206,6 +212,7 @@ export class CmsRecipeEditComponent {
   {
     this.addRecipeContent(RecipeContentType.headline)
   }
+  
   public addRecipeContentSubHeadline()
   {
     this.addRecipeContent(RecipeContentType.subHeadline)
