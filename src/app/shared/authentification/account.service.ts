@@ -4,9 +4,10 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { UserData } from '../models';
 import { AccountLogin } from '../models/account.login.model';
 import { AccountLoginInformation } from './account.login.information';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
-import 'rxjs/add/operator/map';
+
 
 @Injectable()
 export class AccountService {
@@ -25,12 +26,13 @@ export class AccountService {
     };
 
     return this.http.post<AccountLoginInformation>(environment.apiAccountLogin ,body, httpOptions)
-      .map(
+      .pipe(map(
         data => {
           this.accountInformation.setAccountInformation(data);
           return true;
         }
-      );
+      ));
+      
   }
 
   private getAccountDataObservable(): Observable<AccountLoginInformation>

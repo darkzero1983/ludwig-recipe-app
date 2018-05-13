@@ -4,7 +4,7 @@ import { RequestOptions} from '@angular/http';
 
 import { environment } from '../../../environments/environment';
 
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { Navigation, SearchResult } from '../models';
 
 @Injectable()

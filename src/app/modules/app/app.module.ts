@@ -8,9 +8,6 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 //External
-import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
-import { TooltipModule } from 'ngx-bootstrap/tooltip';
-import { ModalModule } from 'ngx-bootstrap/modal';
 import 'hammerjs';
 
 //Components
@@ -50,14 +47,12 @@ const routes: Routes = [
     BrowserModule,
     BrowserAnimationsModule,
     ServiceWorkerModule.register('/ngsw-worker.js', {enabled: environment.production}),
-    BsDropdownModule.forRoot(),
-    TooltipModule.forRoot(),
-    ModalModule.forRoot(),
+
     RouterModule.forRoot(routes),
     HttpClientModule,
     FormsModule
   ],
-  exports: [BsDropdownModule, TooltipModule, ModalModule,RouterModule],
+  exports: [RouterModule],
   providers: [
     AccountService, 
     NavigationService, 
