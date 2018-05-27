@@ -1,0 +1,17 @@
+html, body, .content-body
+{
+    width:1020px !important;
+}
+.hide-on-print
+{
+    display: none !important;
+}
+.print-left-content
+{
+    width:300px !important;
+}
+.print-right-content
+{
+    width:700px !important;
+    float: right;
+}

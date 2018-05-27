@@ -20,7 +20,8 @@
               "src/favicon.ico",
               "src/manifest.json",
               "src/img/",
-              "src/test_data/"
+              "src/test_data/",
+              "src/css/print.css"
             ],
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.css",

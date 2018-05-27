@@ -1,4 +1,4 @@
-<div class="collapse bg-faded hidden-md-up mobile-menu" id="bird">
+<div class="collapse bg-faded hidden-md-up mobile-menu hide-on-print" id="bird">
 	<div class="p-a mobile-menu-height" (click)="openMobileMenu();" data-toggle="collapse" data-target="#bird">
 		<a class="nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Übersicht</a>
 		<div *ngFor="let navItem of navigation.mainNavigation">
@@ -15,14 +15,14 @@
 		<a routerLink="/Benutzerverwaltung/Ausloggen" class="nav-link nav-login-link" [hidden]="!auth.isUserLoggedIn">Abmelden</a>
 	</div>
 </div>
-<nav class="navbar navbar-light bg-faded hidden-md-up navbar-fixed-top">
+<nav class="navbar navbar-light bg-faded hidden-md-up navbar-fixed-top hide-on-print">
 	<a class="navbar-brand" routerLink="/"><img src="/img/Logo.png" class="header-logo"></a>
 	<button id="mobileMenuButton" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#bird" (click)="openMobileMenu();">☰</button>
 </nav>
 
 
-<div class="hidden-md-up bg-faded nav-delimiter"></div>
-<div class="hidden-md-up bg-faded navbar-search">
+<div class="hidden-md-up bg-faded nav-delimiter hide-on-print"></div>
+<div class="hidden-md-up bg-faded navbar-search hide-on-print">
 	<form class="">
 		<div class="input-group">
 			<input class="form-control" type="text" placeholder="Rezepte suchen" [(ngModel)]="searchTerm" name="searchTerm" (keyup)="changeSearchTerm()">
@@ -34,11 +34,11 @@
 	</form>
 	<div style="clear:both;"></div>
 </div>
-<div class="search-result mobile-search-result" *ngIf="searchResult.recipes.length > 0">
+<div class="search-result mobile-search-result hide-on-print" *ngIf="searchResult.recipes.length > 0">
 	<div class="result-item" *ngFor="let recipe of searchResult.recipes" (click)="clearSearchResult()" routerLink="/Rezept/{{recipe.url}}/{{recipe.id}}"><img src="{{imageManagerDomain}}{{recipe.teaserImageUrl}}?w=40&h=30&mode=crop">{{recipe.name}}</div>
 </div>
 
-<div class="container body-content" (click)="clearSearchResult()">
+<div class="container body-content hide-on-print" (click)="clearSearchResult()">
     <nav class="navbar navbar-light bg-faded hidden-sm-down">
         <a class="navbar-brand" routerLink="/"><img src="/img/Logo.png" class="header-logo"></a>
         <div class="navbar-login">
