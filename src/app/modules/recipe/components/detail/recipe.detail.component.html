@@ -11,6 +11,9 @@
             <h1 class="headline">{{recipe.name}}</h1>
         </div>
         <div class="col-xs-2 col-sm-3 text-right hide-on-print">
+            <div class="recipe-detail-menu" [hidden]="!auth.isUserLoggedIn">
+                <a href="/CMS/Rezept/{{recipe.id}}"><i class="fa fa-edit"></i></a>
+            </div>
             <div class="recipe-detail-menu">
                 <a href="javascript:window.print()"><i class="fa fa-print"></i></a>
             </div>

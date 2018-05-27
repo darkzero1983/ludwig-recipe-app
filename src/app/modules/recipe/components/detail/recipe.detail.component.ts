@@ -6,6 +6,7 @@ import { RecipeDetail } from '../../models/recipe.detail.model';
 import { RecipeContent } from '../../models/recipe.content.model';
 import { RecipeContentType } from '../../models/recipe.content.type.enum';
 import { environment } from '../../../../../environments/environment';
+import { AccountLoginInformation } from '../../../../shared/authentification/account.login.information';
 
 @Component({
   selector: 'recipe-detail-component',
@@ -20,7 +21,8 @@ export class RecipeDetailComponent {
   public constructor(
     private titleService: Title,
     private route: ActivatedRoute,
-    private recipeService: RecipeService
+    private recipeService: RecipeService,
+    public auth: AccountLoginInformation
   ) {
     this.imageManagerDomain = environment.imageManagerDomain;
 
