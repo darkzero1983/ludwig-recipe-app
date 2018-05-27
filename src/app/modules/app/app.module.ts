@@ -6,6 +6,7 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { OverlayModule } from "@angular/cdk/overlay";
 
 //External
 import 'hammerjs';
@@ -50,7 +51,8 @@ const routes: Routes = [
 
     RouterModule.forRoot(routes),
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    OverlayModule
   ],
   exports: [RouterModule],
   providers: [
