@@ -13,7 +13,8 @@ import 'hammerjs';
 
 //Components
 import { AppComponent } from './components/app.component';
-import { NavigationComponent } from '../../shared/components';
+import { NavigationComponent } from '../../shared/components/navigation/navigation.component';
+import { AboutComponent } from '../../shared/components/about/about.component';
 
 //Services
 import { NavigationService, TranslationService } from '../../shared/services';
@@ -34,6 +35,7 @@ const routes: Routes = [
   {
     path: 'Benutzerverwaltung', loadChildren: '../account/account.module#AccountModule'
   },
+  { path: 'Impressum', component: AboutComponent },
   {
     path: '', loadChildren: '../recipe/recipe.module#RecipeModule'
   }
@@ -42,7 +44,8 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    NavigationComponent
+    NavigationComponent,
+    AboutComponent
   ],
   imports: [
     BrowserModule,
