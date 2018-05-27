@@ -7,7 +7,7 @@ export const environment = {
 
   //API Urls
   apiAccountLogin: "http://localhost:8030/api/Token",
-  apiNavigation: "/test_data/navigation.json",
+  apiNavigation: "http://localhost:8030/api/Navigation/Load",
   apiRecipeSearch: "http://localhost:8030/api/Recipe/Search",
   apiAccountCanActive: "/test_data/canActivate.txt",
   apiAccountData: "/test_data/account-data.json",
