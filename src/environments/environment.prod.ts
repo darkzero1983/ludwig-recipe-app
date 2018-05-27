@@ -7,8 +7,8 @@ export const environment = {
   
   //API Urls
   apiAccountLogin: "/api/api/Token",
-  apiNavigation: "/test_data/navigation.json",
-  apiRecipeSearch: "/api/api//Recipe/Search",
+  apiNavigation: "/api/api/Navigation/Load",
+  apiRecipeSearch: "/api/api/Recipe/Search",
   apiAccountCanActive: "/test_data/canActivate.txt",
   apiAccountData: "/test_data/account-data.json",
   apiRecipeOverview: "/api/api//Recipe/Overview",
