@@ -14,7 +14,8 @@ export class RecipeDetail {
 	ingredients: IngredientList[];
 	preparationTime: number;
 	waitingTime: number;
-
+	contentItems: RecipeContent[];
+	
 	constructor() {
 		this.ingredients = new Array<IngredientList>();
 		this.measurement = new Measurement();

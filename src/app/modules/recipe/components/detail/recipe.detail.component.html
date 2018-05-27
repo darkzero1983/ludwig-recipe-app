@@ -58,7 +58,7 @@
                     <ol>
                         <ng-container *ngFor="let item of recipe.contentItems; let i = index">
                             <h2 *ngIf="item.contentType == 1">{{item.content}}</h2>
-                            <li *ngIf="item.contentType == 3">{{item.content}}</li>
+                            <li *ngIf="item.contentType == 3"><span [innerHTML]="item.content"></span></li>
                             <h3 *ngIf="item.contentType == 2">{{item.content}}</h3>
                         </ng-container>
                     </ol>
