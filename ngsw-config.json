@@ -9,7 +9,7 @@
           "/favicon.ico",
           "/index.html",
           "/img/Logo.png",
-          "/test_data/*.*"
+          "/img/default_teaser_image.png"
         ],
         "versionedFiles": [
           "/*.bundle.css",
