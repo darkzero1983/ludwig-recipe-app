@@ -20,7 +20,6 @@
               "src/favicon.ico",
               "src/manifest.json",
               "src/img/",
-              "src/test_data/",
               "src/css/print.css"
             ],
             "styles": [

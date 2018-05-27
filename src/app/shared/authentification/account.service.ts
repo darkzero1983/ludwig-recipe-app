@@ -34,9 +34,4 @@ export class AccountService {
       ));
       
   }
-
-  private getAccountDataObservable(): Observable<AccountLoginInformation>
-  {
-    return this.http.get<AccountLoginInformation>(environment.useTestData ? environment.apiAccountDataTest : environment.apiAccountData);
-  }
 }

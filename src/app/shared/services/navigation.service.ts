@@ -17,7 +17,7 @@ export class NavigationService  {
     }
 
     public Load(cmsVersion: boolean): Observable<Navigation> {
-        var url: string = environment.useTestData ? environment.apiNavigationTest : environment.apiNavigation;
+        var url: string = environment.apiNavigation;
         if (cmsVersion) {
             url = url + '?cmsVersion=true';
         }
@@ -31,15 +31,6 @@ export class NavigationService  {
           })
         };
 
-
-        if(environment.useTestData)
-        {
-            return this.http.get<SearchResult>(environment.apiRecipeSearchTest);
-        }
-        else
-        {
-            return this.http.post<SearchResult>(environment.apiRecipeSearch ,JSON.stringify(term), httpOptions);
-        }
-        
+        return this.http.post<SearchResult>(environment.apiRecipeSearch ,JSON.stringify(term), httpOptions); 
     }
 }

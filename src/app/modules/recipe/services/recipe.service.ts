@@ -27,7 +27,7 @@ export class RecipeService  {
             subCategory = '';
         }
         
-        let requestUrl: string = environment.useTestData ? environment.apiRecipeOverviewTest : environment.apiRecipeOverview + "?count=" + count + "&skip=" + skip + "&category=" + category + "&subCategory=" + subCategory;
+        let requestUrl: string = environment.apiRecipeOverview + "?count=" + count + "&skip=" + skip + "&category=" + category + "&subCategory=" + subCategory;
         return this.http.get<RecipeOverview>(requestUrl);
     }
 
