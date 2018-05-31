@@ -38,7 +38,7 @@ export class CmsRecipeEditComponent {
   uploadInput: EventEmitter<UploadInput>;
   humanizeBytes: Function;
   dragOver: boolean;
-
+  private teaserImageUrl: string = '';
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -60,6 +60,7 @@ export class CmsRecipeEditComponent {
           this.cmsService.LoadIngredients().subscribe(x => this.ingredients = x);
           this.cmsService.LoadRecipe(params.get('id')).subscribe(x => {
             this.recipe = x;
+            this.teaserImageUrl = this.recipe.teaserImageUrl;
             this.recipeForm = this.recipeValigation.getRecipeForm(this.recipe);
             this.manageRecipeContentItems();
             this.ingredientListChange();
@@ -95,6 +96,7 @@ export class CmsRecipeEditComponent {
       //Start Upload
     } else if (output.type === 'done') {
       this.recipe.teaserImageUrl = "/media/LudwigsRezepte/" + this.recipe.id + "/" +  this.files[0].name;
+      this.teaserImageUrl = this.recipe.teaserImageUrl;
       this.files = [];
     }
   }
@@ -152,6 +154,8 @@ export class CmsRecipeEditComponent {
       return;
     }
     this.recipe = this.recipeForm.getRawValue();
+    this.recipe.teaserImageUrl = this.teaserImageUrl;
+    console.info(this.recipe);
     this.cmsService.SaveRecipe(this.recipe).subscribe(x => this.router.navigate(['/CMS/Rezept/' + x]));
   }
 
