@@ -45,17 +45,19 @@
                             <td class="text-left">{{ingredient.ingredient}}</td>
                         </tr>
                     </table>
-                    <h2>Rezept Informationen</h2>
-                    <table class="table table-striped recipe-detail-ingredients">
-                        <tr *ngIf="recipe.preparationTime > 0">
-                            <td class="text-left">Vorbereitungszeit:</td>
-                            <td class="text-right">{{recipe.preparationTime}} Min</td>
-                        </tr>
-                        <tr *ngIf="recipe.waitingTime > 0">
-                            <td class="text-left">Zubereitungszeit:</td>
-                            <td class="text-right">{{recipe.waitingTime}} Min</td>
-                        </tr>
-                    </table>
+                    <div *ngIf="recipe.preparationTime > 0 || recipe.waitingTime > 0">
+                        <h2>Rezept Informationen</h2>
+                        <table class="table table-striped recipe-detail-ingredients">
+                            <tr *ngIf="recipe.preparationTime > 0">
+                                <td class="text-left">Vorbereitungszeit:</td>
+                                <td class="text-right">{{recipe.preparationTime}} Min</td>
+                            </tr>
+                            <tr *ngIf="recipe.waitingTime > 0">
+                                <td class="text-left">Zubereitungszeit:</td>
+                                <td class="text-right">{{recipe.waitingTime}} Min</td>
+                            </tr>
+                        </table>
+                    </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7 col-xl-8 print-right-content">
                     <ol>
