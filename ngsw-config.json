@@ -12,9 +12,8 @@
           "/img/default_teaser_image.png"
         ],
         "versionedFiles": [
-          "/*.bundle.css",
-          "/*.bundle.js",
-          "/*.chunk.js"
+          "/*.css",
+          "/*.js"
 
         ]
       }
