@@ -16,7 +16,7 @@
 	</div>
 </div>
 <nav class="navbar navbar-light bg-faded hidden-md-up navbar-fixed-top hide-on-print">
-	<a class="navbar-brand" routerLink="/"><img src="/img/Logo.png" class="header-logo"></a>
+	<a class="navbar-brand" routerLink="/"><img src="./img/Logo.png" class="header-logo"></a>
 	<button id="mobileMenuButton" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#bird" (click)="openMobileMenu();">☰</button>
 </nav>
 
@@ -40,7 +40,7 @@
 
 <div class="container body-content hide-on-print" (click)="clearSearchResult()">
     <nav class="navbar navbar-light bg-faded hidden-sm-down">
-        <a class="navbar-brand" routerLink="/"><img src="/img/Logo.png" class="header-logo"></a>
+        <a class="navbar-brand" routerLink="/"><img src="./img/Logo.png" class="header-logo"></a>
         <div class="navbar-login">
             <a routerLink="/Benutzerverwaltung/Einloggen" [hidden]="auth.isUserLoggedIn">Anmelden</a>
             <a routerLink="/Benutzerverwaltung/Ausloggen" [hidden]="!auth.isUserLoggedIn">Abmelden</a>
