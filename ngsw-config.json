@@ -8,8 +8,7 @@
         "files": [
           "/favicon.ico",
           "/index.html",
-          "/img/Logo.png",
-          "/img/default_teaser_image.png"
+          "/img/Logo.png"
         ],
         "versionedFiles": [
           "/*.css",

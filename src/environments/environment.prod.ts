@@ -1,7 +1,7 @@
 export const environment = {
   production: true,
   useServiceWorker: true,
-  imageManagerDomain: '',
+  imageManagerDomain: '/media/media/LudwigsRezepte/',
 
   //API Urls
   apiAccountLogin: "/api/api/Token",

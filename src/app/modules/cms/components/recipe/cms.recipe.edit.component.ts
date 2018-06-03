@@ -95,7 +95,7 @@ export class CmsRecipeEditComponent {
     } else if (output.type === 'start') {
       //Start Upload
     } else if (output.type === 'done') {
-      this.recipe.teaserImageUrl = "/media/LudwigsRezepte/" + this.recipe.id + "/" +  this.files[0].name;
+      this.recipe.teaserImageUrl = this.recipe.id + "/teaser/" +  this.files[0].name;
       this.teaserImageUrl = this.recipe.teaserImageUrl;
       this.files = [];
     }
@@ -155,7 +155,6 @@ export class CmsRecipeEditComponent {
     }
     this.recipe = this.recipeForm.getRawValue();
     this.recipe.teaserImageUrl = this.teaserImageUrl;
-    console.info(this.recipe);
     this.cmsService.SaveRecipe(this.recipe).subscribe(x => this.router.navigate(['/CMS/Rezept/' + x]));
   }
 
